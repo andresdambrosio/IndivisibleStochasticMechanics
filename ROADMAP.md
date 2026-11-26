@@ -48,7 +48,7 @@ each item is in parentheses.
 ### I.4 Quantum phenomena from the stochastic side
 - [ ] Interference as the cross terms of `|Θ|²`
 - [x] Collapse as the creation of division events (book ch. 10)
-- [ ] Decoherence as the creation of division events
+- [x] Decoherence as the creation of division events (book ch. 10)
 - [ ] Composite systems and entanglement
 - [ ] Noncommutative observables from the Hilbert-space representation
 - [ ] The role of complex numbers (arXiv:2602.01043)
@@ -82,7 +82,13 @@ each item is in parentheses.
       measuring at `π/4` turns a non-division time into a division event
 - [ ] Division events from measurements of arbitrary observables (`V ≠ 1`), and repeated
       measurements
-- [ ] Decoherence: an environment that records configurations creates division events
+- [x] **Decoherence:** an environment that records configurations perfectly creates a
+      division event, with no one reading it (`recordedAt_isDivisionEvent`); the general
+      formula weights interference by the overlaps of the records
+- [x] Partial decoherence of the qubit: swap probability `(1 + cos θ)/2`, and `π/4` is a
+      division event iff the record is perfect
+- [ ] Continuous decoherence: records that build up over time, and approximate division
+      events (a quantitative notion of "almost divisible")
 - [ ] Composite systems, entanglement, Bell/CHSH and the Tsirelson bound
 
 ### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
@@ -110,6 +116,10 @@ each item is in parentheses.
       unspecified. Should they be fixed, and would fixing them change predictions?
 - [ ] Open systems and thermodynamics: link to non-Markovian dynamics and CP-divisibility
 - [ ] Which indivisible processes are "physical"? If only a subclass, there may be new physics
+- [ ] **No autonomous law for Γ:** there are unitaries with `|A|² = |A′|²` but `|BA|² ≠ |BA′|²`,
+      so `Γ(t₁)` never determines `Γ(t)`. The phases are necessary memory. What is the
+      *minimal* memory? Is real data enough (Madelung, Nelson; Wallstrom's objection), or is
+      the full complex structure needed (arXiv:2602.01043)?
 
 ## Stage IV: Community and infrastructure
 

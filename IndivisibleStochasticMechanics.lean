@@ -12,3 +12,5 @@ public import IndivisibleStochasticMechanics.Quantum.Channel
 public import IndivisibleStochasticMechanics.Quantum.Measurement
 public import IndivisibleStochasticMechanics.Quantum.Collapse
 public import IndivisibleStochasticMechanics.Examples.MeasuredQubit
+public import IndivisibleStochasticMechanics.Quantum.Decoherence
+public import IndivisibleStochasticMechanics.Examples.DecoheredQubit

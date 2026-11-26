@@ -45,6 +45,16 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.GenStochasticProcess.measuredAt` | the system's process when its dynamics `U t` is interrupted by a measurement at `t₁ > 0` | arXiv:2302.10778 | | ⏳ |
 | `ISM.Qubit.configMeasurement` | an ideal measurement of the qubit's configuration | — | chosen noncomputably; no result depends on the choice | ⏳ |
 | `ISM.Qubit.measuredProcess` | the qubit process with a configuration measurement at `π/4` | — | | ⏳ |
+| `ISM.IsRecording` | `E` records the system's configuration `k` in the environment state `φ k`, leaving the configuration unchanged | Zurek (2003); arXiv:2302.10778 | **Interpretive choice:** the record is instantaneous and does not disturb the configuration (a "pure decoherence" interaction). Records need not be orthogonal | ⏳ |
+| `ISM.overlap` | overlap `⟨φ_l, φ_k⟩ = ∑ₑ φ k e · conj (φ l e)` of two records | standard | | ⏳ |
+| `ISM.recordingVec` | auxiliary: columns `\|j⟩ ⊗ \|φ j⟩` of a recording unitary | — | auxiliary construction | ⏳ |
+| `ISM.recordedEvolution` | evolve by `U`, record with `E`, evolve by `W`; the environment is frozen otherwise | arXiv:2302.10778 | | ⏳ |
+| `ISM.envMarginal` | the system's transition matrix, summing over the environment, environment initially in `e₀` | arXiv:2302.10778 | generalizes `pointerMarginal` to any environment | ⏳ |
+| `ISM.recordedComposite` | composite evolution with a recording at `t₁` and the same dynamics before and after | arXiv:2302.10778 | | ⏳ |
+| `ISM.GenStochasticProcess.recordedAt` | the system's process when an environment records it at `t₁ > 0` | arXiv:2302.10778 | | ⏳ |
+| `ISM.Qubit.recordState` | records `(1, 0)` and `(cos θ, sin θ)` of the qubit's two configurations, overlap `cos θ` | — | | ⏳ |
+| `ISM.Qubit.recorder` | a unitary that records the qubit with `recordState θ` | — | chosen noncomputably; no result depends on the choice | ⏳ |
+| `ISM.Qubit.decoheredProcess` | the qubit process with a partial record at `π/4` | — | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -65,6 +75,12 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.IsIdealMeasurement.collapse_apply` | **collapse, derived:** after evolve–measure–evolve, the amplitude for (system `i`, pointer `a`) is `(W v_a)ᵢ · ⟨v_a\|U\|j⟩` | arXiv:2302.10778 | | ⏳ |
 | `ISM.IsIdealMeasurement.pointerMarginal_measuredEvolution` | measurement removes interference: `Γ_sys = \|W V\|² · \|Vᴴ U\|²` | arXiv:2302.10778 | | ⏳ |
 | `ISM.GenStochasticProcess.measuredAt_isDivisionEvent` | **collapse as a division event:** measuring the configuration at `t₁` makes `t₁` a division event, for any unitary dynamics | arXiv:2302.10778 | only for measurements of the configuration (`V = 1`) | ⏳ |
+| `ISM.IsRecording.envMarginal_recordedEvolution` | **decoherence formula:** `Γ i j = ∑ₖₗ W i k U k j · conj(W i l U l j) · ⟨φ_l, φ_k⟩` | Zurek (2003) | | ⏳ |
+| `ISM.IsRecording.envMarginal_of_orthonormal` | perfect record ⇒ `Γ = \|W\|² · \|U\|²` (no interference) | Zurek (2003) | | ⏳ |
+| `ISM.IsRecording.envMarginal_of_const` | no record ⇒ `Γ = \|W U\|²` (coherent evolution) | standard | | ⏳ |
+| `ISM.GenStochasticProcess.recordedAt_isDivisionEvent` | **decoherence creates division events:** a perfect record at `t₁` makes `t₁` a division event, with no one reading it | arXiv:2302.10778 | | ⏳ |
+| `ISM.Qubit.decoheredProcess_swap` | after a partial record with overlap `cos θ` at `π/4`, the probability of a swap at `π/2` is `(1 + cos θ)/2` | — | | ⏳ |
+| `ISM.Qubit.decoheredProcess_isDivisionEvent_iff` | `π/4` is a division event iff the record is perfect (`cos θ = 0`) | — | | ⏳ |
 | `ISM.Qubit.measuredProcess_isDivisionEvent` | measuring the qubit at `π/4` makes `π/4` a division event (compare `not_isDivisionEvent_pi_div_four`) | — | | ⏳ |
 
 ## References
@@ -77,4 +93,5 @@ exists, and that it says what we cite it for).
 | Barandes, *The Stochastic-Quantum Correspondence*, arXiv:2302.10778 | code, README, book | ⏳ |
 | Barandes, *The Stochastic-Quantum Theorem*, arXiv:2309.03085 | code, README, book | ⏳ |
 | Barandes, *Quantum Systems as Indivisible Stochastic Processes*, arXiv:2507.21192 (journal: Stud. Hist. Phil. Sci., 2026?) | README, book | ⏳ |
+| Zurek, *Decoherence, einselection, and the quantum origins of the classical*, Rev. Mod. Phys. 75, 715 (2003) | code, book | ⏳ |
 | arXiv:2602.01043, 2603.27369, 2608.04354, 2601.18720 (Calvo); Horsocrates (Rocq) | ROADMAP | ⏳ |

@@ -43,6 +43,8 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Quantum/Measurement` | **the Born rule for arbitrary observables, derived** from pointer-configuration probabilities |
 | `Quantum/Collapse` | **collapse as a division event**: after a measurement, later evolution depends only on the outcome, and interference between outcomes disappears |
 | `Examples/MeasuredQubit` | measuring the qubit at `π/4` turns a non-division time into a division event |
+| `Quantum/Decoherence` | **decoherence creates division events**: an environment that records the configuration removes interference, with no one reading it |
+| `Examples/DecoheredQubit` | partial decoherence of the qubit: a division event appears iff the record is perfect |
 | `ForMathlib/` | general results we build for Mathlib and upstream ([details](IndivisibleStochasticMechanics/ForMathlib/README.md)) |
 
 ## The book

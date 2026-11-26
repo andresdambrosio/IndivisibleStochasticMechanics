@@ -1,7 +1,9 @@
 # 10. Colapso y decoherencia como eventos de división
 
-> Código: `IndivisibleStochasticMechanics/Quantum/Collapse.lean` y
-> `IndivisibleStochasticMechanics/Examples/MeasuredQubit.lean`
+> Código: `IndivisibleStochasticMechanics/Quantum/Collapse.lean`,
+> `IndivisibleStochasticMechanics/Quantum/Decoherence.lean`,
+> `IndivisibleStochasticMechanics/Examples/MeasuredQubit.lean` y
+> `IndivisibleStochasticMechanics/Examples/DecoheredQubit.lean`
 
 ## El problema
 
@@ -103,6 +105,85 @@ dinámica unitaria da una historia divisible o indivisible según haya o no una 
 > crear un evento de división: un instante a partir del cual podemos "reiniciar" el
 > proceso y condicionar en lo que pasó, con probabilidades ordinarias.
 
+## Decoherencia: nadie tiene que mirar
+
+Releé la demostración del evento de división. En ningún momento usamos que alguien **lea**
+el puntero. Lo único que importó es que el puntero quedó **correlacionado** con la
+configuración del sistema. Entonces el aparato no tiene nada de especial: cualquier
+entorno que registre la configuración debería producir lo mismo. Eso es la
+**decoherencia**, y ahora lo demostramos en general.
+
+### El modelo
+
+- Un **entorno** con cualquier espacio de configuraciones finito $m$, preparado en $e_0$.
+  Puede ser un fotón, una molécula de aire o un aparato.
+- Una interacción de **registro** $E$ que deja quieta la configuración del sistema y
+  escribe un "registro" $\varphi_k$ en el entorno:
+  $$E\big(|k\rangle\otimes|e_0\rangle\big) = |k\rangle\otimes|\varphi_k\rangle .$$
+  Los $\varphi_k$ son vectores unitarios, pero **no hace falta que sean ortogonales**. El
+  registro puede ser imperfecto: un fotón que rebota en un átomo puede llevarse solo un poco
+  de información sobre dónde estaba.
+
+**Teorema (existencia).** Para cualquier familia de registros unitarios $\varphi_k$ existe
+una interacción unitaria $E$ que los produce. La demostración es el truco de siempre. Los
+vectores $|k\rangle\otimes|\varphi_k\rangle$ son ortonormales aunque los $\varphi_k$ no lo sean,
+porque la parte del sistema, $|k\rangle$, ya separa los distintos $k$. Después se completan a
+una unitaria.
+
+### La fórmula de la decoherencia
+
+El sistema evoluciona con $U$, el entorno lo registra y después el sistema evoluciona con
+$W$. Sumando sobre el entorno:
+
+**Teorema (fórmula de la decoherencia).**
+$$\Gamma_{ij} = \sum_{k,l} W_{ik}U_{kj}\;\overline{W_{il}U_{lj}}\;\langle\varphi_l,\varphi_k\rangle .$$
+
+Los términos con $k = l$ son probabilidades clásicas: ir de $j$ a $k$ y después de $k$ a
+$i$. Los términos con $k \neq l$ son la interferencia entre los caminos que pasan por $k$ y
+por $l$, y cada uno está **pesado por el solapamiento de sus registros**. Hay dos casos
+extremos:
+
+- **Registro perfecto** ($\varphi_k$ ortonormales): $\langle\varphi_l,\varphi_k\rangle = \delta_{kl}$ y
+  $$\Gamma = |W|^2\cdot|U|^2 .$$
+  La interferencia desaparece del todo.
+- **Sin registro** (todos los $\varphi_k$ iguales): $\langle\varphi_l,\varphi_k\rangle = 1$ y
+  $$\Gamma = |WU|^2 ,$$
+  la evolución coherente, como si el entorno no estuviera.
+
+Entre los dos extremos, la decoherencia apaga la interferencia en la medida exacta en que
+el entorno distingue los caminos.
+
+**Teorema (la decoherencia crea eventos de división).** Si un entorno registra
+perfectamente la configuración en $t_1$, entonces $t_1$ es un evento de división del
+proceso del sistema, cualquiera sea la dinámica. **Nadie tiene que leer el registro.**
+
+La medición del principio del capítulo es el caso particular en que el entorno es un
+aparato.
+
+### El qubit con un registro parcial
+
+Volvamos al qubit con $H = \sigma_x$. En $\pi/4$, un qubit del entorno registra su
+configuración de forma imperfecta: la configuración $0$ deja el registro $(1, 0)$ y la $1$
+deja $(\cos\theta, \sin\theta)$. El solapamiento es $\cos\theta$. Con $\theta = \pi/2$ el
+registro es perfecto, y con $\theta = 0$ no hay registro.
+
+**Teorema.** La probabilidad de que el qubit haya intercambiado su configuración en
+$\pi/2$ es
+$$P(\text{intercambio}) = \frac{1 + \cos\theta}{2} .$$
+
+Sin registro ($\cos\theta = 1$) da $1$: el intercambio determinista del capítulo 6. Con
+registro perfecto ($\cos\theta = 0$) da $1/2$: la interferencia se borró y queda una moneda.
+En el medio, la curva es continua.
+
+**Teorema.** $\pi/4$ es un evento de división **si y solo si** el registro es perfecto,
+$\cos\theta = 0$.
+
+Que un registro parcial no alcance es importante. Un evento de división no es "un poco"
+verdadero: o la dinámica se factoriza o no. En el mundo real los registros nunca son
+perfectos, pero se vuelven perfectos muy rápido: muchos fotones, cada uno con un
+solapamiento chico, multiplican sus solapamientos, que se van a cero en forma exponencial.
+Formalizar esta idea de eventos de división *aproximados* es una de las tareas siguientes.
+
 ## Lo que todavía falta
 
 - **Observables arbitrarios.** El teorema del evento de división vale para mediciones de
@@ -110,10 +191,8 @@ dinámica unitaria da una historia divisible o indivisible según haya o no una 
   |V|^2|V^\dagger U|^2$ y la factorización no es inmediata. El enunciado natural es sobre el
   proceso compuesto sistema + puntero.
 - **Mediciones repetidas** y el efecto Zeno cuántico.
-- **Decoherencia.** Un aparato es un caso especial de un *entorno* que registra la
-  configuración. Queremos demostrar que cualquier entorno que registra crea eventos de
-  división, aunque nadie "lea" el registro. Esta sección del capítulo se va a completar
-  cuando esté el código.
+- **Decoherencia continua.** Registros que se acumulan en el tiempo, y una noción
+  cuantitativa de "casi divisible" para registros casi perfectos.
 
 ## En Lean
 
@@ -134,6 +213,19 @@ theorem GenStochasticProcess.measuredAt_isDivisionEvent (hMV : IsIdealMeasuremen
     (measuredAt U hU h0 M hM t₁ ht₁).IsDivisionEvent t₁
 ```
 
+```lean
+def IsRecording (φ : n → m → ℂ) (E : Matrix (n × m) (n × m) ℂ) (e₀ : m) : Prop :=
+  E ∈ unitaryGroup (n × m) ℂ ∧ ∀ i e j, E (i, e) (j, e₀) = if i = j then φ j e else 0
+
+theorem IsRecording.envMarginal_recordedEvolution (hE : IsRecording φ E e₀)
+    (W U : Matrix n n ℂ) (i j : n) :
+    (envMarginal (recordedEvolution W E U) e₀ i j : ℂ) =
+      ∑ k, ∑ l, W i k * U k j * star (W i l * U l j) * overlap φ k l
+
+theorem Qubit.decoheredProcess_isDivisionEvent_iff (θ : ℝ) :
+    (decoheredProcess θ).IsDivisionEvent (Real.pi / 4) ↔ Real.cos θ = 0
+```
+
 `(W * V) i a` es $(W v_a)_i$ y `(Vᴴ * U) a j` es $\langle v_a|U|j\rangle$. Fijate que
 `collapse_apply` ni siquiera necesita que $V$ sea unitaria: es pura álgebra. La unitariedad
 aparece recién cuando queremos que las probabilidades sumen uno.
@@ -146,5 +238,10 @@ aparece recién cuando queremos que las probabilidades sumen uno.
    identificá el término de interferencia.
 3. (Para pensar) En el modelo, el puntero queda quieto después de la medición. ¿Qué
    pasaría con el evento de división si el puntero también evolucionara?
-4. (Lean, abierto) Demostrá que medir el qubit dos veces, en $t_1 < t_2$, crea dos eventos
+4. (Papel) Con la fórmula de la decoherencia, calculá $P(\text{intercambio})$ para el qubit
+   con un registro de solapamiento complejo $\lambda$. ¿Qué parte de $\lambda$ importa?
+5. (Para pensar) $N$ fotones, cada uno con solapamiento $\lambda$, dejan un registro total
+   con solapamiento $\lambda^N$. ¿Cuántos fotones hacen falta para que $P(\text{intercambio})$
+   difiera de $1/2$ en menos de $10^{-6}$ si $\lambda = 0{,}99$?
+6. (Lean, abierto) Demostrá que medir el qubit dos veces, en $t_1 < t_2$, crea dos eventos
    de división.
