@@ -28,6 +28,8 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.GenStochasticProcess.ofUnitary` | the process `Γᵢⱼ(t) = ‖Uᵢⱼ(t)‖²` induced by a unitary evolution | arXiv:2302.10778 | rows and columns of `U` are indexed by the configurations, i.e. the basis is fixed | ⏳ |
 | `ISM.Qubit.U` | `exp(-i t σₓ)` | standard | written out explicitly, not via a matrix exponential | ⏳ |
 | `ISM.Qubit.process` | the process of the qubit under `H = σₓ` | — | | ⏳ |
+| `ISM.IsUnitaryDilation` | `Γ` is the system marginal of a unitary `U` on system ⊗ environment, environment prepared in `e₀` | arXiv:2309.03085 | measurement of the environment is not modelled; we only marginalize over it | ⏳ |
+| `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
 
@@ -36,6 +38,7 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.IsUnistochastic.mem_colStochastic` | every unistochastic matrix is stochastic | standard | | ⏳ |
 | `ISM.Qubit.process_Γ` | for the qubit, `Γ(t) = [[cos²t, sin²t], [sin²t, cos²t]]` | — | | ⏳ |
 | `ISM.Qubit.process_isIndivisible` | the qubit's process is indivisible | — | | ⏳ |
+| `ISM.forall_mem_colStochastic_iff_exists_isUnitaryDilation` | **stochastic-quantum correspondence (finite dimensions)**: transition matrices are stochastic at all times iff at all times they are unitary marginals | arXiv:2309.03085 | **Weaker than it may sound:** the unitary `U(t)` is chosen independently at each `t`. It need not be continuous, satisfy `U(0) = 1`, or come from a Hamiltonian | ⏳ |
 
 ## References
 

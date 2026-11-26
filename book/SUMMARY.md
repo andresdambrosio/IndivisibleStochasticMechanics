@@ -18,7 +18,7 @@
 # Parte III: La correspondencia completa
 
 - [La matriz densidad y la evolución hamiltoniana]()
-- [El teorema estocástico-cuántico]()
+- [El teorema estocástico-cuántico](08-teorema-estocastico-cuantico.md)
 - [Interferencia, decoherencia y medición]()
 - [Sistemas compuestos y entrelazamiento]()
 

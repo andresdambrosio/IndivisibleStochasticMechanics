@@ -25,7 +25,7 @@ planes.
 **Parte III: La correspondencia completa** 🚧
 
 7. 🚧 La matriz densidad y la evolución hamiltoniana
-8. 🚧 El teorema estocástico-cuántico: de procesos a espacios de Hilbert
+8. ✅ [El teorema estocástico-cuántico: de procesos a espacios de Hilbert](08-teorema-estocastico-cuantico.md)
 9. 🚧 Interferencia, decoherencia y medición
 10. 🚧 Sistemas compuestos y entrelazamiento
 

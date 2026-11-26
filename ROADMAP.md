@@ -33,13 +33,17 @@ each item is in parentheses.
 - [ ] Density matrix `ρ(t) = Θ(t) diag(p₀) Θ(t)†` with `pᵢ(t) = ρᵢᵢ(t)`
 - [ ] Generic unitary dynamics are indivisible (interference ⇒ failure of divisibility)
 
-### I.3 Stochastic → quantum: the Stochastic-Quantum Theorem
-- [ ] Every stochastic matrix has a Born representation `Θᵢⱼ = √Γᵢⱼ`
-- [ ] Every generalized stochastic process has a unitary dilation on a larger
-      configuration space (arXiv:2309.03085)
+### I.3 Stochastic → quantum: the Stochastic-Quantum Theorem (book ch. 8)
+- [x] The marginal of a unitary on system ⊗ environment is stochastic
+- [x] Every stochastic matrix has a unitary dilation (environment `Option n`)
+- [x] **Flagship theorem, first version:** transition matrices are stochastic at all times
+      iff at all times they are unitary marginals
+      (`forall_mem_colStochastic_iff_exists_isUnitaryDilation`)
+- [ ] Every stochastic matrix has a Born representation `Θᵢⱼ = √Γᵢⱼ` (issue #3)
+- [ ] Strengthen the dilation: `U(0) = 1`, and `U(t)` continuous in `t` when `Γ(t)` is
+- [ ] Smaller environments: when does an environment of size `n`, or none, suffice?
+- [ ] Compare with Barandes' exact statement in arXiv:2309.03085 and formalize it verbatim
 - [ ] Gauge freedom: phases and changes of basis that leave `Γ` invariant
-- [ ] **Flagship theorem:** the stochastic-quantum correspondence in both directions,
-      for finite configuration spaces
 
 ### I.4 Quantum phenomena from the stochastic side
 - [ ] Interference as the cross terms of `|Θ|²`
@@ -50,6 +54,29 @@ each item is in parentheses.
 - [ ] The role of complex numbers (arXiv:2602.01043)
 
 ## Stage II: Complete the dictionary with textbook quantum mechanics
+
+"All of quantum mechanics" means, in increasing difficulty:
+
+1. **Finite dimensions, closed systems:** unitary evolution. *(Stage I, nearly done.)*
+2. **Finite dimensions, everything else:** density matrices, quantum channels, measurement
+   of arbitrary observables (POVMs), composite systems. Mathlib has what we need.
+3. **Infinite dimensions:** particles in ℝ³, unbounded observables like position,
+   momentum and energy. This **needs new Mathlib infrastructure**, which we build
+   ourselves in `ForMathlib/` and upstream. See `ForMathlib/README.md`.
+4. **Fields:** QFT. See Stage III.
+
+### II.1 Finite dimensions, everything else
+- [ ] Density matrices and quantum channels (Kraus form) ⇒ stochastic processes
+- [ ] Measurement of an arbitrary observable as a division event involving an apparatus
+- [ ] The Born rule for arbitrary observables, derived rather than postulated
+
+### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
+- [ ] Spectral measures; the spectral theorem for unbounded self-adjoint operators
+- [ ] Stone's theorem: strongly continuous unitary groups ↔ self-adjoint generators
+- [ ] Strongly continuous (C₀) semigroups
+- [ ] Density operators and channels on separable Hilbert spaces
+
+### II.3 Infinite dimensions, physics
 
 - [ ] Continuous configuration spaces (ℝ, ℝ³) using Mathlib's measure theory and
       Markov kernels (`ProbabilityTheory.Kernel`)
@@ -77,6 +104,8 @@ each item is in parentheses.
 - [x] `CONTRIBUTING.md`: AI-first model (free proofs, trusted definitions)
 - [x] Trusted layer `TRUSTED.md`, with CI enforcing that every definition is listed
 - [ ] Human review of every ⏳ entry in `TRUSTED.md`, including references
+- [x] `ForMathlib/` directory for general results to upstream to Mathlib
+- [ ] First upstream PR to Mathlib (`Matrix.exists_mem_unitaryGroup_of_orthonormal`)
 - [x] CI check that `main` has no warnings and no `sorry` (`lake build --wfail`)
 - [ ] Blueprint (leanblueprint) linking each paper statement to its Lean declaration
 - [ ] API docs with doc-gen4, published on GitHub Pages

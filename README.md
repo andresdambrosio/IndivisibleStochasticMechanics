@@ -37,6 +37,8 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Stochastic/Unistochastic` | Born representations, unistochastic ⇒ stochastic |
 | `Quantum/UnitaryProcess` | unitary evolution ⇒ generalized stochastic process |
 | `Examples/Qubit` | a qubit under `H = σₓ` whose process is provably indivisible |
+| `Quantum/Dilation` | **stochastic-quantum correspondence (finite dimensions)**: every stochastic process is the marginal of a unitary evolution on a larger system |
+| `ForMathlib/` | general results we build for Mathlib and upstream ([details](IndivisibleStochasticMechanics/ForMathlib/README.md)) |
 
 ## The book
 
