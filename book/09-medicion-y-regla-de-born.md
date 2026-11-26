@@ -91,8 +91,9 @@ roadmap.
 - **Mediciones no ideales y POVM:** aparatos ruidosos o imperfectos.
 - **El "colapso":** queremos demostrar que después de la medición hay un **evento de
   división**. El sistema compuesto "se reinicia" y la evolución posterior depende solo
-  del resultado registrado. En esta teoría, el colapso no sería más que condicionar
-  probabilidades ordinarias en un evento de división. Es la próxima tarea de este nivel.
+  del resultado registrado. En esta teoría, el colapso no es más que condicionar
+  probabilidades ordinarias en un evento de división. Lo demostramos en el
+  [capítulo 10](10-colapso.md).
 
 ## En Lean
 

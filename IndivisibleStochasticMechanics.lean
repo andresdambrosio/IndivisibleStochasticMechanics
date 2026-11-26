@@ -10,3 +10,5 @@ public import IndivisibleStochasticMechanics.Quantum.Dilation
 public import IndivisibleStochasticMechanics.Quantum.DensityMatrix
 public import IndivisibleStochasticMechanics.Quantum.Channel
 public import IndivisibleStochasticMechanics.Quantum.Measurement
+public import IndivisibleStochasticMechanics.Quantum.Collapse
+public import IndivisibleStochasticMechanics.Examples.MeasuredQubit

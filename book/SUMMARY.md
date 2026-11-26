@@ -20,7 +20,7 @@
 - [Matrices densidad y canales cuánticos](07-matriz-densidad-y-canales.md)
 - [El teorema estocástico-cuántico](08-teorema-estocastico-cuantico.md)
 - [La medición y la regla de Born](09-medicion-y-regla-de-born.md)
-- [Decoherencia y colapso como eventos de división]()
+- [Colapso y decoherencia como eventos de división](10-colapso.md)
 - [Sistemas compuestos y entrelazamiento]()
 
 # Parte IV: Más allá

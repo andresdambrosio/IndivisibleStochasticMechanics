@@ -38,6 +38,13 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.IsIdealMeasurement` | an ideal (von Neumann) measurement of the observable with eigenbasis the columns of `V`, recorded by a pointer | von Neumann (1932); arXiv:2302.10778 | **Interpretive choice:** an outcome *is* a pointer configuration. Non-degenerate observables only. The pointer has one configuration per outcome plus `ready` | ⏳ |
 | `ISM.measurementVec` | auxiliary: columns of the measurement unitary with the pointer ready | — | auxiliary construction | ⏳ |
 | `ISM.readyState` | composite state "system in `ψ`, pointer ready" | — | | ⏳ |
+| `ISM.measuredEvolution` | evolve the system by `U`, measure with `M`, then evolve the system by `W`; the pointer does not move outside the measurement | arXiv:2302.10778 | **Interpretive choice:** the measurement is instantaneous and the pointer is frozen after it | ⏳ |
+| `ISM.normSqMatrix` | the matrix of squared moduli `‖Aᵢⱼ‖²` | standard | | ⏳ |
+| `ISM.pointerMarginal` | the system's transition matrix `∑ₚ ‖Θ (i, p) (j, ready)‖²`, summing over the pointer | arXiv:2302.10778 | the pointer always starts ready, so other initial pointer configurations are ignored | ⏳ |
+| `ISM.measuredComposite` | composite evolution: `U t ⊗ 1` before `t₁`, then measurement at `t₁`, then `U t U(t₁)† ⊗ 1` | arXiv:2302.10778 | after the measurement the system keeps the *same* Hamiltonian dynamics, now applied from `t₁` | ⏳ |
+| `ISM.GenStochasticProcess.measuredAt` | the system's process when its dynamics `U t` is interrupted by a measurement at `t₁ > 0` | arXiv:2302.10778 | | ⏳ |
+| `ISM.Qubit.configMeasurement` | an ideal measurement of the qubit's configuration | — | chosen noncomputably; no result depends on the choice | ⏳ |
+| `ISM.Qubit.measuredProcess` | the qubit process with a configuration measurement at `π/4` | — | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -55,6 +62,10 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.exists_isIdealMeasurement` | every (non-degenerate) observable admits an ideal measurement interaction | von Neumann (1932) | | ⏳ |
 | `ISM.IsIdealMeasurement.pointer_prob` | **Born rule from configurations:** pointer shows `a` with probability `‖⟨v a, ψ⟩‖²` | arXiv:2302.10778 | | ⏳ |
 | `ISM.IsIdealMeasurement.prob_after_evolution` | the same, for a system that starts in configuration `j` and evolves by `U` | arXiv:2302.10778 | | ⏳ |
+| `ISM.IsIdealMeasurement.collapse_apply` | **collapse, derived:** after evolve–measure–evolve, the amplitude for (system `i`, pointer `a`) is `(W v_a)ᵢ · ⟨v_a\|U\|j⟩` | arXiv:2302.10778 | | ⏳ |
+| `ISM.IsIdealMeasurement.pointerMarginal_measuredEvolution` | measurement removes interference: `Γ_sys = \|W V\|² · \|Vᴴ U\|²` | arXiv:2302.10778 | | ⏳ |
+| `ISM.GenStochasticProcess.measuredAt_isDivisionEvent` | **collapse as a division event:** measuring the configuration at `t₁` makes `t₁` a division event, for any unitary dynamics | arXiv:2302.10778 | only for measurements of the configuration (`V = 1`) | ⏳ |
+| `ISM.Qubit.measuredProcess_isDivisionEvent` | measuring the qubit at `π/4` makes `π/4` a division event (compare `not_isDivisionEvent_pi_div_four`) | — | | ⏳ |
 
 ## References
 

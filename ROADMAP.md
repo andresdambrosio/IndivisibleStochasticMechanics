@@ -47,6 +47,7 @@ each item is in parentheses.
 
 ### I.4 Quantum phenomena from the stochastic side
 - [ ] Interference as the cross terms of `|Θ|²`
+- [x] Collapse as the creation of division events (book ch. 10)
 - [ ] Decoherence as the creation of division events
 - [ ] Composite systems and entanglement
 - [ ] Noncommutative observables from the Hilbert-space representation
@@ -64,7 +65,7 @@ each item is in parentheses.
    ourselves in `ForMathlib/` and upstream. See `ForMathlib/README.md`.
 4. **Fields:** QFT. See Stage III.
 
-### II.1 Finite dimensions, everything else (book ch. 7, 9)
+### II.1 Finite dimensions, everything else (book ch. 7, 9, 10)
 - [x] Barandes' density matrix is a density matrix whose diagonal is the stochastic distribution
 - [x] Quantum channels (Kraus form) induce stochastic matrices
 - [x] Every stochastic matrix is induced by a quantum channel (classical Kraus operators)
@@ -73,8 +74,14 @@ each item is in parentheses.
       equal `‖⟨v a, ψ⟩‖²`
 - [ ] Degenerate observables (projectors of higher rank)
 - [ ] Non-ideal measurements and POVMs
-- [ ] **Collapse as conditioning:** after an ideal measurement, the composite process has a
-      division event, and later evolution depends only on the recorded outcome
+- [x] **Collapse, derived:** after evolve–measure–evolve, `P(i, a | j) = |(W v_a)ᵢ|² · |⟨v_a|U|j⟩|²`;
+      later evolution depends only on the recorded outcome (`collapse_apply`)
+- [x] Measurement removes interference: `Γ_sys = |W V|² · |Vᴴ U|²`
+- [x] **Collapse as a division event:** measuring the configuration at `t₁` makes `t₁` a
+      division event, for any unitary dynamics (`measuredAt_isDivisionEvent`); for the qubit,
+      measuring at `π/4` turns a non-division time into a division event
+- [ ] Division events from measurements of arbitrary observables (`V ≠ 1`), and repeated
+      measurements
 - [ ] Decoherence: an environment that records configurations creates division events
 - [ ] Composite systems, entanglement, Bell/CHSH and the Tsirelson bound
 

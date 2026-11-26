@@ -27,7 +27,7 @@ planes.
 7. ✅ [Matrices densidad y canales cuánticos](07-matriz-densidad-y-canales.md)
 8. ✅ [El teorema estocástico-cuántico: de procesos a espacios de Hilbert](08-teorema-estocastico-cuantico.md)
 9. ✅ [La medición y la regla de Born](09-medicion-y-regla-de-born.md)
-10. 🚧 Decoherencia y colapso como eventos de división
+10. ✅ [Colapso y decoherencia como eventos de división](10-colapso.md) (colapso ✅, decoherencia 🚧)
 11. 🚧 Sistemas compuestos y entrelazamiento
 
 **Parte IV: Más allá** 🚧
