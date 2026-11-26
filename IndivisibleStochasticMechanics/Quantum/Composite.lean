@@ -107,4 +107,61 @@ theorem ofUnitary_kronecker {U : ℝ → Matrix n n ℂ} {V : ℝ → Matrix m m
 
 end GenStochasticProcess
 
+
+section LocalOperations
+
+variable {A B E : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B]
+  [Fintype E] [DecidableEq E]
+
+/-- Bob's local operation: a unitary `N` on his system and his own ancilla `E`. -/
+def bobLocal (N : Matrix (B × E) (B × E) ℂ) : Matrix ((A × B) × E) ((A × B) × E) ℂ :=
+  of fun r c => (if r.1.1 = c.1.1 then 1 else 0) * N (r.1.2, r.2) (c.1.2, c.2)
+
+/-- Alice's transition probabilities after a joint evolution `Ψ`, summing over Bob's system
+and ancilla, starting from configuration `j` and ancilla state `e₀`. -/
+noncomputable def aliceMarginal (Ψ : Matrix ((A × B) × E) ((A × B) × E) ℂ) (j : A × B)
+    (e₀ : E) (i : A) : ℝ :=
+  ∑ p : B × E, ‖Ψ ((i, p.1), p.2) (j, e₀)‖ ^ 2
+
+omit [DecidableEq B] in
+/-- The amplitude after Bob's local operation is `N` applied to the vector
+`(b, e) ↦ Θ (i, b) j · δ(e, e₀)`. -/
+theorem bobLocal_mul_apply (N : Matrix (B × E) (B × E) ℂ) (Θ : Matrix (A × B) (A × B) ℂ)
+    (j : A × B) (e₀ : E) (i : A) (p : B × E) :
+    (bobLocal (A := A) N * (Θ ⊗ₖ (1 : Matrix E E ℂ))) ((i, p.1), p.2) (j, e₀) =
+      (N *ᵥ fun q : B × E => Θ (i, q.1) j * (1 : Matrix E E ℂ) q.2 e₀) p := by
+  rw [Matrix.mul_apply, mulVec, dotProduct, Fintype.sum_prod_type, Fintype.sum_prod_type]
+  rw [Finset.sum_eq_single i]
+  · simp [bobLocal, Fintype.sum_prod_type]
+  · intro k _ hk
+    simp [bobLocal, Ne.symm hk]
+  · simp
+
+/-- **No signalling, for any local operation of Bob.** Whatever unitary Bob applies to his
+system and his own ancilla (in particular, any measurement with his own apparatus), Alice's
+transition probabilities do not change. -/
+theorem aliceMarginal_bobLocal {N : Matrix (B × E) (B × E) ℂ}
+    (hN : N ∈ unitaryGroup (B × E) ℂ) (Θ : Matrix (A × B) (A × B) ℂ) (j : A × B) (e₀ : E)
+    (i : A) :
+    aliceMarginal (bobLocal (A := A) N * (Θ ⊗ₖ (1 : Matrix E E ℂ))) j e₀ i = ∑ b, ‖Θ (i, b) j‖ ^ 2 := by
+  simp only [aliceMarginal, bobLocal_mul_apply]
+  rw [sum_norm_sq_mulVec_of_mem_unitaryGroup hN, Fintype.sum_prod_type]
+  refine Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.sum_eq_single e₀]
+  · simp
+  · intro e _ he; simp [one_apply_ne he]
+  · simp
+
+/-- **No signalling for local measurements.** If Bob measures his system with an ideal
+apparatus (chapter 9), Alice's transition probabilities are unchanged. -/
+theorem aliceMarginal_of_isIdealMeasurement {W : Matrix B B ℂ}
+    {N : Matrix (B × Option B) (B × Option B) ℂ} (hN : IsIdealMeasurement W N)
+    (Θ : Matrix (A × B) (A × B) ℂ) (j : A × B) (i : A) :
+    aliceMarginal (bobLocal (A := A) N * (Θ ⊗ₖ (1 : Matrix (Option B) (Option B) ℂ))) j none
+      i =
+      ∑ b, ‖Θ (i, b) j‖ ^ 2 :=
+  aliceMarginal_bobLocal hN.1 Θ j none i
+
+end LocalOperations
+
 end ISM

@@ -43,7 +43,7 @@ each item is in parentheses.
 - [ ] Strengthen the dilation: `U(0) = 1`, and `U(t)` continuous in `t` when `Γ(t)` is
 - [ ] Smaller environments: when does an environment of size `n`, or none, suffice?
 - [ ] Compare with Barandes' exact statement in arXiv:2309.03085 and formalize it verbatim
-- [ ] Gauge freedom: phases and changes of basis that leave `Γ` invariant
+- [ ] Gauge freedom: moved to Stage V
 
 ### I.4 Quantum phenomena from the stochastic side
 - [ ] Interference as the cross terms of `|Θ|²`
@@ -55,7 +55,7 @@ each item is in parentheses.
 - [x] Entanglement, stochastically: a Bell pair's correlations survive a local change of
       basis only without a division event (book ch. 11)
 - [ ] Noncommutative observables from the Hilbert-space representation
-- [ ] The role of complex numbers (arXiv:2602.01043)
+- [ ] The role of complex numbers: moved to Stage V
 
 ## Stage II: Complete the dictionary with textbook quantum mechanics
 
@@ -94,7 +94,8 @@ each item is in parentheses.
 - [ ] Continuous decoherence: records that build up over time, and approximate division
       events (a quantitative notion of "almost divisible")
 - [x] Composite systems and a Bell pair (book ch. 11)
-- [ ] No signalling for local *measurements* (not only local unitaries)
+- [x] No signalling for any local operation (unitary on system + own ancilla), in particular
+      local measurements with an apparatus (book ch. 11)
 - [x] CHSH inequality for local hidden-variable models, Tsirelson's bound `2√2`, and the
       Bell pair reaching it (book ch. 11)
 - [x] Tsirelson's bound stated directly for the transition probabilities of a composite
@@ -127,10 +128,7 @@ each item is in parentheses.
       unspecified. Should they be fixed, and would fixing them change predictions?
 - [ ] Open systems and thermodynamics: link to non-Markovian dynamics and CP-divisibility
 - [ ] Which indivisible processes are "physical"? If only a subclass, there may be new physics
-- [ ] **No autonomous law for Γ:** there are unitaries with `|A|² = |A′|²` but `|BA|² ≠ |BA′|²`,
-      so `Γ(t₁)` never determines `Γ(t)`. The phases are necessary memory. What is the
-      *minimal* memory? Is real data enough (Madelung, Nelson; Wallstrom's objection), or is
-      the full complex structure needed (arXiv:2602.01043)?
+- [ ] No autonomous law for Γ: moved to Stage V
 
 ## Stage IV: Community and infrastructure
 
@@ -149,6 +147,52 @@ each item is in parentheses.
       Lean Zulip, and upstream general results to Mathlib or physlib
 - [ ] Label `good first issue` tasks for physicists learning Lean
 - [ ] Reach out to Jacob Barandes once the flagship theorem is verified
+
+## Stage V: Without the Hilbert space, and without complex numbers (last)
+
+In indivisible stochastic mechanics, everything physical is real: configurations, and the
+stochastic matrices `Γ(t)`. Complex numbers only appear in the Hilbert-space representation
+`Γ = |Θ|²`. **Working hypothesis (Andrés D'Ambrosio):** the complex numbers play a fictitious,
+bookkeeping role, and the theory can be stated, computed and used without them.
+
+What is already known, and what any answer has to respect:
+
+- Barandes argues that the Hilbert-space formalism is a Markovian embedding of an
+  indivisible process, and that complex numbers are what make that embedding work
+  ([arXiv:2602.01043](https://arxiv.org/abs/2602.01043), *A Deflationary Account of
+  Quantum Theory and its Implications for the Complex Numbers*). On that view they belong
+  to the representation, not to the ontology. That is close to the hypothesis above.
+- Renou et al. showed that quantum theory over the **real** numbers, with the standard
+  tensor-product rule for independent sources, makes different predictions in network
+  scenarios ([Nature 600, 625 (2021)](https://doi.org/10.1038/s41586-021-04160-4)).
+  Experiments favour the complex theory
+  ([Chen et al., PRL 128, 040403 (2022)](https://doi.org/10.1103/PhysRevLett.128.040403);
+  [Li et al., PRL 128, 040402 (2022)](https://doi.org/10.1103/PhysRevLett.128.040402)).
+  So "replace ℂ by ℝ in the Hilbert space" does not work. A real reformulation has to
+  change something else, for example how composite systems are put together.
+- Real hydrodynamic reformulations (Madelung) are not equivalent to the Schrödinger
+  equation without an extra quantization condition
+  ([Wallstrom, PRA 49, 1613 (1994)](https://doi.org/10.1103/PhysRevA.49.1613)).
+
+Tasks:
+
+- [ ] **No autonomous law for Γ:** there are unitaries with `|A|² = |A′|²` but
+      `|BA|² ≠ |BA′|²`, so `Γ(t₁)` alone never determines `Γ(t)`. Some memory beyond `Γ`
+      is necessary.
+- [ ] **Gauge freedom:** exactly which data of `Θ` are fixed by the whole family `Γ(t)`
+      (phases, changes of basis).
+- [ ] **Trading ℂ for a hidden bit:** every complex unitary `U = A + iB` gives a real
+      orthogonal matrix `[[A, -B], [B, A]]` on `n × Bool`, and `Γ` is the marginal of its
+      Born matrix. One system's dynamics never needs complex numbers, only one more binary
+      configuration.
+- [ ] **Composite systems:** realifying `U ⊗ V` seems to need one *shared* bit, not one per
+      subsystem (to check). Make this precise and relate it to Renou et al.: is the shared bit the whole
+      price of removing ℂ?
+- [ ] **Minimal memory:** what is the smallest real structure that, together with `Γ(t₁)`,
+      determines the future? Is it less than a complex phase per entry?
+- [ ] **Without the Hilbert space:** state and prove the main results of the book
+      (interference, collapse, decoherence, Bell) using only real stochastic data plus that
+      memory.
 
 ---
 

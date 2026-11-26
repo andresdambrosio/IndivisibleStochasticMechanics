@@ -75,6 +75,8 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.localPair` | Alice's and Bob's apparatuses acting together, each on its own system and pointer | ours | the order of factors `(A × B) × (Option A × Option B)` is a convention | ⏳ |
 | `ISM.pointerJoint` | the joint distribution of the two pointers after preparation and both measurements | ours | summed over the systems' final configurations | ⏳ |
 | `ISM.pointerCorr` | correlations of the two pointers' readings | ours | | ⏳ |
+| `ISM.bobLocal` | Bob's local operation: a unitary on his system and his own ancilla, identity on Alice's system | standard (Stinespring form of a local operation) | ancilla `E` is Bob's alone | ⏳ |
+| `ISM.aliceMarginal` | Alice's transition probabilities, summing over Bob's system and ancilla | standard | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -104,6 +106,8 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.GenStochasticProcess.ofUnitary_kronecker` | independent unitaries `U(t) ⊗ V(t)` give the product process | standard | | ⏳ |
 | `ISM.GenStochasticProcess.prod_isDivisionEvent` | a time that divides two independent processes divides their product | — | | ⏳ |
 | `ISM.envMarginal_one_kronecker_mul` | **no signalling:** a unitary on the second system does not change the first system's transition probabilities | Ghirardi–Rimini–Weber (1980); arXiv:2402.16935 | local *unitaries* only; local measurements are not yet covered | ⏳ |
+| `ISM.aliceMarginal_bobLocal` | **no signalling for any local operation of Bob** (any unitary on his system and ancilla) | Ghirardi–Rimini–Weber (1980) | covers Bob's measurements with his own apparatus, ideal or not | ⏳ |
+| `ISM.aliceMarginal_of_isIdealMeasurement` | no signalling for Bob's ideal measurements | Ghirardi–Rimini–Weber (1980) | | ⏳ |
 | `ISM.BellPair.not_product` | after the Bell preparation the two qubits' joint distribution is not a product | standard | | ⏳ |
 | `ISM.BellPair.coherent` | without a division event, the qubits still agree after local Hadamards on both | Nielsen–Chuang | | ⏳ |
 | `ISM.BellPair.decohered_of_isRecording` | a perfect record right after the preparation makes the same local Hadamards give the uniform distribution | arXiv:2302.10778 §3.9 | | ⏳ |

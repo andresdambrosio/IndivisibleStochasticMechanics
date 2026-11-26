@@ -66,8 +66,21 @@ Es la versión estocástica del teorema de no señalización de la mecánica cu�
 ([Ghirardi, Rimini y Weber, 1980](https://doi.org/10.1007/BF02817189)): lo que hace Bob no
 aparece en las estadísticas de Alicia, así que no sirve para mandar mensajes. Barandes
 discute la localidad causal de su formulación en
-[Barandes, 2024](https://arxiv.org/abs/2402.16935). Por ahora formalizamos solo el caso de
-operaciones unitarias; el caso de mediciones locales queda pendiente.
+[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+
+**Teorema (no señalización para cualquier operación local).** Ahora Bob hace cualquier cosa
+de su lado: trae su propio sistema auxiliar $E$ (por ejemplo el puntero de un aparato) en
+un estado $e_0$, y aplica cualquier unitaria $N$ a su sistema junto con $E$. Las
+probabilidades de transición de Alicia no cambian:
+$$\sum_{i_2,\,e}\Big|\big(N_{\text{Bob}}\,(\Theta\otimes\mathbb 1)\big)_{((i_1,i_2),e),\,(j,e_0)}\Big|^2
+= \sum_{i_2}\big|\Theta_{(i_1,i_2),j}\big|^2 .$$
+*Demostración:* para $i_1$ y $j$ fijos, el lado izquierdo es la norma al cuadrado de $N x$
+con $x_{(i_2,e)} = \Theta_{(i_1,i_2),j}\,\delta_{e,e_0}$, y $N$ preserva la norma.
+$\blacksquare$ En particular, **que Bob mida su sistema con su propio aparato** (ideal como en
+el capítulo 9, o no) no se ve en las estadísticas de Alicia. Toda operación cuántica local
+se puede escribir así, con un sistema auxiliar (teorema de Stinespring, ver el capítulo 8 y las [referencias](99-references.md)), así
+que esto las cubre a todas. El enunciado formal es nuestro; el resultado es de Ghirardi,
+Rimini y Weber.
 
 ## Entrelazamiento: un par de Bell
 
@@ -186,7 +199,6 @@ lectura es nuestra; para cómo encaja la localidad en la formulación de Barande
 
 - **Mediciones no ideales.** Los aparatos de acá son ideales (proyectivos). Las mediciones
   generales (POVM) quedan pendientes.
-- **No señalización para mediciones locales**, no solo para unitarias.
 - **La pregunta de la localidad.** Barandes sostiene que su formulación es causalmente
   local ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizar ese enunciado es
   una tarea de la etapa III del roadmap.
@@ -261,5 +273,5 @@ theorem BellPair.chsh_pointerCorr (hM : ∀ x, IsIdealMeasurement (rot (alice x)
 4. (Para pensar) Las "monedas pegadas" y el par de Bell tienen la misma distribución en el
    instante intermedio. ¿Hay alguna forma de distinguirlos mirando solo ese instante?
 5. (Papel) Verificá que $S = 2\sqrt2$ a partir de $E(a,b) = \cos 2(a-b)$ y los cuatro ángulos.
-6. (Lean, abierto) Extendé el teorema de no señalización a una medición ideal hecha por Bob
-   sobre su qubit.
+6. (Papel) ¿Por qué la demostración de no señalización necesita que el sistema auxiliar
+   sea solo de Bob? ¿Qué falla si lo comparte con Alicia?

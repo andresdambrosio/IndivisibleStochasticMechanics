@@ -64,8 +64,20 @@ This is the stochastic version of the no-signalling theorem of quantum mechanics
 ([Ghirardi, Rimini and Weber, 1980](https://doi.org/10.1007/BF02817189)): what Bob does
 does not show up in Alice's statistics, so it cannot be used to send messages. Barandes
 discusses the causal locality of his formulation in
-[Barandes, 2024](https://arxiv.org/abs/2402.16935). For now we formalize only the case of
-unitary operations; the case of local measurements is still open.
+[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+
+**Theorem (no signalling for any local operation).** Now Bob does anything at all to his
+side: he brings his own ancilla $E$ (for example the pointer of an apparatus) in a state
+$e_0$, and applies any unitary $N$ to his system together with $E$. Alice's transition
+probabilities do not change:
+$$\sum_{i_2,\,e}\Big|\big(N_{\text{Bob}}\,(\Theta\otimes\mathbb 1)\big)_{((i_1,i_2),e),\,(j,e_0)}\Big|^2
+= \sum_{i_2}\big|\Theta_{(i_1,i_2),j}\big|^2 .$$
+*Proof:* for fixed $i_1$ and $j$, the left-hand side is the squared norm of $N x$ with
+$x_{(i_2,e)} = \Theta_{(i_1,i_2),j}\,\delta_{e,e_0}$, and $N$ preserves the norm.
+$\blacksquare$ In particular, **Bob measuring his system with his own apparatus** (ideal as
+in chapter 9, or not) cannot be seen in Alice's statistics. Every local quantum operation
+can be written this way, with an ancilla (Stinespring's theorem, see chapter 8 and the [references](99-references.md)), so this covers
+all of them. The formal statement is ours; the result is Ghirardi, Rimini and Weber's.
 
 ## Entanglement: a Bell pair
 
@@ -181,7 +193,6 @@ for how locality fits into Barandes' formulation, see
 
 - **Non-ideal measurements.** The apparatuses here are ideal (projective). General
   measurements (POVMs) are pending.
-- **No signalling for local measurements**, not only for unitaries.
 - **The locality question.** Barandes argues that his formulation is causally local
   ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizing that claim is a
   stage III task on the roadmap.
@@ -256,5 +267,5 @@ theorem BellPair.chsh_pointerCorr (hM : ∀ x, IsIdealMeasurement (rot (alice x)
 4. (To think about) The "glued coins" and the Bell pair have the same distribution at the
    intermediate time. Is there any way to tell them apart by looking at that time alone?
 5. (Paper) Check that $S = 2\sqrt2$ from $E(a,b) = \cos 2(a-b)$ and the four angles.
-6. (Lean, open) Extend the no-signalling theorem to an ideal measurement made by Bob on
-   his qubit.
+6. (Paper) Why does the no-signalling proof need Bob's ancilla to be his alone? What goes
+   wrong if the ancilla is shared with Alice?
