@@ -31,6 +31,8 @@ a division event. The quantum facts used here (the Bell state and its invariance
   locally and then read the configurations, the correlation is `cos 2(a - b)`; with the
   standard settings the CHSH value is `2√2`, so no local hidden-variable model reproduces
   these transition probabilities (Bell 1964; CHSH 1969).
+* `chsh_pointerCorr`, `exists_apparatus_chsh`: the same value `2√2` for the pointers of
+  local ideal apparatuses.
 
 ## References
 
@@ -206,5 +208,41 @@ theorem lhv_corr_ne_bellCorr {Λ : Type*} [Fintype Λ] (L : LHVModel Λ) :
     rw [show (1 : ℝ) = Real.sqrt 1 by simp]
     exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
   linarith
+
+
+/-- Rotations are unitary. -/
+theorem rot_mem_unitaryGroup (θ : ℝ) : rot θ ∈ unitaryGroup (Fin 2) ℂ := by
+  have h : ((Real.cos θ : ℂ)) ^ 2 + (Real.sin θ : ℂ) ^ 2 = 1 := by
+    exact_mod_cast Real.cos_sq_add_sin_sq θ
+  rw [mem_unitaryGroup_iff]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [rot, rotR, Matrix.mul_apply, Fin.sum_univ_two, Complex.conj_ofReal,
+      -Complex.ofReal_cos, -Complex.ofReal_sin] <;>
+    first | ring1 | linear_combination h
+
+/-- **The Bell pair measured with apparatuses reaches `2√2`.** If Alice and Bob measure with
+any ideal apparatuses (chapter 9) in the rotated bases, the pointers' CHSH value is `2√2`. -/
+theorem chsh_pointerCorr {M : Fin 2 → Matrix (Fin 2 × Option (Fin 2)) (Fin 2 × Option (Fin 2)) ℂ}
+    {N : Fin 2 → Matrix (Fin 2 × Option (Fin 2)) (Fin 2 × Option (Fin 2)) ℂ}
+    (hM : ∀ x, IsIdealMeasurement (rot (alice x))ᴴ (M x))
+    (hN : ∀ y, IsIdealMeasurement (rot (bob y))ᴴ (N y)) :
+    chsh (pointerCorr M N prep (fun _ => sgn) (fun _ => sgn) (0, 0)) = 2 * Real.sqrt 2 := by
+  rw [pointerCorr_eq hM hN (fun x => Unitary.star_mem (rot_mem_unitaryGroup _))
+    (fun y => Unitary.star_mem (rot_mem_unitaryGroup _))]
+  simp only [conjTranspose_conjTranspose]
+  exact chsh_bellCorr
+
+/-- Such apparatuses exist. -/
+theorem exists_apparatus_chsh :
+    ∃ M N : Fin 2 → Matrix (Fin 2 × Option (Fin 2)) (Fin 2 × Option (Fin 2)) ℂ,
+      (∀ x, IsIdealMeasurement (rot (alice x))ᴴ (M x)) ∧
+      (∀ y, IsIdealMeasurement (rot (bob y))ᴴ (N y)) ∧
+      chsh (pointerCorr M N prep (fun _ => sgn) (fun _ => sgn) (0, 0)) = 2 * Real.sqrt 2 := by
+  choose M hM using fun x => exists_isIdealMeasurement
+    (Unitary.star_mem (rot_mem_unitaryGroup (alice x)))
+  choose N hN using fun y => exists_isIdealMeasurement
+    (Unitary.star_mem (rot_mem_unitaryGroup (bob y)))
+  exact ⟨M, N, hM, hN, chsh_pointerCorr hM hN⟩
 
 end ISM.BellPair

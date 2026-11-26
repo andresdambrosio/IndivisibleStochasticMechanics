@@ -20,19 +20,27 @@ DECL = re.compile(
     r"(def|structure|abbrev|class|inductive|instance|theorem|lemma)\s+([^\s:({\[]+)"
 )
 NAMESPACE = re.compile(r"^namespace\s+(\S+)")
-END = re.compile(r"^end\s+(\S+)")
+SECTION = re.compile(
+    r"^(?:@\[[^\]]*\]\s*)?(?:public\s+)?(?:noncomputable\s+)?section(?:\s+(\S+))?\s*$"
+)
+END = re.compile(r"^end(?:\s+(\S+))?\s*$")
 DEFINITION_KINDS = {"def", "structure", "abbrev", "class", "inductive", "instance"}
 
 
 def declarations():
     """Yield (kind, full name, location) for every declaration in the library."""
     for path in sorted(SRC.rglob("*.lean")):
-        stack = []
+        # Each scope is (kind, name parts); sections do not change the namespace.
+        scopes = []
         for lineno, line in enumerate(path.read_text().splitlines(), 1):
+            stack = [p for kind, parts in scopes if kind == "namespace" for p in parts]
             if m := NAMESPACE.match(line):
-                stack.extend(m.group(1).split("."))
+                scopes.append(("namespace", m.group(1).split(".")))
+            elif m := SECTION.match(line):
+                scopes.append(("section", []))
             elif m := END.match(line):
-                del stack[-len(m.group(1).split(".")):]
+                if scopes:
+                    scopes.pop()
             elif m := DECL.match(line):
                 kind, name = m.groups()
                 full = ".".join(stack + [name])

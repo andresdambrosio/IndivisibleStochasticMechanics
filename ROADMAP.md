@@ -97,8 +97,10 @@ each item is in parentheses.
 - [ ] No signalling for local *measurements* (not only local unitaries)
 - [x] CHSH inequality for local hidden-variable models, Tsirelson's bound `2√2`, and the
       Bell pair reaching it (book ch. 11)
-- [ ] Tsirelson's bound stated directly for stochastic correlations (via the dilation)
-- [ ] Bell/CHSH with explicit measurement apparatuses (ch. 9) instead of rotate-then-read
+- [x] Tsirelson's bound stated directly for the transition probabilities of a composite
+      process (any unitary preparation, local unitaries, `±1` outcomes)
+- [x] Bell/CHSH with explicit local measurement apparatuses (ch. 9): the pointers'
+      distribution equals rotate-then-read, Tsirelson holds, and the Bell pair reaches `2√2`
 
 ### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
 - [ ] Spectral measures; the spectral theorem for unbounded self-adjoint operators

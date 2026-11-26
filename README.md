@@ -46,7 +46,7 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Quantum/Decoherence` | **decoherence creates division events**: an environment that records the configuration removes interference, with no one reading it |
 | `Examples/DecoheredQubit` | partial decoherence of the qubit: a division event appears iff the record is perfect |
 | `Quantum/Composite` | composite systems: independent systems give product processes; **no signalling** for local unitaries |
-| `Quantum/Bell` | the CHSH inequality for local hidden-variable models and Tsirelson's bound `2√2` |
+| `Quantum/Bell` | the CHSH inequality for local hidden-variable models; Tsirelson's bound `2√2`, also for transition probabilities and for local apparatuses' pointers |
 | `Examples/BellPair` | a Bell pair: correlations that survive a local change of basis only without a division event |
 | `ForMathlib/` | general results we build for Mathlib and upstream ([details](IndivisibleStochasticMechanics/ForMathlib/README.md)) |
 

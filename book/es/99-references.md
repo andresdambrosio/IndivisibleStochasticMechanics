@@ -116,6 +116,7 @@ proyecto, de Andrés D'Ambrosio, son estos:
   con el teorema "$\pi/4$ es un evento de división si y solo si el registro es perfecto"
   (capítulo 10). Hasta donde sabemos, ese enunciado no aparece en la literatura. Y la
   lectura estocástica del par de Bell (capítulo 11): las mismas estadísticas en el instante
-  intermedio, con o sin evento de división, y futuros distintos; y CHSH enunciado para las
-  probabilidades de transición del proceso compuesto.
+  intermedio, con o sin evento de división, y futuros distintos; y CHSH y la cota de Tsirelson
+  enunciados para las probabilidades de transición de un proceso compuesto y para los
+  punteros de aparatos locales.
 - **La exposición:** el curso en sí, su organización, sus ejercicios y sus discusiones.

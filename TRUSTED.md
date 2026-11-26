@@ -70,6 +70,11 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.BellPair.alice` | Alice's CHSH settings `0, π/4` | standard | | ⏳ |
 | `ISM.BellPair.bob` | Bob's CHSH settings `π/8, -π/8` | standard | | ⏳ |
 | `ISM.BellPair.bellCorr` | the four Bell-pair correlations at those settings | standard | | ⏳ |
+| `ISM.stochCorr` | correlations from the transition probabilities of a composite process: prepare with `Θ` from `j`, apply local unitaries `U x`, `V y`, read both configurations with outcomes `a x`, `b y` | ours (stochastic statement) | | ⏳ |
+| `ISM.rotObs` | the observable `Uᴴ diag(a) U` measured by "rotate by `U`, then read with outcomes `a`" | standard | | ⏳ |
+| `ISM.localPair` | Alice's and Bob's apparatuses acting together, each on its own system and pointer | ours | the order of factors `(A × B) × (Option A × Option B)` is a convention | ⏳ |
+| `ISM.pointerJoint` | the joint distribution of the two pointers after preparation and both measurements | ours | summed over the systems' final configurations | ⏳ |
+| `ISM.pointerCorr` | correlations of the two pointers' readings | ours | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -104,6 +109,10 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.BellPair.decohered_of_isRecording` | a perfect record right after the preparation makes the same local Hadamards give the uniform distribution | arXiv:2302.10778 §3.9 | | ⏳ |
 | `ISM.LHVModel.abs_chsh_corr_le_two` | **CHSH inequality:** every local hidden-variable model has `\|S\| ≤ 2` | CHSH (1969) | | ⏳ |
 | `ISM.expect_chsh_le` | **Tsirelson's bound:** `⟨C⟩ ≤ 2√2 ‖ψ‖²` for `±1` observables with Alice's commuting with Bob's | Cirel'son (1980) | quantum side; not yet stated for stochastic correlations directly | ⏳ |
+| `ISM.abs_chsh_stochCorr_le` | **Tsirelson for transition probabilities:** any unitary preparation, local unitaries and `±1` outcomes give `\|S\| ≤ 2√2` | Cirel'son (1980), restated by us | | ⏳ |
+| `ISM.pointerJoint_eq` | with local ideal apparatuses, the pointers' joint distribution is `\|((Vᴴ ⊗ Wᴴ) Θ)_{(a,b), j}\|²` | ours | | ⏳ |
+| `ISM.abs_chsh_pointerCorr_le` | **Tsirelson for local apparatuses:** the pointers' CHSH value is at most `2√2` | Cirel'son (1980), restated by us | | ⏳ |
+| `ISM.BellPair.chsh_pointerCorr` | the Bell pair measured with local ideal apparatuses reaches `2√2` | standard content; apparatus version ours | | ⏳ |
 | `ISM.BellPair.corr_eq` | the Bell-pair correlation is `cos 2(a - b)` | standard | | ⏳ |
 | `ISM.BellPair.chsh_bellCorr` | the Bell pair reaches `S = 2√2` | standard | | ⏳ |
 | `ISM.BellPair.lhv_corr_ne_bellCorr` | no local hidden-variable model reproduces the Bell-pair correlations | Bell (1964); CHSH (1969) | | ⏳ |

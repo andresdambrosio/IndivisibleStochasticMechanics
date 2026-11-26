@@ -149,6 +149,31 @@ $$(sA_0 - B_0 - B_1)^2 + (sA_1 - B_0 + B_1)^2 = 8 - 2s\,(A_0B_0 + A_0B_1 + A_1B_
 y el lado izquierdo tiene valor esperado no negativo. $\blacksquare$ Así que el par de Bell
 es óptimo: la mecánica cuántica supera 2, pero nunca $2\sqrt2$.
 
+**Teorema (Tsirelson, en lenguaje estocástico).** La misma cota vale directamente para las
+probabilidades de transición de un proceso compuesto. Tomá cualquier preparación unitaria
+$\Theta$ de los dos sistemas, cualesquiera unitarias locales $U_x$ para Alicia y $V_y$ para
+Bob, y cualquier asignación de resultados $\pm1$ a las configuraciones. Entonces las
+correlaciones
+$$E(x,y) = \sum_{i_1,i_2} a_x(i_1)\,b_y(i_2)\;\Gamma^{xy}_{(i_1,i_2),\,j}$$
+calculadas con las matrices de transición $\Gamma^{xy}$ cumplen $|S| \le 2\sqrt2$.
+*Demostración:* $E(x,y)$ es el valor esperado cuántico de
+$(U_x^\dagger D_{a_x} U_x)\otimes(V_y^\dagger D_{b_y} V_y)$ en el estado $\Theta e_j$, donde
+$D_a$ es la matriz diagonal de resultados. Esos observables tienen cuadrado $1$, así que
+vale el teorema anterior. $\blacksquare$ La cota es de Cirel'son; enunciarla para
+probabilidades de transición es nuestro.
+
+**Teorema (con aparatos).** Hasta acá, "medir" quería decir rotar y después leer la
+configuración. Ahora cada lado mide con un aparato ideal como el del capítulo 9: Alicia con
+un aparato para la base $V_x$ y su propio puntero, Bob con uno para $W_y$ y su propio
+puntero. Cada aparato actúa solo sobre su sistema y su puntero. Entonces los punteros
+marcan $(a,b)$ con probabilidad
+$$P(a,b) = \Big|\big((V_x^\dagger\otimes W_y^\dagger)\,\Theta\big)_{(a,b),\,j}\Big|^2 ,$$
+que es exactamente la probabilidad de "rotar con $V_x^\dagger$, $W_y^\dagger$ y leer".
+En consecuencia, **los punteros también cumplen $|S|\le 2\sqrt2$**, y para el par de Bell,
+con aparatos para las bases rotadas, **los punteros llegan a $S = 2\sqrt2$**. La física es
+la teoría de la medición estándar; estos tres enunciados en esta forma, y sus
+demostraciones formales, son nuestros.
+
 ¿Qué significa esto para la mecánica estocástica indivisible? Las configuraciones son
 reales en todo instante, pero **no** son una variable oculta local en el sentido de Bell:
 el teorema muestra que ninguna variable así reproduce las estadísticas. En el lenguaje de
@@ -159,10 +184,8 @@ lectura es nuestra; para cómo encaja la localidad en la formulación de Barande
 
 ## Lo que todavía falta
 
-- **Bell con aparatos.** Acá "medir" quiere decir rotar y después leer la configuración.
-  Modelar cada medición con un aparato (capítulo 9) queda pendiente.
-- **Tsirelson, en lenguaje estocástico.** Probamos la cota del lado cuántico; enunciarla
-  directamente para las probabilidades de transición de cualquier proceso queda pendiente.
+- **Mediciones no ideales.** Los aparatos de acá son ideales (proyectivos). Las mediciones
+  generales (POVM) quedan pendientes.
 - **No señalización para mediciones locales**, no solo para unitarias.
 - **La pregunta de la localidad.** Barandes sostiene que su formulación es causalmente
   local ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizar ese enunciado es
@@ -212,6 +235,18 @@ theorem BellPair.lhv_corr_ne_bellCorr (L : LHVModel Λ) : L.corr ≠ bellCorr
 
 theorem expect_chsh_le ... (ψ : ι → ℂ) :
     expect (A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁) ψ ≤ 2 * Real.sqrt 2 * ∑ i, ‖ψ i‖ ^ 2
+
+theorem abs_chsh_stochCorr_le (hΘ : Θ ∈ unitaryGroup (A × B) ℂ) (hU : ∀ x, U x ∈ ...)
+    (hV : ∀ y, V y ∈ ...) (ha : ∀ x i, a x i = 1 ∨ a x i = -1) (hb : ...) (j : A × B) :
+    |chsh (stochCorr Θ U V a b j)| ≤ 2 * Real.sqrt 2
+
+theorem pointerJoint_eq (hM : IsIdealMeasurement V M) (hN : IsIdealMeasurement W N)
+    (hV : V ∈ unitaryGroup A ℂ) (hW : W ∈ unitaryGroup B ℂ) (Θ) (j) (a) (b) :
+    pointerJoint M N Θ j a b = normSqMatrix ((Vᴴ ⊗ₖ Wᴴ) * Θ) (a, b) j
+
+theorem BellPair.chsh_pointerCorr (hM : ∀ x, IsIdealMeasurement (rot (alice x))ᴴ (M x))
+    (hN : ∀ y, IsIdealMeasurement (rot (bob y))ᴴ (N y)) :
+    chsh (pointerCorr M N prep (fun _ => sgn) (fun _ => sgn) (0, 0)) = 2 * Real.sqrt 2
 ```
 
 ## Ejercicios

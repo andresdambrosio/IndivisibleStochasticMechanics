@@ -146,6 +146,29 @@ $$(sA_0 - B_0 - B_1)^2 + (sA_1 - B_0 + B_1)^2 = 8 - 2s\,(A_0B_0 + A_0B_1 + A_1B_
 and the left-hand side has a non-negative expectation. $\blacksquare$ So the Bell pair is
 optimal: quantum mechanics goes beyond 2, but never beyond $2\sqrt2$.
 
+**Theorem (Tsirelson, stochastically).** The same bound holds directly for the transition
+probabilities of a composite process. Take any unitary preparation $\Theta$ of the two
+systems, any local unitaries $U_x$ for Alice and $V_y$ for Bob, and any assignment of
+outcomes $\pm1$ to configurations. Then the correlations
+$$E(x,y) = \sum_{i_1,i_2} a_x(i_1)\,b_y(i_2)\;\Gamma^{xy}_{(i_1,i_2),\,j}$$
+computed from the transition matrices $\Gamma^{xy}$ satisfy $|S| \le 2\sqrt2$. *Proof:*
+$E(x,y)$ is the quantum expectation value of $(U_x^\dagger D_{a_x} U_x)\otimes(V_y^\dagger
+D_{b_y} V_y)$ in the state $\Theta e_j$, where $D_a$ is the diagonal matrix of outcomes.
+These observables square to $1$, so the previous theorem applies. $\blacksquare$ The bound
+is Cirel'son's; stating it for transition probabilities is ours.
+
+**Theorem (with apparatuses).** So far, "measuring" meant rotating and then reading the
+configuration. Now each side measures with an ideal apparatus as in chapter 9: Alice with an
+apparatus for the basis $V_x$ and her own pointer, Bob with one for $W_y$ and his own
+pointer. Each apparatus acts only on its own system and pointer. Then the pointers read
+$(a,b)$ with probability
+$$P(a,b) = \Big|\big((V_x^\dagger\otimes W_y^\dagger)\,\Theta\big)_{(a,b),\,j}\Big|^2 ,$$
+exactly the probability of "rotate by $V_x^\dagger$, $W_y^\dagger$ and read". As a
+consequence, **the pointers also satisfy $|S|\le 2\sqrt2$**, and for the Bell pair, with
+apparatuses for the rotated bases, **the pointers reach $S = 2\sqrt2$**. The physics is
+standard measurement theory; these three statements in this form, and their formal proofs,
+are ours.
+
 What does this mean for indivisible stochastic mechanics? The configurations are real at
 every time, but they are **not** a local hidden variable in Bell's sense: the theorem shows
 that no such variable reproduces the statistics. In the language of this book, the reason
@@ -156,10 +179,8 @@ for how locality fits into Barandes' formulation, see
 
 ## What is still missing
 
-- **Bell with apparatuses.** Here "measuring" means rotating and then reading the
-  configuration. Modelling each measurement with an apparatus (chapter 9) is pending.
-- **Tsirelson, stochastically.** We proved the bound on the quantum side; stating it
-  directly for the transition probabilities of every process is pending.
+- **Non-ideal measurements.** The apparatuses here are ideal (projective). General
+  measurements (POVMs) are pending.
 - **No signalling for local measurements**, not only for unitaries.
 - **The locality question.** Barandes argues that his formulation is causally local
   ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizing that claim is a
@@ -209,6 +230,18 @@ theorem BellPair.lhv_corr_ne_bellCorr (L : LHVModel Λ) : L.corr ≠ bellCorr
 
 theorem expect_chsh_le ... (ψ : ι → ℂ) :
     expect (A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁) ψ ≤ 2 * Real.sqrt 2 * ∑ i, ‖ψ i‖ ^ 2
+
+theorem abs_chsh_stochCorr_le (hΘ : Θ ∈ unitaryGroup (A × B) ℂ) (hU : ∀ x, U x ∈ ...)
+    (hV : ∀ y, V y ∈ ...) (ha : ∀ x i, a x i = 1 ∨ a x i = -1) (hb : ...) (j : A × B) :
+    |chsh (stochCorr Θ U V a b j)| ≤ 2 * Real.sqrt 2
+
+theorem pointerJoint_eq (hM : IsIdealMeasurement V M) (hN : IsIdealMeasurement W N)
+    (hV : V ∈ unitaryGroup A ℂ) (hW : W ∈ unitaryGroup B ℂ) (Θ) (j) (a) (b) :
+    pointerJoint M N Θ j a b = normSqMatrix ((Vᴴ ⊗ₖ Wᴴ) * Θ) (a, b) j
+
+theorem BellPair.chsh_pointerCorr (hM : ∀ x, IsIdealMeasurement (rot (alice x))ᴴ (M x))
+    (hN : ∀ y, IsIdealMeasurement (rot (bob y))ᴴ (N y)) :
+    chsh (pointerCorr M N prep (fun _ => sgn) (fun _ => sgn) (0, 0)) = 2 * Real.sqrt 2
 ```
 
 ## Exercises

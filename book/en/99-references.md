@@ -117,6 +117,7 @@ contributions, by Andrés D'Ambrosio, are these:
   perfect" (chapter 10). As far as we know, that statement does not appear in the
   literature. Also the stochastic reading of the Bell pair (chapter 11): the same statistics
   at the intermediate time, with or without a division event, and different futures; and
-  CHSH stated for the transition probabilities of the composite process.
+  CHSH and Tsirelson's bound stated for the transition probabilities of a composite
+  process and for the pointers of local apparatuses.
 - **The exposition:** the course itself, its organization, its exercises and its
   discussions.
