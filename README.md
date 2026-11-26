@@ -45,6 +45,8 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Examples/MeasuredQubit` | measuring the qubit at `π/4` turns a non-division time into a division event |
 | `Quantum/Decoherence` | **decoherence creates division events**: an environment that records the configuration removes interference, with no one reading it |
 | `Examples/DecoheredQubit` | partial decoherence of the qubit: a division event appears iff the record is perfect |
+| `Quantum/Composite` | composite systems: independent systems give product processes; **no signalling** for local unitaries |
+| `Examples/BellPair` | a Bell pair: correlations that survive a local change of basis only without a division event |
 | `ForMathlib/` | general results we build for Mathlib and upstream ([details](IndivisibleStochasticMechanics/ForMathlib/README.md)) |
 
 ## The book

@@ -48,4 +48,14 @@ theorem sum_norm_sq_col_eq_conjTranspose_mul_self (A : Matrix m n ℂ) (j : n) :
   simp only [Matrix.mul_apply, conjTranspose_apply, Complex.star_def]
   exact Finset.sum_congr rfl fun i _ => (Complex.conj_mul' (A i j)).symm
 
+/-- A unitary matrix preserves the squared Euclidean norm: `∑ e, ‖(B x) e‖² = ∑ e, ‖x e‖²`. -/
+theorem sum_norm_sq_mulVec_of_mem_unitaryGroup [DecidableEq m] {B : Matrix m m ℂ}
+    (hB : B ∈ unitaryGroup m ℂ) (x : m → ℂ) :
+    ∑ e, ‖(B *ᵥ x) e‖ ^ 2 = ∑ e, ‖x e‖ ^ 2 := by
+  have key : ∀ y : m → ℂ, ((∑ e, ‖y e‖ ^ 2 : ℝ) : ℂ) = star y ⬝ᵥ y := fun y => by
+    push_cast; simp [dotProduct, Complex.mul_conj', mul_comm]
+  apply Complex.ofReal_injective
+  rw [key, key, star_mulVec, dotProduct_mulVec, vecMul_vecMul]
+  rw [show Bᴴ * B = 1 from mem_unitaryGroup_iff'.mp hB, vecMul_one]
+
 end Matrix

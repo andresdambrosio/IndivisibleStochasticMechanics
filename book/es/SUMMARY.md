@@ -21,7 +21,7 @@
 - [El teorema estocástico-cuántico](08-stochastic-quantum-theorem.md)
 - [La medición y la regla de Born](09-measurement-and-born-rule.md)
 - [Colapso y decoherencia como eventos de división](10-collapse-and-decoherence.md)
-- [Sistemas compuestos y entrelazamiento]()
+- [Sistemas compuestos y entrelazamiento](11-composite-systems.md)
 
 # Parte IV: Más allá
 

@@ -15,8 +15,8 @@ form, that ISM is equivalent to all of quantum mechanics. Read `ROADMAP.md` firs
 | Path | Contents |
 |---|---|
 | `IndivisibleStochasticMechanics/Stochastic/` | stochastic matrices, generalized processes, division events, Born representations |
-| `IndivisibleStochasticMechanics/Quantum/` | unitary processes, dilations (the correspondence), density matrices, channels, measurement, collapse, decoherence |
-| `IndivisibleStochasticMechanics/Examples/` | the indivisible qubit, measured, and partially decohered |
+| `IndivisibleStochasticMechanics/Quantum/` | unitary processes, dilations (the correspondence), density matrices, channels, measurement, collapse, decoherence, composite systems |
+| `IndivisibleStochasticMechanics/Examples/` | the indivisible qubit (measured, partially decohered) and a Bell pair |
 | `IndivisibleStochasticMechanics/ForMathlib/` | general results to upstream to Mathlib (Mathlib namespaces, no project imports) |
 | `TRUSTED.md` | the trusted layer: every definition and main statement, with source and review status |
 | `ROADMAP.md` | the full plan, with what is done |

@@ -55,6 +55,10 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.Qubit.recordState` | records `(1, 0)` and `(cos θ, sin θ)` of the qubit's two configurations, overlap `cos θ` | — | | ⏳ |
 | `ISM.Qubit.recorder` | a unitary that records the qubit with `recordState θ` | — | chosen noncomputably; no result depends on the choice | ⏳ |
 | `ISM.Qubit.decoheredProcess` | the qubit process with a partial record at `π/4` | — | | ⏳ |
+| `ISM.GenStochasticProcess.prod` | the process of two independent systems, `Γ(t) = Γ₁(t) ⊗ Γ₂(t)` | standard | "independent" means no interaction at any time | ⏳ |
+| `ISM.BellPair.hadamard` | the Hadamard gate `(1/√2)[[1, 1], [1, -1]]` | standard | | ⏳ |
+| `ISM.BellPair.cnot` | the CNOT gate `\|a, b⟩ ↦ \|a, b + a⟩` | standard | | ⏳ |
+| `ISM.BellPair.prep` | Bell-pair preparation `CNOT · (H ⊗ 1)` | Nielsen–Chuang §1.3.6 | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -81,6 +85,12 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.GenStochasticProcess.recordedAt_isDivisionEvent` | **decoherence creates division events:** a perfect record at `t₁` makes `t₁` a division event, with no one reading it | arXiv:2302.10778 | | ⏳ |
 | `ISM.Qubit.decoheredProcess_swap` | after a partial record with overlap `cos θ` at `π/4`, the probability of a swap at `π/2` is `(1 + cos θ)/2` | — | | ⏳ |
 | `ISM.Qubit.decoheredProcess_isDivisionEvent_iff` | `π/4` is a division event iff the record is perfect (`cos θ = 0`) | — | | ⏳ |
+| `ISM.GenStochasticProcess.ofUnitary_kronecker` | independent unitaries `U(t) ⊗ V(t)` give the product process | standard | | ⏳ |
+| `ISM.GenStochasticProcess.prod_isDivisionEvent` | a time that divides two independent processes divides their product | — | | ⏳ |
+| `ISM.envMarginal_one_kronecker_mul` | **no signalling:** a unitary on the second system does not change the first system's transition probabilities | Ghirardi–Rimini–Weber (1980); arXiv:2402.16935 | local *unitaries* only; local measurements are not yet covered | ⏳ |
+| `ISM.BellPair.not_product` | after the Bell preparation the two qubits' joint distribution is not a product | standard | | ⏳ |
+| `ISM.BellPair.coherent` | without a division event, the qubits still agree after local Hadamards on both | Nielsen–Chuang | | ⏳ |
+| `ISM.BellPair.decohered_of_isRecording` | a perfect record right after the preparation makes the same local Hadamards give the uniform distribution | arXiv:2302.10778 §3.9 | | ⏳ |
 | `ISM.Qubit.measuredProcess_isDivisionEvent` | measuring the qubit at `π/4` makes `π/4` a division event (compare `not_isDivisionEvent_pi_div_four`) | — | | ⏳ |
 
 ## References
@@ -94,4 +104,7 @@ exists, and that it says what we cite it for).
 | Barandes, *The Stochastic-Quantum Theorem*, arXiv:2309.03085 | code, README, book | ⏳ |
 | Barandes, *Quantum Systems as Indivisible Stochastic Processes*, arXiv:2507.21192 (journal: Stud. Hist. Phil. Sci., 2026?) | README, book | ⏳ |
 | Zurek, *Decoherence, einselection, and the quantum origins of the classical*, Rev. Mod. Phys. 75, 715 (2003) | code, book | ⏳ |
+| Barandes, *New Prospects for a Causally Local Formulation of Quantum Theory*, arXiv:2402.16935 | code, book | ⏳ |
+| Ghirardi, Rimini, Weber, Lett. Nuovo Cimento 27, 293 (1980) (no signalling) | code, book | ⏳ |
+| Nielsen and Chuang, *Quantum Computation and Quantum Information* (Cambridge, 2000) | code, book | ⏳ |
 | arXiv:2602.01043, 2603.27369, 2608.04354, 2601.18720 (Calvo); Horsocrates (Rocq) | ROADMAP | ⏳ |

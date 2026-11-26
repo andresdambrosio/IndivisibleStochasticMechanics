@@ -21,7 +21,7 @@
 - [The stochastic-quantum theorem](08-stochastic-quantum-theorem.md)
 - [Measurement and the Born rule](09-measurement-and-born-rule.md)
 - [Collapse and decoherence as division events](10-collapse-and-decoherence.md)
-- [Composite systems and entanglement]()
+- [Composite systems and entanglement](11-composite-systems.md)
 
 # Part IV: Beyond
 

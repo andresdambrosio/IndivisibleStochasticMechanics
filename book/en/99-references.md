@@ -9,6 +9,9 @@
 - **[Barandes, 2023b]** J. A. Barandes, *The Stochastic-Quantum Theorem*,
   [arXiv:2309.03085](https://arxiv.org/abs/2309.03085) (2023). The stochastic-quantum
   theorem in detail.
+- **[Barandes, 2024]** J. A. Barandes, *New Prospects for a Causally Local Formulation of
+  Quantum Theory*, [arXiv:2402.16935](https://arxiv.org/abs/2402.16935) (2024). On
+  locality.
 - **[Barandes, 2025]** J. A. Barandes, *Quantum Systems as Indivisible Stochastic
   Processes*, [arXiv:2507.21192](https://arxiv.org/abs/2507.21192) (2025); Stud. Hist.
   Phil. Sci. 119, 102213 (2026). A short, conceptual version.
@@ -57,6 +60,24 @@
 - K. Życzkowski, W. Słomczyński, M. Kuś and H.-J. Sommers, *Random Unistochastic Matrices*,
   J. Phys. A 36, 3425 (2003), [arXiv:nlin/0112036](https://arxiv.org/abs/nlin/0112036).
 
+## Entanglement, Bell and locality
+
+- A. Einstein, B. Podolsky and N. Rosen, *Can Quantum-Mechanical Description of Physical
+  Reality Be Considered Complete?*, Phys. Rev. 47, 777 (1935),
+  [doi:10.1103/PhysRev.47.777](https://doi.org/10.1103/PhysRev.47.777).
+- E. Schrödinger, *Die gegenwärtige Situation in der Quantenmechanik*, Naturwissenschaften
+  23, 807 (1935), [doi:10.1007/BF01491891](https://doi.org/10.1007/BF01491891).
+- J. S. Bell, *On the Einstein Podolsky Rosen Paradox*, Physics Physique Fizika 1, 195
+  (1964), [doi:10.1103/PhysicsPhysiqueFizika.1.195](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195).
+- J. F. Clauser, M. A. Horne, A. Shimony and R. A. Holt, *Proposed Experiment to Test Local
+  Hidden-Variable Theories*, Phys. Rev. Lett. 23, 880 (1969),
+  [doi:10.1103/PhysRevLett.23.880](https://doi.org/10.1103/PhysRevLett.23.880).
+- B. S. Cirel'son, *Quantum Generalizations of Bell's Inequality*, Lett. Math. Phys. 4, 93
+  (1980), [doi:10.1007/BF00417500](https://doi.org/10.1007/BF00417500).
+- G. C. Ghirardi, A. Rimini and T. Weber, *A General Argument Against Superluminal
+  Transmission Through the Quantum Mechanical Measurement Process*, Lett. Nuovo Cimento 27,
+  293 (1980), [doi:10.1007/BF02817189](https://doi.org/10.1007/BF02817189).
+
 ## Decoherence
 
 - H. D. Zeh, *On the Interpretation of Measurement in Quantum Theory*, Found. Phys. 1, 69
@@ -83,16 +104,18 @@
 The physical ideas in this book belong to the authors cited above. The project's own
 contributions, by Andrés D'Ambrosio, are these:
 
-- **The Lean 4 formalization** of all the results of chapters 3 to 10, with
+- **The Lean 4 formalization** of all the results of chapters 3 to 11, with
   computer-checked proofs. The interpretive choices we made when formalizing are in
   [`TRUSTED.md`](https://github.com/andresdambrosio/IndivisibleStochasticMechanics/blob/main/TRUSTED.md).
 - **Concrete constructions:** the unitary dilation with environment `Option n`
   (chapter 8), which is of Stinespring type but not necessarily Barandes', and the general
-  lemma for completing orthonormal columns to a unitary (`ForMathlib/`).
+  lemmas for completing orthonormal columns to a unitary and on Kronecker products of
+  stochastic matrices (`ForMathlib/`).
 - **New examples and statements:** the qubit with $H = \sigma_x$ as an example of
   indivisibility (chapter 6), the qubit measured at $\pi/4$, and the qubit with a partial
   record, with the theorem "$\pi/4$ is a division event if and only if the record is
   perfect" (chapter 10). As far as we know, that statement does not appear in the
-  literature.
+  literature. Also the stochastic reading of the Bell pair (chapter 11): the same statistics
+  at the intermediate time, with or without a division event, and different futures.
 - **The exposition:** the course itself, its organization, its exercises and its
   discussions.

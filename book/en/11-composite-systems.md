@@ -1,0 +1,167 @@
+# 11. Composite systems and entanglement
+
+> Code: `IndivisibleStochasticMechanics/Quantum/Composite.lean`,
+> `IndivisibleStochasticMechanics/Examples/BellPair.lean` and
+> `IndivisibleStochasticMechanics/ForMathlib/Matrix/Stochastic.lean`
+
+## The physical idea
+
+Two systems, with configuration spaces $\mathcal{C}_1$ and $\mathcal{C}_2$, form a
+composite system whose configurations are **pairs** $(i_1, i_2)$. Nothing more is needed:
+in indivisible stochastic mechanics, a composite system is simply a system whose
+configuration space is a Cartesian product. Barandes treats composite systems and
+entanglement in [Barandes, 2023a, §3.9](https://arxiv.org/abs/2302.10778).
+
+In textbook quantum mechanics, **entanglement** is the most mysterious feature of
+composite systems. Einstein, Podolsky and Rosen pointed it out
+([1935](https://doi.org/10.1103/PhysRev.47.777)), and Schrödinger named it
+(*Verschränkung*) the same year ([Schrödinger, 1935](https://doi.org/10.1007/BF01491891)).
+In this chapter we see three things in stochastic language: what happens when the systems
+do not interact, why what one of them does cannot be seen in the other's statistics, and
+how entanglement shows up in a concrete example.
+
+## Independent systems
+
+If the two systems never interact, each evolves with its own unitary and the composite
+evolves with the Kronecker product $U(t)\otimes V(t)$. Since
+$$|(A\otimes B)_{(i_1,i_2),(j_1,j_2)}|^2 = |A_{i_1j_1}|^2\,|B_{i_2j_2}|^2 ,$$
+the Born rule gives
+
+**Theorem (independent systems).** The composite process is the Kronecker product of the
+processes:
+$$\Gamma(t) = \Gamma_1(t)\otimes\Gamma_2(t).$$
+
+For this to make sense we need a lemma of linear algebra: **the Kronecker product of two
+stochastic matrices is stochastic**. Column $(j_1, j_2)$ sums to
+$\sum_{i_1}\Gamma^{(1)}_{i_1j_1}\cdot\sum_{i_2}\Gamma^{(2)}_{i_2j_2} = 1\cdot 1$. The lemma
+is general and was not in Mathlib, so we put it in `ForMathlib/`.
+
+**Theorem.** If $t'$ is a division event of both processes, it is also one of the product.
+*Proof:* if $\Gamma_1(t) = \Delta_1(t)\Gamma_1(t')$ and $\Gamma_2(t) = \Delta_2(t)\Gamma_2(t')$,
+the property $(A B)\otimes(C D) = (A\otimes C)(B\otimes D)$ gives
+$\Gamma(t) = \big(\Delta_1(t)\otimes\Delta_2(t)\big)\,\Gamma(t')$. $\blacksquare$
+
+These results are standard; the formal statements are ours.
+
+## No signalling
+
+Now the systems may have interacted: the joint evolution $\Theta$ is anything at all.
+Alice has system 1 and Bob has system 2. Bob applies a unitary operation $B$ to his system
+only. Can Alice notice?
+
+**Theorem (no signalling).** For any joint evolution $\Theta$ and any unitary $B$ on
+system 2, the transition probabilities of system 1 do not change:
+$$\sum_{i_2}\Big|\big((\mathbb 1\otimes B)\,\Theta\big)_{(i_1,i_2),(j_1,j_2)}\Big|^2
+= \sum_{i_2}\big|\Theta_{(i_1,i_2),(j_1,j_2)}\big|^2 .$$
+
+*Proof.* For fixed $i_1$, $j_1$ and $j_2$, the left-hand side is the squared norm of the
+vector $B x$, with $x_{i_2} = \Theta_{(i_1,i_2),(j_1,j_2)}$. A unitary preserves the norm.
+$\blacksquare$
+
+This is the stochastic version of the no-signalling theorem of quantum mechanics
+([Ghirardi, Rimini and Weber, 1980](https://doi.org/10.1007/BF02817189)): what Bob does
+does not show up in Alice's statistics, so it cannot be used to send messages. Barandes
+discusses the causal locality of his formulation in
+[Barandes, 2024](https://arxiv.org/abs/2402.16935). For now we formalize only the case of
+unitary operations; the case of local measurements is still open.
+
+## Entanglement: a Bell pair
+
+Two qubits start in the configuration $(0,0)$. A Hadamard gate
+$H = \tfrac{1}{\sqrt 2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ on the first one and a CNOT
+($|a,b\rangle\mapsto|a, b\oplus a\rangle$) prepare the Bell state
+$$\frac{|00\rangle + |11\rangle}{\sqrt 2}$$
+(see for example [Nielsen and Chuang, 2000, §1.3.6](https://doi.org/10.1017/CBO9780511976667)).
+This example and its four theorems in stochastic language are ours. The quantum facts
+they use are textbook material.
+
+**Theorem (correlation).** Right after the preparation, the two qubits agree: the
+configuration is $(0,0)$ or $(1,1)$, each with probability $1/2$. This distribution **is
+not a product** $p\otimes q$.
+
+*Proof of the second part.* If it were, then $p_0 q_0 = 1/2$, $p_1 q_1 = 1/2$ and
+$p_0 q_1 = 0$. But $p_0 q_1 = 0$ means $p_0 = 0$ or $q_1 = 0$, and either one contradicts
+one of the other equalities. $\blacksquare$
+
+So far there is nothing quantum: two coins that someone glued together also always agree.
+The difference shows up when we change basis.
+
+**Theorem (without a division event).** If after the preparation we apply a Hadamard to
+**each** qubit, the qubits *still* agree with certainty: $(0,0)$ or $(1,1)$, each with
+probability $1/2$. That is because the Bell state is invariant under $H\otimes H$.
+
+**Theorem (with a division event).** If right after the preparation an environment
+**records** the configuration of the two qubits (a perfect record, as in chapter 10), the
+same local Hadamards give the **uniform** distribution: each of the four configurations
+with probability $1/4$. Nobody has to read the record.
+
+At the intermediate time, the two histories have **exactly the same** configuration
+statistics: $(0,0)$ or $(1,1)$ with probability $1/2$. What tells them apart is whether
+that time is a division event.
+
+> In the language of this book, the entanglement of the Bell pair looks like this:
+> **correlations plus the absence of a division event**. The glued coins are correlations
+> *with* a division event. This is our way of summarizing the example; for Barandes'
+> general discussion see [Barandes, 2023a, §3.9](https://arxiv.org/abs/2302.10778).
+
+## What is still missing
+
+- **Bell and CHSH.** The next step is to show that no local hidden-variable theory
+  reproduces these correlations ([Bell, 1964](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195);
+  [Clauser, Horne, Shimony and Holt, 1969](https://doi.org/10.1103/PhysRevLett.23.880)),
+  and that the quantum CHSH value is bounded by $2\sqrt 2$
+  ([Cirel'son, 1980](https://doi.org/10.1007/BF00417500)). In our language, this requires
+  measuring non-commuting observables on each qubit with apparatuses (chapter 9).
+- **No signalling for local measurements**, not only for unitaries.
+- **The locality question.** Barandes argues that his formulation is causally local
+  ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizing that claim is a
+  stage III task on the roadmap.
+
+## In Lean
+
+```lean
+theorem Matrix.kronecker_mem_colStochastic (hA : A ∈ colStochastic R m)
+    (hB : B ∈ colStochastic R n) : A ⊗ₖ B ∈ colStochastic R (m × n)
+
+def GenStochasticProcess.prod (P : GenStochasticProcess n) (Q : GenStochasticProcess m) :
+    GenStochasticProcess (n × m) where
+  Γ t := P.Γ t ⊗ₖ Q.Γ t
+  ...
+
+theorem GenStochasticProcess.prod_isDivisionEvent (hP : P.IsDivisionEvent t')
+    (hQ : Q.IsDivisionEvent t') : (P.prod Q).IsDivisionEvent t'
+
+theorem envMarginal_one_kronecker_mul (hB : B ∈ unitaryGroup m ℂ)
+    (Θ : Matrix (n × m) (n × m) ℂ) (e₀ : m) :
+    envMarginal (((1 : Matrix n n ℂ) ⊗ₖ B) * Θ) e₀ = envMarginal Θ e₀
+```
+
+`envMarginal Θ e₀` is the transition matrix of system 1 summing over system 2, with
+system 2 starting in $e_0$: the same one we used for the environment in chapter 10. Here
+the "environment" is Bob's system.
+
+```lean
+theorem BellPair.not_product :
+    ¬ ∃ p q : Fin 2 → ℝ, ∀ i, normSqMatrix prep i (0, 0) = p i.1 * q i.2
+
+theorem BellPair.coherent (i : Fin 2 × Fin 2) :
+    normSqMatrix ((hadamard ⊗ₖ hadamard) * prep) i (0, 0) = if i.1 = i.2 then 1 / 2 else 0
+
+theorem BellPair.decohered_of_isRecording (hE : IsRecording φ E e₀)
+    (hφ : ∀ k l, overlap φ k l = if k = l then 1 else 0) (i : Fin 2 × Fin 2) :
+    envMarginal (recordedEvolution (hadamard ⊗ₖ hadamard) E prep) e₀ i (0, 0) = 1 / 4
+```
+
+## Exercises
+
+1. (Paper) Check by hand that $(H\otimes H)\,\tfrac{1}{\sqrt2}(|00\rangle+|11\rangle) =
+   \tfrac{1}{\sqrt2}(|00\rangle+|11\rangle)$.
+2. (Paper) In the Bell pair, what is the distribution of the configurations of Alice's
+   qubit alone? Does it change if Bob applies a Hadamard? Compare with the no-signalling
+   theorem.
+3. (Paper) Repeat the example with the state $\tfrac{1}{\sqrt2}(|01\rangle-|10\rangle)$.
+   Which local gates leave the correlations intact?
+4. (To think about) The "glued coins" and the Bell pair have the same distribution at the
+   intermediate time. Is there any way to tell them apart by looking at that time alone?
+5. (Lean, open) Extend the no-signalling theorem to an ideal measurement made by Bob on
+   his qubit.

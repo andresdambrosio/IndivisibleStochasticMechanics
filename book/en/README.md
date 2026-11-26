@@ -39,13 +39,13 @@ Chapters marked ✅ match code that is already verified. Chapters marked 🚧 ar
 5. ✅ [The Born representation and unitary evolution](05-born-representation.md)
 6. ✅ [The indivisible qubit: interference seen from the stochastic side](06-indivisible-qubit.md)
 
-**Part III: The full correspondence** 🚧
+**Part III: The full correspondence**
 
 7. ✅ [Density matrices and quantum channels](07-density-matrices-and-channels.md)
 8. ✅ [The stochastic-quantum theorem: from processes to Hilbert spaces](08-stochastic-quantum-theorem.md)
 9. ✅ [Measurement and the Born rule](09-measurement-and-born-rule.md)
 10. ✅ [Collapse and decoherence as division events](10-collapse-and-decoherence.md)
-11. 🚧 Composite systems and entanglement
+11. ✅ [Composite systems and entanglement](11-composite-systems.md)
 
 **Part IV: Beyond** 🚧
 

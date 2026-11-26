@@ -49,7 +49,11 @@ each item is in parentheses.
 - [ ] Interference as the cross terms of `|Θ|²`
 - [x] Collapse as the creation of division events (book ch. 10)
 - [x] Decoherence as the creation of division events (book ch. 10)
-- [ ] Composite systems and entanglement
+- [x] Composite systems: independent systems give the product process, and common division
+      events survive (book ch. 11)
+- [x] No signalling: local unitaries on one system do not change the other's statistics
+- [x] Entanglement, stochastically: a Bell pair's correlations survive a local change of
+      basis only without a division event (book ch. 11)
 - [ ] Noncommutative observables from the Hilbert-space representation
 - [ ] The role of complex numbers (arXiv:2602.01043)
 
@@ -65,7 +69,7 @@ each item is in parentheses.
    ourselves in `ForMathlib/` and upstream. See `ForMathlib/README.md`.
 4. **Fields:** QFT. See Stage III.
 
-### II.1 Finite dimensions, everything else (book ch. 7, 9, 10)
+### II.1 Finite dimensions, everything else (book ch. 7, 9, 10, 11)
 - [x] Barandes' density matrix is a density matrix whose diagonal is the stochastic distribution
 - [x] Quantum channels (Kraus form) induce stochastic matrices
 - [x] Every stochastic matrix is induced by a quantum channel (classical Kraus operators)
@@ -89,7 +93,9 @@ each item is in parentheses.
       division event iff the record is perfect
 - [ ] Continuous decoherence: records that build up over time, and approximate division
       events (a quantitative notion of "almost divisible")
-- [ ] Composite systems, entanglement, Bell/CHSH and the Tsirelson bound
+- [x] Composite systems and a Bell pair (book ch. 11)
+- [ ] No signalling for local *measurements* (not only local unitaries)
+- [ ] Bell/CHSH with measurement apparatuses, and the Tsirelson bound `2√2`
 
 ### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
 - [ ] Spectral measures; the spectral theorem for unbounded self-adjoint operators

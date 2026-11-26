@@ -22,6 +22,8 @@ The FLT project and others follow the same pattern.
 | Declaration | File | Upstream status |
 |---|---|---|
 | `Matrix.exists_mem_unitaryGroup_of_orthonormal` | `Matrix/Unitary.lean` | not yet proposed |
+| `Matrix.kronecker_mem_colStochastic` | `Matrix/Stochastic.lean` | not yet proposed |
+| `Matrix.sum_norm_sq_mulVec_of_mem_unitaryGroup` | `Matrix/Unitary.lean` | not yet proposed; Mathlib may have it for `EuclideanSpace` via `LinearIsometry` |
 | `Matrix.sum_norm_sq_col_eq_conjTranspose_mul_self` | `Matrix/Unitary.lean` | not yet proposed; check whether Mathlib already has it in another form |
 
 ## What Mathlib is missing for infinite-dimensional quantum mechanics

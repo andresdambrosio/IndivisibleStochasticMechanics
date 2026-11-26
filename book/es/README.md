@@ -40,13 +40,13 @@ planes.
 5. ✅ [La representación de Born y la evolución unitaria](05-born-representation.md)
 6. ✅ [El qubit indivisible: interferencia vista desde lo estocástico](06-indivisible-qubit.md)
 
-**Parte III: La correspondencia completa** 🚧
+**Parte III: La correspondencia completa**
 
 7. ✅ [Matrices densidad y canales cuánticos](07-density-matrices-and-channels.md)
 8. ✅ [El teorema estocástico-cuántico: de procesos a espacios de Hilbert](08-stochastic-quantum-theorem.md)
 9. ✅ [La medición y la regla de Born](09-measurement-and-born-rule.md)
 10. ✅ [Colapso y decoherencia como eventos de división](10-collapse-and-decoherence.md)
-11. 🚧 Sistemas compuestos y entrelazamiento
+11. ✅ [Sistemas compuestos y entrelazamiento](11-composite-systems.md)
 
 **Parte IV: Más allá** 🚧
 
