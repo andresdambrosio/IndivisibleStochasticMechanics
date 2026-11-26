@@ -29,6 +29,15 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.Qubit.U` | `exp(-i t σₓ)` | standard | written out explicitly, not via a matrix exponential | ⏳ |
 | `ISM.Qubit.process` | the process of the qubit under `H = σₓ` | — | | ⏳ |
 | `ISM.IsUnitaryDilation` | `Γ` is the system marginal of a unitary `U` on system ⊗ environment, environment prepared in `e₀` | arXiv:2309.03085 | measurement of the environment is not modelled; we only marginalize over it | ⏳ |
+| `ISM.IsDensityMatrix` | a density matrix: positive semidefinite, trace one | standard | | ⏳ |
+| `ISM.bornDensity` | Barandes' density matrix `Θ · diag(p) · Θᴴ` | arXiv:2302.10778 | built from a *diagonal* initial state (a mixture of configurations), as in the paper | ⏳ |
+| `ISM.IsKrausFamily` | Kraus operators: `∑ Kᴴ K = 1` | standard | finite Kraus index | ⏳ |
+| `ISM.krausChannel` | the channel `ρ ↦ ∑ K ρ Kᴴ` | standard | | ⏳ |
+| `ISM.krausTransition` | the channel's transition probabilities in the configuration basis, `∑ₖ ‖Kₖᵢⱼ‖²` | standard | | ⏳ |
+| `ISM.classicalKraus` | auxiliary: Kraus operators `√Γ_ab ∣a⟩⟨b∣` realizing a stochastic matrix | standard | auxiliary construction | ⏳ |
+| `ISM.IsIdealMeasurement` | an ideal (von Neumann) measurement of the observable with eigenbasis the columns of `V`, recorded by a pointer | von Neumann (1932); arXiv:2302.10778 | **Interpretive choice:** an outcome *is* a pointer configuration. Non-degenerate observables only. The pointer has one configuration per outcome plus `ready` | ⏳ |
+| `ISM.measurementVec` | auxiliary: columns of the measurement unitary with the pointer ready | — | auxiliary construction | ⏳ |
+| `ISM.readyState` | composite state "system in `ψ`, pointer ready" | — | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -39,6 +48,13 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.Qubit.process_Γ` | for the qubit, `Γ(t) = [[cos²t, sin²t], [sin²t, cos²t]]` | — | | ⏳ |
 | `ISM.Qubit.process_isIndivisible` | the qubit's process is indivisible | — | | ⏳ |
 | `ISM.forall_mem_colStochastic_iff_exists_isUnitaryDilation` | **stochastic-quantum correspondence (finite dimensions)**: transition matrices are stochastic at all times iff at all times they are unitary marginals | arXiv:2309.03085 | **Weaker than it may sound:** the unitary `U(t)` is chosen independently at each `t`. It need not be continuous, satisfy `U(0) = 1`, or come from a Hamiltonian | ⏳ |
+| `ISM.bornDensity_apply_self` | the diagonal of Barandes' density matrix is the stochastic distribution `Γ p` | arXiv:2302.10778 | | ⏳ |
+| `ISM.bornDensity_isDensityMatrix` | Barandes' density matrix is a genuine density matrix | arXiv:2302.10778 | | ⏳ |
+| `ISM.IsKrausFamily.krausTransition_mem_colStochastic` | every quantum channel induces a stochastic matrix | standard | | ⏳ |
+| `ISM.krausTransition_classicalKraus` | every stochastic matrix is induced by a quantum channel | standard | | ⏳ |
+| `ISM.exists_isIdealMeasurement` | every (non-degenerate) observable admits an ideal measurement interaction | von Neumann (1932) | | ⏳ |
+| `ISM.IsIdealMeasurement.pointer_prob` | **Born rule from configurations:** pointer shows `a` with probability `‖⟨v a, ψ⟩‖²` | arXiv:2302.10778 | | ⏳ |
+| `ISM.IsIdealMeasurement.prob_after_evolution` | the same, for a system that starts in configuration `j` and evolves by `U` | arXiv:2302.10778 | | ⏳ |
 
 ## References
 

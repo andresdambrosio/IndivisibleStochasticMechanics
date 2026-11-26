@@ -24,16 +24,17 @@ planes.
 
 **Parte III: La correspondencia completa** 🚧
 
-7. 🚧 La matriz densidad y la evolución hamiltoniana
+7. ✅ [Matrices densidad y canales cuánticos](07-matriz-densidad-y-canales.md)
 8. ✅ [El teorema estocástico-cuántico: de procesos a espacios de Hilbert](08-teorema-estocastico-cuantico.md)
-9. 🚧 Interferencia, decoherencia y medición
-10. 🚧 Sistemas compuestos y entrelazamiento
+9. ✅ [La medición y la regla de Born](09-medicion-y-regla-de-born.md)
+10. 🚧 Decoherencia y colapso como eventos de división
+11. 🚧 Sistemas compuestos y entrelazamiento
 
 **Parte IV: Más allá** 🚧
 
-11. 🚧 Espacios de configuraciones continuos
-12. 🚧 Hacia la relatividad y los campos
-13. 🚧 Problemas abiertos
+12. 🚧 Espacios de configuraciones continuos
+13. 🚧 Hacia la relatividad y los campos
+14. 🚧 Problemas abiertos
 
 ## Convenciones
 

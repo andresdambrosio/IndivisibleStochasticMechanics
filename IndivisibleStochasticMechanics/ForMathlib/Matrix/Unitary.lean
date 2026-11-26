@@ -36,3 +36,16 @@ theorem exists_mem_unitaryGroup_of_orthonormal {s : Set ι} {v : ι → Euclidea
   simp [Basis.toMatrix_apply, hb j hj]
 
 end Matrix
+
+namespace Matrix
+
+variable {m n : Type*} [Fintype m]
+
+/-- The squared norm of the `j`-th column of a complex matrix is the `(j, j)` entry of `Aᴴ * A`. -/
+theorem sum_norm_sq_col_eq_conjTranspose_mul_self (A : Matrix m n ℂ) (j : n) :
+    ((∑ i, ‖A i j‖ ^ 2 : ℝ) : ℂ) = (Aᴴ * A) j j := by
+  push_cast
+  simp only [Matrix.mul_apply, conjTranspose_apply, Complex.star_def]
+  exact Finset.sum_congr rfl fun i _ => (Complex.conj_mul' (A i j)).symm
+
+end Matrix

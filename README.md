@@ -38,6 +38,9 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Quantum/UnitaryProcess` | unitary evolution ⇒ generalized stochastic process |
 | `Examples/Qubit` | a qubit under `H = σₓ` whose process is provably indivisible |
 | `Quantum/Dilation` | **stochastic-quantum correspondence (finite dimensions)**: every stochastic process is the marginal of a unitary evolution on a larger system |
+| `Quantum/DensityMatrix` | Barandes' density matrix `Θ diag(p) Θᴴ`: a genuine density matrix whose diagonal is the stochastic distribution |
+| `Quantum/Channel` | quantum channels ⇔ stochastic matrices |
+| `Quantum/Measurement` | **the Born rule for arbitrary observables, derived** from pointer-configuration probabilities |
 | `ForMathlib/` | general results we build for Mathlib and upstream ([details](IndivisibleStochasticMechanics/ForMathlib/README.md)) |
 
 ## The book

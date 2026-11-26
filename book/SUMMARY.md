@@ -17,9 +17,10 @@
 
 # Parte III: La correspondencia completa
 
-- [La matriz densidad y la evolución hamiltoniana]()
+- [Matrices densidad y canales cuánticos](07-matriz-densidad-y-canales.md)
 - [El teorema estocástico-cuántico](08-teorema-estocastico-cuantico.md)
-- [Interferencia, decoherencia y medición]()
+- [La medición y la regla de Born](09-medicion-y-regla-de-born.md)
+- [Decoherencia y colapso como eventos de división]()
 - [Sistemas compuestos y entrelazamiento]()
 
 # Parte IV: Más allá

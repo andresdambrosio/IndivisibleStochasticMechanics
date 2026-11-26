@@ -30,7 +30,7 @@ each item is in parentheses.
 - [x] Example: a qubit under `H = σₓ` whose process is indivisible (`π/4` is not a division event)
 - [ ] Qubit: no `t' ∈ (0, π/2)` is a division event, and `π/2` is one
 - [ ] Hamiltonian evolution `U(t) = exp(-itH)` via Mathlib's `NormedSpace.exp`
-- [ ] Density matrix `ρ(t) = Θ(t) diag(p₀) Θ(t)†` with `pᵢ(t) = ρᵢᵢ(t)`
+- [x] Density matrix `ρ(t) = Θ(t) diag(p₀) Θ(t)†` with `pᵢ(t) = ρᵢᵢ(t)`, and it is a genuine density matrix
 - [ ] Generic unitary dynamics are indivisible (interference ⇒ failure of divisibility)
 
 ### I.3 Stochastic → quantum: the Stochastic-Quantum Theorem (book ch. 8)
@@ -48,7 +48,6 @@ each item is in parentheses.
 ### I.4 Quantum phenomena from the stochastic side
 - [ ] Interference as the cross terms of `|Θ|²`
 - [ ] Decoherence as the creation of division events
-- [ ] Measurement: the Born rule and "collapse" as conditioning at a division event
 - [ ] Composite systems and entanglement
 - [ ] Noncommutative observables from the Hilbert-space representation
 - [ ] The role of complex numbers (arXiv:2602.01043)
@@ -65,10 +64,19 @@ each item is in parentheses.
    ourselves in `ForMathlib/` and upstream. See `ForMathlib/README.md`.
 4. **Fields:** QFT. See Stage III.
 
-### II.1 Finite dimensions, everything else
-- [ ] Density matrices and quantum channels (Kraus form) ⇒ stochastic processes
-- [ ] Measurement of an arbitrary observable as a division event involving an apparatus
-- [ ] The Born rule for arbitrary observables, derived rather than postulated
+### II.1 Finite dimensions, everything else (book ch. 7, 9)
+- [x] Barandes' density matrix is a density matrix whose diagonal is the stochastic distribution
+- [x] Quantum channels (Kraus form) induce stochastic matrices
+- [x] Every stochastic matrix is induced by a quantum channel (classical Kraus operators)
+- [x] Every non-degenerate observable admits an ideal (von Neumann) measurement interaction
+- [x] **Born rule for arbitrary observables, derived:** pointer-configuration probabilities
+      equal `‖⟨v a, ψ⟩‖²`
+- [ ] Degenerate observables (projectors of higher rank)
+- [ ] Non-ideal measurements and POVMs
+- [ ] **Collapse as conditioning:** after an ideal measurement, the composite process has a
+      division event, and later evolution depends only on the recorded outcome
+- [ ] Decoherence: an environment that records configurations creates division events
+- [ ] Composite systems, entanglement, Bell/CHSH and the Tsirelson bound
 
 ### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
 - [ ] Spectral measures; the spectral theorem for unbounded self-adjoint operators

@@ -7,3 +7,6 @@ public import IndivisibleStochasticMechanics.Quantum.UnitaryProcess
 public import IndivisibleStochasticMechanics.Examples.Qubit
 public import IndivisibleStochasticMechanics.ForMathlib.Matrix.Unitary
 public import IndivisibleStochasticMechanics.Quantum.Dilation
+public import IndivisibleStochasticMechanics.Quantum.DensityMatrix
+public import IndivisibleStochasticMechanics.Quantum.Channel
+public import IndivisibleStochasticMechanics.Quantum.Measurement
