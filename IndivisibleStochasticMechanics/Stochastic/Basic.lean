@@ -1,5 +1,5 @@
 /-
-Copyright (c) 2026 NewQuantumMechanics contributors. All rights reserved.
+Copyright (c) 2026 Indivisible Stochastic Mechanics contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
@@ -30,7 +30,7 @@ distribution `p` evolves as `p(t) = Γ(t) *ᵥ p(0)`.
 
 open Matrix
 
-namespace NQM
+namespace ISM
 
 variable {n : Type*} [Fintype n]
 
@@ -45,4 +45,4 @@ theorem IsProbDist.mulVec [DecidableEq n] {Γ : Matrix n n ℝ} (hΓ : Γ ∈ co
   nonneg := nonneg_mulVec_of_mem_colStochastic hΓ hp.nonneg
   sum_eq_one := by rw [sum_mulVec_of_mem_colStochastic hΓ, hp.sum_eq_one]
 
-end NQM
+end ISM

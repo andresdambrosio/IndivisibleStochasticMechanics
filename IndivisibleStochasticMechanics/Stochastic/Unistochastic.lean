@@ -1,10 +1,10 @@
 /-
-Copyright (c) 2026 NewQuantumMechanics contributors. All rights reserved.
+Copyright (c) 2026 Indivisible Stochastic Mechanics contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import NewQuantumMechanics.Stochastic.Basic
+public import IndivisibleStochasticMechanics.Stochastic.Basic
 
 /-!
 # Unistochastic matrices and the Born-rule representation
@@ -21,12 +21,12 @@ correspondence.
 
 ## Main definitions
 
-* `NQM.IsBornRep Γ Θ`: `Θ` is a Born representation of `Γ`.
-* `NQM.IsUnistochastic Γ`: `Γ` has a unitary Born representation.
+* `ISM.IsBornRep Γ Θ`: `Θ` is a Born representation of `Γ`.
+* `ISM.IsUnistochastic Γ`: `Γ` has a unitary Born representation.
 
 ## Main results
 
-* `NQM.IsUnistochastic.mem_colStochastic`: every unistochastic matrix is stochastic.
+* `ISM.IsUnistochastic.mem_colStochastic`: every unistochastic matrix is stochastic.
 
 ## References
 
@@ -37,7 +37,7 @@ correspondence.
 
 open Matrix
 
-namespace NQM
+namespace ISM
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
@@ -66,4 +66,4 @@ theorem IsUnistochastic.mem_colStochastic {Γ : Matrix n n ℝ} (h : IsUnistocha
   · rw [hΓ i j]; positivity
   · rw [Finset.sum_congr rfl fun i _ => hΓ i j]; exact unitary_col_normSq_sum hU j
 
-end NQM
+end ISM

@@ -1,5 +1,5 @@
-name = "NewQuantumMechanics"
-defaultTargets = ["NewQuantumMechanics"]
+name = "IndivisibleStochasticMechanics"
+defaultTargets = ["IndivisibleStochasticMechanics"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -10,4 +10,4 @@ name = "mathlib"
 scope = "leanprover-community"
 
 [[lean_lib]]
-name = "NewQuantumMechanics"
+name = "IndivisibleStochasticMechanics"

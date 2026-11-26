@@ -1,10 +1,10 @@
 /-
-Copyright (c) 2026 NewQuantumMechanics contributors. All rights reserved.
+Copyright (c) 2026 Indivisible Stochastic Mechanics contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import NewQuantumMechanics.Stochastic.Basic
+public import IndivisibleStochasticMechanics.Stochastic.Basic
 
 /-!
 # Generalized (indivisible) stochastic processes
@@ -18,10 +18,10 @@ A generic indivisible process admits such factorizations only at special times, 
 
 ## Main definitions
 
-* `NQM.GenStochasticProcess`: transition matrices `Γ t = Γ(t ← 0)` for `t ≥ 0`.
-* `NQM.GenStochasticProcess.IsDivisionEvent`: `t'` is a time through which the dynamics
+* `ISM.GenStochasticProcess`: transition matrices `Γ t = Γ(t ← 0)` for `t ≥ 0`.
+* `ISM.GenStochasticProcess.IsDivisionEvent`: `t'` is a time through which the dynamics
   factor stochastically.
-* `NQM.GenStochasticProcess.IsDivisible`: every time is a division event (Markovian case).
+* `ISM.GenStochasticProcess.IsDivisible`: every time is a division event (Markovian case).
 
 ## References
 
@@ -32,7 +32,7 @@ A generic indivisible process admits such factorizations only at special times, 
 
 open Matrix
 
-namespace NQM
+namespace ISM
 
 /-- A generalized stochastic process on a finite configuration space `n`, given by its
 cumulative transition matrices `Γ t = Γ(t ← 0)`. -/
@@ -71,4 +71,4 @@ theorem evolve_isProbDist {p₀ : n → ℝ} (hp : IsProbDist p₀) {t : ℝ} (h
 
 end GenStochasticProcess
 
-end NQM
+end ISM
