@@ -74,7 +74,9 @@ each item is in parentheses.
 - [x] CI: `lake build` on every push and pull request
 - [x] Book in Markdown (`book/`) explaining every step, written for a course
 - [x] Book published on GitHub Pages (mdBook + KaTeX)
-- [x] `CONTRIBUTING.md`, with rules for Lean, the book, and AI use
+- [x] `CONTRIBUTING.md`: AI-first model (free proofs, trusted definitions)
+- [x] Trusted layer `TRUSTED.md`, with CI enforcing that every definition is listed
+- [ ] Human review of every ⏳ entry in `TRUSTED.md`, including references
 - [x] CI check that `main` has no warnings and no `sorry` (`lake build --wfail`)
 - [ ] Blueprint (leanblueprint) linking each paper statement to its Lean declaration
 - [ ] API docs with doc-gen4, published on GitHub Pages

@@ -43,6 +43,32 @@ lake build
 Si `lake build` termina sin errores, todas las demostraciones del libro que están
 marcadas como verificadas lo están de verdad en tu máquina.
 
+## Cómo trabajamos: IA y la capa de confianza
+
+Este proyecto se hace con ayuda intensiva de inteligencia artificial, y no lo
+escondemos: es parte del experimento. La pregunta obvia es por qué deberías confiar en
+algo escrito en buena parte por una IA. La respuesta tiene dos partes.
+
+**Las demostraciones no necesitan confianza.** Lean comprueba cada paso. Si el archivo
+compila, la demostración es correcta, sin importar quién o qué la escribió. Por eso la IA
+puede escribir demostraciones sin límite.
+
+**Las definiciones sí necesitan confianza.** Lean comprueba que demostramos *lo que
+escribimos*, pero no que lo escrito sea *lo que la física quiere decir*. Si definimos mal
+"evento de división", todos los teoremas sobre eventos de división quedan perfectamente
+verificados y son perfectamente irrelevantes. Ninguna computadora puede detectar ese
+error, porque es un error de *significado*.
+
+Por eso el proyecto tiene una **capa de confianza**: el archivo `TRUSTED.md` lista cada
+definición y cada enunciado principal, qué pretende capturar, de qué paper sale y si ya
+lo revisó una persona (✅) o todavía no (⏳). La CI impide agregar una definición nueva
+sin registrarla ahí. Toda la confianza humana se concentra en esa capa, que es pequeña,
+y el resto puede crecer tanto como haga falta.
+
+A lo largo del libro, cuando presentemos una definición, discutiremos las **decisiones de
+interpretación** que tomamos al formalizarla. Esas discusiones son física, no
+programación, y son la parte más importante del curso.
+
 ## Sobre el nombre
 
 Barandes habla de *indivisible stochastic processes* y de la *stochastic-quantum

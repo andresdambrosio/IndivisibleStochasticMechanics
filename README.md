@@ -18,6 +18,14 @@ equivalent descriptions, linked by the Born-type relation `Γᵢⱼ(t) = |Θᵢ�
 picture the wave function, Hilbert space and collapse are mathematical tools rather than
 physical ingredients.
 
+## How we work: AI-first, with a trusted layer
+
+AI tools write as much as possible, proofs included, at any scale: Lean checks every
+proof. What Lean cannot check is whether a *definition* means what the physics says. So
+every definition and main statement is listed in [TRUSTED.md](TRUSTED.md), with its
+source and a human-review status, and CI enforces that the list is complete. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Status
 
 Early. See [ROADMAP.md](ROADMAP.md) for the full plan.

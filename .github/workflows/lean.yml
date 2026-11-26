@@ -14,3 +14,10 @@ jobs:
       - uses: leanprover/lean-action@v1
         with:
           build-args: "--wfail"
+
+  trusted-layer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Every definition must be registered in TRUSTED.md; see CONTRIBUTING.md.
+      - run: python3 scripts/check_trusted.py
