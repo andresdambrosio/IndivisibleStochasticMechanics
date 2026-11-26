@@ -1,3 +1,5 @@
-import NewQuantumMechanics.Stochastic.Basic
-import NewQuantumMechanics.Stochastic.Indivisible
-import NewQuantumMechanics.Stochastic.Unistochastic
+module
+
+public import NewQuantumMechanics.Stochastic.Basic
+public import NewQuantumMechanics.Stochastic.Indivisible
+public import NewQuantumMechanics.Stochastic.Unistochastic

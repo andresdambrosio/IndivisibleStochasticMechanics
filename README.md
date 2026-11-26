@@ -23,7 +23,7 @@ Early. See [ROADMAP.md](ROADMAP.md).
 
 | Module | Contents |
 |---|---|
-| `Stochastic/Basic` | probability distributions, column-stochastic matrices, closure under products |
+| `Stochastic/Basic` | probability distributions; evolution under Mathlib's `colStochastic` matrices |
 | `Stochastic/Indivisible` | generalized stochastic processes, division events, (in)divisibility |
 | `Stochastic/Unistochastic` | Born representations, unistochastic ⇒ stochastic |
 

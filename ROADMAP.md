@@ -5,7 +5,7 @@
 - [x] Generalized stochastic processes, division events, divisibility
 - [x] Born representation `Γᵢⱼ = |Θᵢⱼ|²`, unistochastic matrices
 - [x] Columns of a unitary matrix are unit vectors (`unitary_col_normSq_sum`)
-- [ ] Relate `IsStochastic` to Mathlib's stochastic-matrix API, if one exists
+- [x] Use Mathlib's `Matrix.colStochastic` instead of a custom definition
 
 ## Phase 1: Quantum → stochastic
 - [ ] Unitary evolution `U(t)` induces a generalized stochastic process `Γ(t) = |U(t)|²`

@@ -2,7 +2,9 @@
 Copyright (c) 2026 NewQuantumMechanics contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NewQuantumMechanics.Stochastic.Basic
+module
+
+public import NewQuantumMechanics.Stochastic.Basic
 
 /-!
 # Generalized (indivisible) stochastic processes
@@ -26,6 +28,8 @@ A generic indivisible process admits such factorizations only at special times, 
 * J. A. Barandes, *The Stochastic-Quantum Correspondence*, arXiv:2302.10778, §3.
 -/
 
+@[expose] public section
+
 open Matrix
 
 namespace NQM
@@ -35,7 +39,7 @@ cumulative transition matrices `Γ t = Γ(t ← 0)`. -/
 structure GenStochasticProcess (n : Type*) [Fintype n] [DecidableEq n] where
   /-- `Γ t i j = P(i at time t | j at time 0)`. -/
   Γ : ℝ → Matrix n n ℝ
-  stochastic : ∀ t, 0 ≤ t → IsStochastic (Γ t)
+  stochastic : ∀ t, 0 ≤ t → Γ t ∈ colStochastic ℝ n
   init : Γ 0 = 1
 
 namespace GenStochasticProcess
@@ -46,7 +50,7 @@ variable {n : Type*} [Fintype n] [DecidableEq n] (P : GenStochasticProcess n)
 `Γ(t ← 0) = Δ(t ← t') * Γ(t' ← 0)` with `Δ(t ← t')` stochastic. -/
 def IsDivisionEvent (t' : ℝ) : Prop :=
   0 ≤ t' ∧ ∃ Δ : ℝ → Matrix n n ℝ,
-    ∀ t, t' ≤ t → IsStochastic (Δ t) ∧ P.Γ t = Δ t * P.Γ t'
+    ∀ t, t' ≤ t → Δ t ∈ colStochastic ℝ n ∧ P.Γ t = Δ t * P.Γ t'
 
 /-- A process is *divisible* (Markovian) if every time is a division event. -/
 def IsDivisible : Prop := ∀ t', 0 ≤ t' → P.IsDivisionEvent t'
@@ -63,7 +67,7 @@ def evolve (p₀ : n → ℝ) (t : ℝ) : n → ℝ := P.Γ t *ᵥ p₀
 
 theorem evolve_isProbDist {p₀ : n → ℝ} (hp : IsProbDist p₀) {t : ℝ} (ht : 0 ≤ t) :
     IsProbDist (P.evolve p₀ t) :=
-  (P.stochastic t ht).mulVec_isProbDist hp
+  hp.mulVec (P.stochastic t ht)
 
 end GenStochasticProcess
 

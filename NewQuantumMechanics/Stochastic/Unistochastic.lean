@@ -2,7 +2,9 @@
 Copyright (c) 2026 NewQuantumMechanics contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NewQuantumMechanics.Stochastic.Basic
+module
+
+public import NewQuantumMechanics.Stochastic.Basic
 
 /-!
 # Unistochastic matrices and the Born-rule representation
@@ -24,12 +26,14 @@ correspondence.
 
 ## Main results
 
-* `NQM.IsUnistochastic.isStochastic`: every unistochastic matrix is stochastic.
+* `NQM.IsUnistochastic.mem_colStochastic`: every unistochastic matrix is stochastic.
 
 ## References
 
 * J. A. Barandes, *The Stochastic-Quantum Theorem*, arXiv:2309.03085.
 -/
+
+@[expose] public section
 
 open Matrix
 
@@ -55,10 +59,10 @@ theorem unitary_col_normSq_sum {U : Matrix n n ℂ} (hU : U ∈ Matrix.unitaryGr
   exact_mod_cast h
 
 /-- Every unistochastic matrix is stochastic. -/
-theorem IsUnistochastic.isStochastic {Γ : Matrix n n ℝ} (h : IsUnistochastic Γ) :
-    IsStochastic Γ := by
+theorem IsUnistochastic.mem_colStochastic {Γ : Matrix n n ℝ} (h : IsUnistochastic Γ) :
+    Γ ∈ colStochastic ℝ n := by
   obtain ⟨U, hU, hΓ⟩ := h
-  refine ⟨fun i j => ?_, fun j => ?_⟩
+  refine mem_colStochastic_iff_sum.mpr ⟨fun i j => ?_, fun j => ?_⟩
   · rw [hΓ i j]; positivity
   · rw [Finset.sum_congr rfl fun i _ => hΓ i j]; exact unitary_col_normSq_sum hU j
 
