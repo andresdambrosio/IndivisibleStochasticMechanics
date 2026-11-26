@@ -4,16 +4,28 @@
 
 Es el cuaderno de bitácora de un proyecto con dos objetivos:
 
-1. Tomar la reformulación de la mecánica cuántica propuesta por **Jacob Barandes**
-   (Harvard), en la que los sistemas cuánticos son *procesos estocásticos indivisibles*,
-   y **verificar cada uno de sus teoremas con un asistente de demostración**: Lean 4.
+1. Tomar la reformulación de la mecánica cuántica propuesta por **Jacob A. Barandes**
+   (Harvard) en [Barandes, 2023a](https://arxiv.org/abs/2302.10778),
+   [Barandes, 2023b](https://arxiv.org/abs/2309.03085) y
+   [Barandes, 2025](https://arxiv.org/abs/2507.21192), en la que los sistemas cuánticos son
+   *procesos estocásticos indivisibles*, y **verificar cada uno de sus teoremas con un asistente de demostración**: Lean 4.
 2. A partir de ahí, **extenderla** para que cubra todo lo que hace la mecánica cuántica
    de libro de texto, y averiguar si en algún punto dice algo nuevo.
 
-La inspiración viene de lo que está ocurriendo en matemática. Con Lean y su biblioteca
-**Mathlib**, miles de personas formalizan matemática de forma colaborativa: cada teorema
-lo comprueba una computadora y nadie tiene que "confiar" en una demostración. Queremos
+La inspiración viene de lo que está ocurriendo en matemática. Con
+[Lean 4](https://lean-lang.org/) ([de Moura y Ullrich, 2021](https://doi.org/10.1007/978-3-030-79876-5_37))
+y su biblioteca **Mathlib** ([The mathlib Community, 2020](https://arxiv.org/abs/1910.09336)), miles de personas
+formalizan matemática de forma colaborativa: cada teorema lo comprueba una computadora y nadie tiene que "confiar" en una demostración. Queremos
 lo mismo para un programa concreto de fundamentos de la física.
+
+## Autoría
+
+El libro y la formalización son de **Andrés D'Ambrosio**. La teoría que se formaliza es de
+Jacob Barandes, y los resultados clásicos que usamos son de sus respectivos autores. En
+cada capítulo decimos de quién es cada idea, con la cita y el link. Cuando algo es un
+aporte propio del proyecto (una demostración formal, una construcción o un ejemplo nuevo)
+lo decimos explícitamente. La lista completa de fuentes está en la
+[bibliografía](99-references.md).
 
 ## A quién está dirigido
 
@@ -72,7 +84,9 @@ programación, y son la parte más importante del curso.
 ## Sobre el nombre
 
 Barandes habla de *indivisible stochastic processes* y de la *stochastic-quantum
-correspondence*. Nosotros llamamos al conjunto **Mecánica Estocástica Indivisible**
-(*Indivisible Stochastic Mechanics*, ISM). Ojo: no hay que confundirla con la *mecánica
-estocástica* de Edward Nelson (1966), que es una teoría distinta basada en procesos de
-difusión markovianos.
+correspondence*. En este curso usamos **Mecánica Estocástica Indivisible**
+(*Indivisible Stochastic Mechanics*, ISM) como nombre corto para el conjunto. Es una
+etiqueta nuestra, no una teoría distinta de la de Barandes. Ojo: no hay que confundirla
+con la *mecánica estocástica* de Edward Nelson
+([Nelson, 1966](https://doi.org/10.1103/PhysRev.150.1079)), que es una teoría distinta
+basada en procesos de difusión markovianos.

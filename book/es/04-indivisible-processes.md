@@ -12,17 +12,24 @@ $$\Gamma(t\leftarrow 0) = \Gamma(t\leftarrow t')\,\Gamma(t'\leftarrow 0), \qquad
 
 con $\Gamma(t\leftarrow t')$ estocástica. Esto se llama **divisibilidad**.
 
-La observación clave de Barandes es que **nada en la teoría de la probabilidad obliga a
+La observación clave de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778), [Barandes, 2025](https://arxiv.org/abs/2507.21192)) es que **nada en la teoría de la probabilidad obliga a
 que eso pase**. Un proceso queda definido por sus probabilidades condicionales respecto
 del instante inicial, $\Gamma(t\leftarrow 0)$. Que además existan $\Gamma(t\leftarrow t')$
 estocásticas que las compongan es una propiedad *adicional*, que puede cumplirse o no.
 
 - Si se cumple para un instante concreto $t'$, decimos que $t'$ es un **evento de
-  división**: el proceso "se reinicia" ahí.
+  división**: el proceso "se reinicia" ahí. El término es de Barandes.
 - Si no se cumple en todos los instantes, el proceso es **indivisible**.
 
 Barandes sostiene que los sistemas cuánticos son justamente procesos indivisibles, y que
 los eventos de división aparecen físicamente cuando hay **decoherencia** o **medición**.
+
+La divisibilidad como criterio de "markovianidad" no es exclusiva de Barandes. En la
+teoría de sistemas cuánticos abiertos se estudia la divisibilidad de canales cuánticos
+([Wolf y Cirac, 2008](https://arxiv.org/abs/math-ph/0611057)) y se la usa para definir
+la no-markovianidad ([Rivas, Huelga y Plenio, 2014](https://arxiv.org/abs/1405.0303)). Lo
+propio de Barandes es tomar las matrices *estocásticas* indivisibles como la descripción
+fundamental de los sistemas cuánticos.
 
 ## La matemática
 
@@ -31,10 +38,12 @@ $\Gamma(t) := \Gamma(t\leftarrow 0)$, para $t \geq 0$, tal que:
 1. $\Gamma(t)$ es estocástica para todo $t \geq 0$;
 2. $\Gamma(0) = \mathbb{1}$: en tiempo cero no pasó nada.
 
-**Definición (evento de división).** $t' \geq 0$ es un evento de división si existe una
-familia $\Delta(t)$ con $\Delta(t)$ estocástica y
+**Definición (evento de división, formalizada a partir de [Barandes, 2023a](https://arxiv.org/abs/2302.10778)).** $t' \geq 0$
+es un evento de división si existe una familia $\Delta(t)$ con $\Delta(t)$ estocástica y
 $$\Gamma(t) = \Delta(t)\,\Gamma(t') \qquad \text{para todo } t \ge t'.$$
-Acá $\Delta(t)$ cumple el papel de $\Gamma(t \leftarrow t')$.
+Acá $\Delta(t)$ cumple el papel de $\Gamma(t \leftarrow t')$. Pedir *una* familia
+$\Delta(t)$ que sirva para todos los $t \ge t'$ es una decisión de interpretación nuestra
+al formalizar, y está anotada en `TRUSTED.md`.
 
 **Definición.** El proceso es **divisible** si todo $t' \geq 0$ es un evento de
 división, e **indivisible** si no lo es.
@@ -85,7 +94,8 @@ orden que la definición:
 
 Un proceso generalizado especifica solamente $\Gamma(t\leftarrow 0)$. **No** especifica
 probabilidades conjuntas en varios instantes, como $P(i \text{ en } t_2,\ k \text{ en } t_1 \mid j \text{ en } 0)$.
-Es una decisión deliberada de Barandes, y es una de las preguntas abiertas de la Parte IV.
+Es una decisión deliberada de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)), y es una de las preguntas abiertas
+de la Parte IV.
 
 ## Ejercicios
 

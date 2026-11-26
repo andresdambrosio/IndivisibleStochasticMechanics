@@ -5,7 +5,8 @@
 
 En el capítulo 5 vimos una dirección de la correspondencia: toda evolución unitaria
 define un proceso estocástico. Este capítulo demuestra la otra: **todo proceso
-estocástico se puede ver como un sistema cuántico**. Con las dos direcciones juntas
+estocástico se puede ver como un sistema cuántico**. El teorema es de Barandes
+([Barandes, 2023b](https://arxiv.org/abs/2309.03085)). Con las dos direcciones juntas
 obtenemos el primer teorema de equivalencia verificado del proyecto.
 
 ## El obstáculo
@@ -28,8 +29,8 @@ $$\Gamma_{ij} = \sum_{e \in \mathcal{E}} \big|U_{(i,e),(j,e_0)}\big|^2 .$$
 
 En palabras: $\Gamma_{ij}$ es la probabilidad de encontrar al **sistema** en $i$, *haga lo
 que haga el entorno*, si empezó en $j$ y el entorno en $e_0$. Esto se llama una
-**dilatación unitaria** de $\Gamma$. Es la misma idea que el teorema de Stinespring de la
-teoría de información cuántica.
+**dilatación unitaria** de $\Gamma$. Es la misma idea que el teorema de dilatación de Stinespring
+([Stinespring, 1955](https://doi.org/10.2307/2032342)).
 
 ## La matemática
 
@@ -48,7 +49,9 @@ porque es la norma al cuadrado de la columna $(j,e_0)$ de una matriz unitaria. $
 **Teorema (de lo estocástico a lo cuántico).** Toda matriz estocástica $\Gamma$ tiene una
 dilatación unitaria. Basta un entorno con $N+1$ configuraciones.
 
-*Demostración.* Tomamos como entorno $\mathcal{E} = \{\varnothing\} \cup \mathcal{C}$, con
+*Demostración.* Esta construcción concreta es nuestra. Es una dilatación directa del tipo
+de Stinespring, y no necesariamente coincide con la del paper de Barandes. Tomamos como
+entorno $\mathcal{E} = \{\varnothing\} \cup \mathcal{C}$, con
 estado inicial $e_0 = \varnothing$. En Lean esto es `Option n`, y $\varnothing$ es `none`.
 Para cada configuración inicial $j$ definimos el vector
 $$v_j = \sum_i \sqrt{\Gamma_{ij}}\; |i\rangle \otimes |j\rangle_{\mathcal{E}} .$$
@@ -74,7 +77,7 @@ la marginal de una evolución unitaria $U(t)$ del sistema más el entorno.
 
 ## Lo que el teorema dice y lo que no
 
-Este es el tipo de discusión que la formalización obliga a tener, y por eso también
+Esta discusión es nuestra. Es el tipo de discusión que la formalización obliga a tener, y por eso también
 quedó anotada en `TRUSTED.md`.
 
 - **Lo que dice:** en cada instante, las probabilidades de transición de *cualquier*

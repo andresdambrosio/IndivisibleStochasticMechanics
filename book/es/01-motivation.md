@@ -3,14 +3,15 @@
 ## La teoría que funciona y que nadie entiende
 
 La mecánica cuántica es la teoría física con más éxito predictivo de la historia. Sin
-embargo, su formulación de libro de texto, la de Dirac y von Neumann, tiene una
-estructura incómoda:
+embargo, su formulación de libro de texto, la de Dirac (1930) y von
+Neumann ([1932](https://doi.org/10.1515/9781400889921)), tiene una estructura incómoda:
 
 1. El estado de un sistema es un vector $|\psi\rangle$ en un espacio de Hilbert.
 2. Mientras nadie mide, $|\psi\rangle$ evoluciona de forma determinista y unitaria:
    $|\psi(t)\rangle = U(t)|\psi(0)\rangle$.
 3. Cuando alguien *mide*, el estado "colapsa" de forma aleatoria, con probabilidades dadas
-   por la **regla de Born**: $P(i) = |\langle i|\psi\rangle|^2$.
+   por la **regla de Born** ([Born, 1926](https://doi.org/10.1007/BF01397477)):
+   $P(i) = |\langle i|\psi\rangle|^2$.
 
 Esta estructura genera el famoso **problema de la medición**. ¿Qué cuenta como una
 medición? ¿Por qué hay dos leyes de evolución distintas? ¿Qué *es* $|\psi\rangle$:
@@ -20,7 +21,8 @@ a estas preguntas.
 
 ## La propuesta de Barandes
 
-Barandes propone darle la vuelta al orden habitual:
+Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778), [Barandes, 2025](https://arxiv.org/abs/2507.21192)) propone darle la vuelta al orden habitual. En
+nuestras palabras:
 
 > Un sistema cuántico **es** un sistema que, en cada instante, está en una configuración
 > definida (una de las posibles $i \in \mathcal{C}$), y que salta entre configuraciones
@@ -36,22 +38,26 @@ Barandes trabaja con procesos en los que esta descomposición **no** existe en g
 A esos procesos los llama **indivisibles**. Las leyes solo dicen cómo se condiciona
 respecto del instante inicial, y no paso a paso.
 
-El resultado central, la **correspondencia estocástico-cuántica**, dice lo siguiente:
+El resultado central de Barandes, la **correspondencia estocástico-cuántica**
+([Barandes, 2023a](https://arxiv.org/abs/2302.10778), [Barandes, 2023b](https://arxiv.org/abs/2309.03085)), dice lo siguiente:
 
 - Toda evolución cuántica unitaria define un proceso indivisible, mediante
   $\Gamma_{ij}(t) = |U_{ij}(t)|^2$.
 - Todo proceso indivisible se puede representar en un espacio de Hilbert, con una
   evolución unitaria en un espacio de configuraciones posiblemente más grande.
 
-Por tanto, **las dos descripciones son equivalentes**. Pero en la versión estocástica:
+Por tanto, **las dos descripciones son equivalentes**. Según Barandes, en la versión
+estocástica:
 
 - La función de onda deja de ser un objeto físico y pasa a ser una herramienta de
-  cálculo, como lo es el potencial vector en electromagnetismo.
+  cálculo.
 - No hay colapso como proceso físico: medir es actualizar probabilidades ordinarias.
 - La interferencia, el entrelazamiento y los observables que no conmutan **aparecen solos**
   a partir de la indivisibilidad.
 
 ## Qué aporta formalizar
+
+Esta sección es la motivación de este proyecto, no de Barandes.
 
 La correspondencia es una afirmación matemática precisa, y por eso se puede verificar.
 Hay tres razones para hacerlo en Lean:
@@ -66,8 +72,9 @@ Hay tres razones para hacerlo en Lean:
 
 ## Lo que esta teoría no es (todavía)
 
-Conviene ser honestos: tal como está formulada, la mecánica estocástica indivisible
-**hace las mismas predicciones** que la mecánica cuántica. Por eso, "reemplazar" la
+Conviene ser honestos. El propio Barandes presenta su formulación como empíricamente
+equivalente a la mecánica cuántica: tal como está formulada, la mecánica estocástica
+indivisible **hace las mismas predicciones** que la mecánica cuántica. Por eso, "reemplazar" la
 mecánica cuántica significa hoy reemplazar su *ontología*, es decir, qué existe según la
 teoría, y no sus predicciones. Si hay física nueva, aparecerá al explorar los bordes:
 qué procesos son físicamente admisibles, qué pasa con las estadísticas en varios
@@ -75,9 +82,11 @@ instantes, cómo se lleva la teoría con la relatividad. De eso trata la Parte I
 
 ## Lecturas
 
-- J. A. Barandes, *The Stochastic-Quantum Correspondence*, arXiv:2302.10778. Es el texto
-  base.
-- J. A. Barandes, *Quantum Systems as Indivisible Stochastic Processes*, arXiv:2507.21192.
-  Es una versión más corta y conceptual.
-- J. A. Barandes, *The Stochastic-Quantum Theorem*, arXiv:2309.03085. Contiene el
-  teorema en detalle.
+- J. A. Barandes, *The Stochastic-Quantum Correspondence*,
+  [arXiv:2302.10778](https://arxiv.org/abs/2302.10778); Philosophy of Physics 3(1): 8
+  (2025). Es el texto base.
+- J. A. Barandes, *Quantum Systems as Indivisible Stochastic Processes*,
+  [arXiv:2507.21192](https://arxiv.org/abs/2507.21192); Stud. Hist. Phil. Sci. 119,
+  102213 (2026). Es una versión más corta y conceptual.
+- J. A. Barandes, *The Stochastic-Quantum Theorem*,
+  [arXiv:2309.03085](https://arxiv.org/abs/2309.03085). Contiene el teorema en detalle.

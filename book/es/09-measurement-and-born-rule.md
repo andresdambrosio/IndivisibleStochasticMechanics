@@ -18,6 +18,9 @@ qubit cuyas configuraciones son los autoestados de $\sigma_z$?
 
 ## La respuesta estocástica
 
+El argumento de esta sección es de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)). El modelo de medición es el de
+von Neumann ([1932, cap. VI](https://doi.org/10.1515/9781400889921)).
+
 En la mecánica estocástica indivisible **solo las configuraciones son físicas**. Una
 medición no es una operación especial: es una **interacción física** entre el sistema y un
 aparato. El aparato también tiene configuraciones, porque la aguja de un instrumento está
@@ -75,7 +78,8 @@ del sistema.
 
 ## Qué ganamos
 
-Antes, la regla de Born para observables arbitrarios era un postulado. Ahora es un teorema
+El argumento es de Barandes, y el modelo de medición, de von Neumann. Lo que aporta este
+capítulo es la versión formal, verificada en Lean. Antes, la regla de Born para observables arbitrarios era un postulado. Ahora es un teorema
 que dice lo siguiente: **si el aparato es un sistema físico más y los resultados son sus
 configuraciones, las probabilidades de los resultados son las de Born**. Solo usamos dos
 cosas: la regla para configuraciones, que en esta teoría es la definición de las
@@ -93,7 +97,7 @@ roadmap.
   división**. El sistema compuesto "se reinicia" y la evolución posterior depende solo
   del resultado registrado. En esta teoría, el colapso no es más que condicionar
   probabilidades ordinarias en un evento de división. Lo demostramos en el
-  [capítulo 10](10-colapso.md).
+  [capítulo 10](10-collapse-and-decoherence.md).
 
 ## En Lean
 

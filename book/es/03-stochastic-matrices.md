@@ -4,6 +4,9 @@
 
 ## La idea física
 
+El material de este capítulo es probabilidad estándar. La convención por columnas es la
+de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)).
+
 El sistema tiene un **espacio de configuraciones** finito $\mathcal{C} = \{1, \dots, N\}$.
 Pueden ser las posiciones de una partícula en una red, los dos estados de un bit, etc.
 En cada instante el sistema está en *una* configuración. No sabemos cuál, así que

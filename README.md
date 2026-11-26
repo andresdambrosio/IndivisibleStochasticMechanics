@@ -1,6 +1,6 @@
 # Indivisible Stochastic Mechanics
 
-A community project to **formalize Jacob Barandes' indivisible-stochastic reformulation of
+A project by **Andrés D'Ambrosio**, open to the community, to **formalize Jacob Barandes' indivisible-stochastic reformulation of
 quantum mechanics in Lean 4**, and then extend it. It is built on
 [Mathlib](https://github.com/leanprover-community/mathlib4).
 
@@ -49,9 +49,13 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## The book
 
-**[Read it online](https://andresdambrosio.github.io/IndivisibleStochasticMechanics/)**.
-It is a step-by-step course, in Spanish, that explains the physics, the mathematics and
-the Lean code as the project grows. Sources are in [`book/`](book/README.md).
+**[Read it online](https://andresdambrosio.github.io/IndivisibleStochasticMechanics/)**
+([en español](https://andresdambrosio.github.io/IndivisibleStochasticMechanics/es/)).
+*Indivisible Stochastic Mechanics* by **Andrés D'Ambrosio** is a step-by-step course, in
+English and Spanish, that explains the physics, the mathematics and the Lean code as the
+project grows. The theory is Jacob Barandes'; every chapter credits the source of each
+result and marks what is original to this project. Sources are in
+[`book/en/`](book/en/README.md) and [`book/es/`](book/es/README.md).
 
 ## Building
 

@@ -11,16 +11,18 @@ en $i$ es
 
 $$\Gamma_{ij}(t) = |\langle i|U(t)|j\rangle|^2 = |U_{ij}(t)|^2.$$
 
-Barandes da vuelta la lectura habitual. Esta fórmula no describe "lo que pasa al medir",
+La fórmula es la regla de Born ([Born, 1926](https://doi.org/10.1007/BF01397477)).
+Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)) da vuelta la lectura habitual. Esta fórmula no describe "lo que pasa al medir",
 sino **las probabilidades de transición del proceso estocástico subyacente**.
 
 ## La matemática
 
-**Definición (representación de Born).** Una matriz compleja $\Theta$ es una
+**Definición (representación de Born, de [Barandes, 2023b](https://arxiv.org/abs/2309.03085)).** Una matriz compleja $\Theta$ es una
 representación de Born de $\Gamma$ si $\Gamma_{ij} = |\Theta_{ij}|^2$ para todos $i,j$.
 
 **Definición.** $\Gamma$ es **uniestocástica** si tiene una representación de Born
-*unitaria*.
+*unitaria*. Es un concepto clásico del álgebra lineal (ver, por ejemplo,
+[Życzkowski, Słomczyński, Kuś y Sommers, 2003](https://arxiv.org/abs/nlin/0112036)).
 
 **Lema.** Si $U$ es unitaria, sus columnas son vectores unitarios:
 $\sum_i |U_{ij}|^2 = 1$.
@@ -41,7 +43,8 @@ $\Gamma_{ij}(0) = |\delta_{ij}|^2 = \delta_{ij}$. $\blacksquare$
 **Advertencia.** No toda matriz estocástica es uniestocástica. El ejemplo clásico es la
 matriz $3\times 3$
 $$\tfrac{1}{2}\begin{pmatrix}1&1&0\\0&1&1\\1&0&1\end{pmatrix},$$
-que no lo es. Por eso el teorema de Barandes en la dirección inversa necesita, en
+que no lo es. Es un ejemplo conocido de la literatura sobre matrices uniestocásticas, y
+el ejercicio 1 pide demostrarlo. Por eso el teorema de Barandes en la dirección inversa necesita, en
 general, un espacio de configuraciones **más grande**. Lo veremos en el capítulo 8.
 
 ## En Lean

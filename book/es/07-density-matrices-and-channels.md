@@ -13,7 +13,7 @@ capítulo muestra que las dos tienen su contraparte estocástica exacta.
 ### La idea física
 
 En la formulación usual, la matriz densidad $\rho$ es *el* estado del sistema. En la de
-Barandes es una **herramienta de cálculo** que se construye a partir de dos ingredientes:
+Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)) es una **herramienta de cálculo** que se construye a partir de dos ingredientes:
 la representación de Born $\Theta$ y la distribución de probabilidad $p$ sobre las
 configuraciones iniciales:
 
@@ -42,7 +42,8 @@ distribución estocástica en el instante $t$.
 
 ### Lo que dice la diagonal y lo que dicen los demás elementos
 
-La diagonal de $\rho$ contiene **toda** la información probabilística sobre dónde está el
+Esta sección es nuestra lectura de los resultados, en línea con la de Barandes. La
+diagonal de $\rho$ contiene **toda** la información probabilística sobre dónde está el
 sistema. Los elementos fuera de la diagonal (las *coherencias*) no son probabilidades de
 nada. Son la huella de la indivisibilidad: la información que el sistema necesita para
 "recordar" su configuración inicial más adelante.
@@ -62,7 +63,8 @@ definida.
 ### La idea física
 
 Un **canal cuántico** describe cualquier evolución física posible de un sistema, incluso
-cuando interactúa con un entorno al que no tenemos acceso. Se escribe en **forma de Kraus**:
+cuando interactúa con un entorno al que no tenemos acceso. Se escribe en **forma de Kraus** ([Kraus, 1971](https://doi.org/10.1016/0003-4916(71)90108-4);
+[Choi, 1975](https://doi.org/10.1016/0024-3795(75)90075-0)):
 $$\rho \;\mapsto\; \sum_k K_k\,\rho\,K_k^\dagger, \qquad \sum_k K_k^\dagger K_k = \mathbb{1}.$$
 Una evolución unitaria es el caso de un único operador de Kraus, $K = U$.
 
@@ -79,7 +81,9 @@ $\blacksquare$
 una matriz con diagonal $\Gamma p$.
 
 **Teorema (de lo estocástico a lo cuántico).** Toda matriz estocástica es la matriz de
-transición de algún canal cuántico. Basta tomar los operadores de Kraus "clásicos"
+transición de algún canal cuántico. Es la forma estándar de ver un canal clásico como
+canal cuántico (ver por ejemplo [Nielsen y Chuang, 2000](https://doi.org/10.1017/CBO9780511976667)).
+Basta tomar los operadores de Kraus "clásicos"
 $$K_{(a,b)} = \sqrt{\Gamma_{ab}}\;|a\rangle\langle b| ,$$
 que llevan la configuración $b$ a la $a$ con amplitud $\sqrt{\Gamma_{ab}}$.
 
@@ -128,7 +132,7 @@ diagonal de $A^\dagger A$" aparece una y otra vez. La pusimos en `ForMathlib/` c
 
 1. (Papel) Calculá $\rho(t)$ para el qubit con $p_0 = (1/2, 1/2)$. ¿Hay coherencias? ¿Qué
    te dice eso sobre si $\pi/4$ es un evento de división para esa condición inicial?
-2. (Papel) El *canal de desfasaje* tiene $K_0 = \sqrt{1-q}\,\mathbb{1}$ y
+2. (Papel) El *canal de desfasaje* (Nielsen y Chuang, cap. 8) tiene $K_0 = \sqrt{1-q}\,\mathbb{1}$ y
    $K_1 = \sqrt{q}\,\sigma_z$. Calculá su $\Gamma$. ¿Qué le hace a las coherencias?
 3. (Papel) Mostrá que una composición de canales es un canal. ¿Por qué eso no contradice
    que los procesos indivisibles no se descomponen en pasos?

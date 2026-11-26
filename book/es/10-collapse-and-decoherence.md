@@ -17,9 +17,10 @@ La segunda ley es rara. No es unitaria ni lineal, y depende de una noción de "m
 que la teoría nunca define. Muchos consideran que este es *el* problema de la mecánica
 cuántica.
 
-En el capítulo 9 vimos que en la mecánica estocástica indivisible la medición es una
+En el capítulo 9 vimos, siguiendo a Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)), que la medición es una
 interacción física más, y que las probabilidades de los resultados son las de Born. Ahora
-damos el paso siguiente. **El colapso no es una ley nueva, es una consecuencia.** Y tiene
+damos el paso siguiente, que también es de Barandes. **El colapso no es una ley nueva, es
+una consecuencia.** Y tiene
 un significado estocástico preciso: la medición crea un **evento de división**.
 
 ## El modelo: evolucionar, medir, evolucionar
@@ -38,7 +39,8 @@ No hay ninguna segunda ley. En Lean, esto es `measuredEvolution W M U`.
 
 ## La matemática
 
-**Teorema (colapso).** La amplitud de "sistema en $i$, puntero en $a$" es
+**Teorema (colapso).** Es un cálculo estándar del modelo de von Neumann; la versión formal
+es nuestra. La amplitud de "sistema en $i$, puntero en $a$" es
 $$\Theta_{(i,a),(j,\text{ready})} = (W v_a)_i \cdot \langle v_a|U|j\rangle .$$
 
 *Demostración.* En el capítulo 9 vimos que, después de $M(U\otimes\mathbb 1)$, la
@@ -51,7 +53,8 @@ Tomando el módulo al cuadrado:
 $$P(i, a \mid j) = \underbrace{|\langle v_a|U|j\rangle|^2}_{\text{Born para } a}\;\cdot\;
 \underbrace{|(W v_a)_i|^2}_{\text{evolucionar desde } v_a}.$$
 
-Esta es exactamente la receta del libro de texto: se obtiene $a$ con la probabilidad de
+Esta es exactamente la receta del libro de texto (von Neumann,
+[1932](https://doi.org/10.1515/9781400889921)): se obtiene $a$ con la probabilidad de
 Born y **después** el sistema evoluciona *como si* hubiera colapsado a $v_a$. Pero acá no
 lo postulamos: es una identidad sobre la única evolución unitaria del sistema compuesto.
 Lo que pasa después depende del pasado **solo a través del resultado registrado** $a$.
@@ -66,7 +69,7 @@ La diferencia es justamente la interferencia. El módulo al cuadrado de un produ
 términos cruzados entre los distintos caminos $a$, y el producto de los módulos al
 cuadrado no los tiene. La medición convierte "sumar amplitudes" en "sumar
 probabilidades". Además, $|WV|^2$ y $|V^\dagger U|^2$ son las dos estocásticas, porque son
-unistocásticas: la evolución del sistema **se factoriza a través del resultado** $a$.
+uniestocásticas: la evolución del sistema **se factoriza a través del resultado** $a$.
 
 ## El colapso como evento de división
 
@@ -82,7 +85,9 @@ proceso del sistema, sumando sobre el puntero, es un proceso estocástico genera
 (`GenStochasticProcess.measuredAt`).
 
 **Teorema (colapso como evento de división).** El instante $t_1$ de la medición es un
-evento de división de ese proceso, **cualquiera sea** la dinámica $U(t)$.
+evento de división de ese proceso, **cualquiera sea** la dinámica $U(t)$. La idea es de
+Barandes ([2023a](https://arxiv.org/abs/2302.10778)); este enunciado formal y su
+demostración en Lean son nuestros.
 
 *Demostración.* Por el corolario, con $V = \mathbb 1$, para $t \ge t_1$ vale
 $$\Gamma(t) = |U(t)U(t_1)^\dagger|^2 \cdot |U(t_1)|^2,
@@ -97,11 +102,12 @@ En el capítulo 6 demostramos que, para el qubit con $H = \sigma_x$, el instante
 pero a $\pi/2$ el qubit intercambió sus configuraciones de forma determinista, y ninguna ley
 estocástica puede recuperar esa información.
 
-Si un aparato mide la configuración del qubit en $\pi/4$, la historia cambia: $\pi/4$
+Si un aparato mide la configuración del qubit en $\pi/4$, la historia cambia (el ejemplo es
+nuestro): $\pi/4$
 **pasa a ser** un evento de división (`Qubit.measuredProcess_isDivisionEvent`). La misma
 dinámica unitaria da una historia divisible o indivisible según haya o no una medición.
 
-> Esta es la lectura de Barandes del colapso. Medir no cambia las leyes. Lo que hace es
+> Esta es la lectura de Barandes del colapso ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)). Medir no cambia las leyes. Lo que hace es
 > crear un evento de división: un instante a partir del cual podemos "reiniciar" el
 > proceso y condicionar en lo que pasó, con probabilidades ordinarias.
 
@@ -111,7 +117,10 @@ Releé la demostración del evento de división. En ningún momento usamos que a
 el puntero. Lo único que importó es que el puntero quedó **correlacionado** con la
 configuración del sistema. Entonces el aparato no tiene nada de especial: cualquier
 entorno que registre la configuración debería producir lo mismo. Eso es la
-**decoherencia**, y ahora lo demostramos en general.
+**decoherencia** ([Zeh, 1970](https://doi.org/10.1007/BF00708656);
+[Joos y Zeh, 1985](https://doi.org/10.1007/BF01725541);
+[Zurek, 2003](https://arxiv.org/abs/quant-ph/0105127)), y ahora lo demostramos en general
+en este modelo.
 
 ### El modelo
 
@@ -135,7 +144,9 @@ una unitaria.
 El sistema evoluciona con $U$, el entorno lo registra y después el sistema evoluciona con
 $W$. Sumando sobre el entorno:
 
-**Teorema (fórmula de la decoherencia).**
+**Teorema (fórmula de la decoherencia).** Es la fórmula estándar de la teoría de la
+decoherencia (ver [Schlosshauer, 2007](https://doi.org/10.1007/978-3-540-35775-9)), escrita
+para probabilidades de transición.
 $$\Gamma_{ij} = \sum_{k,l} W_{ik}U_{kj}\;\overline{W_{il}U_{lj}}\;\langle\varphi_l,\varphi_k\rangle .$$
 
 Los términos con $k = l$ son probabilidades clásicas: ir de $j$ a $k$ y después de $k$ a
@@ -153,7 +164,8 @@ extremos:
 Entre los dos extremos, la decoherencia apaga la interferencia en la medida exacta en que
 el entorno distingue los caminos.
 
-**Teorema (la decoherencia crea eventos de división).** Si un entorno registra
+**Teorema (la decoherencia crea eventos de división).** La idea es de Barandes; el
+enunciado formal y su demostración en Lean son nuestros. Si un entorno registra
 perfectamente la configuración en $t_1$, entonces $t_1$ es un evento de división del
 proceso del sistema, cualquiera sea la dinámica. **Nadie tiene que leer el registro.**
 
@@ -178,10 +190,14 @@ En el medio, la curva es continua.
 **Teorema.** $\pi/4$ es un evento de división **si y solo si** el registro es perfecto,
 $\cos\theta = 0$.
 
+Este ejemplo y sus dos teoremas son nuestros. Hasta donde sabemos, este enunciado preciso
+no aparece en la literatura.
+
 Que un registro parcial no alcance es importante. Un evento de división no es "un poco"
 verdadero: o la dinámica se factoriza o no. En el mundo real los registros nunca son
 perfectos, pero se vuelven perfectos muy rápido: muchos fotones, cada uno con un
-solapamiento chico, multiplican sus solapamientos, que se van a cero en forma exponencial.
+solapamiento cercano a uno, multiplican sus solapamientos, que se van a cero en forma
+exponencial ([Joos y Zeh, 1985](https://doi.org/10.1007/BF01725541)).
 Formalizar esta idea de eventos de división *aproximados* es una de las tareas siguientes.
 
 ## Lo que todavía falta

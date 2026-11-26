@@ -5,6 +5,10 @@
 Este es el primer resultado "con física" del proyecto: un sistema cuántico concreto cuyo
 proceso estocástico **demostramos** que es indivisible.
 
+La tesis de que la interferencia y la indivisibilidad son dos caras del mismo fenómeno es
+de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)). El ejemplo concreto, con este hamiltoniano y estos instantes,
+lo armamos para este curso, y la demostración formal en Lean es nuestra.
+
 ## El sistema
 
 Dos configuraciones, $\mathcal{C} = \{0, 1\}$, con hamiltoniano $H = \sigma_x$. La
@@ -16,7 +20,8 @@ y la regla de Born da
 
 $$\Gamma(t) = \begin{pmatrix}\cos^2 t & \sin^2 t\\ \sin^2 t & \cos^2 t\end{pmatrix}.$$
 
-Es la dinámica de las **oscilaciones de Rabi**: el sistema pasa de $0$ a $1$ y vuelve.
+Es la dinámica de las **oscilaciones de Rabi** ([Rabi, 1937](https://doi.org/10.1103/PhysRev.51.652)):
+el sistema pasa de $0$ a $1$ y vuelve.
 
 ## Tres instantes clave
 
@@ -109,8 +114,8 @@ theorem process_isIndivisible : process.IsIndivisible := fun h =>
 1. (Papel) Mostrá que $t'=\pi/2$ **sí** es un evento de división. Pista: $\Gamma(\pi/2)$
    es una permutación, así que tiene inversa estocástica.
 2. (Papel) Mostrá que **ningún** $t' \in (0, \pi/2)$ es un evento de división. Pista:
-   escribí $\Gamma(t) = \tfrac12(\mathbb{1} + \lambda(t)\,\sigma_x)$ con $\lambda(t) = \cos 2t$
-   y usá el ejercicio 2 del capítulo 4.
+   escribí $\Gamma(t) = \tfrac12\begin{pmatrix}1+\lambda & 1-\lambda\\ 1-\lambda & 1+\lambda\end{pmatrix}$
+   con $\lambda = \cos 2t$, y usá el ejercicio 2 del capítulo 4.
 3. (Lean) Formalizá los dos ejercicios anteriores. Es una tarea abierta del roadmap.
 4. (Para pensar) En $\pi/2$ el sistema "se reinicia". ¿Es una coincidencia que sea
    justo cuando $U(\pi/2)$ es, salvo fases, una permutación?

@@ -5,7 +5,7 @@ lifting as possible, at any scale. We keep the project credible by concentrating
 trust in one thin, explicit layer.
 
 Contributions come in three kinds, and all three are welcome: **Lean proofs**, **book
-chapters** (in Spanish, see `book/`), and **human review** of the trusted layer.
+chapters** (in English and Spanish, see `book/en/` and `book/es/`), and **human review** of the trusted layer.
 
 ## The model: free proofs, trusted definitions
 
@@ -65,10 +65,17 @@ python3 scripts/check_trusted.py
 
 ## Rules for the book
 
+- The book exists in English (`book/en/`, the default, published at the site root) and
+  Spanish (`book/es/`, published under `es/`). Both use the same file names, and every
+  change goes into both.
+- **Credit every idea.** Each result that comes from someone else is attributed to its
+  author, with a citation and a link, in the paragraph where it appears, and listed in
+  `99-references.md`. Only what is genuinely original to the project is presented as
+  ours, and then it says so explicitly.
 - Every chapter describes verified code, or is clearly marked 🚧.
 - Structure: physical idea → mathematics → Lean → exercises.
 - If you change a declaration, update the chapter that quotes it.
-- Licence: book CC BY 4.0 (`book/LICENSE`), code Apache 2.0 (`LICENSE`).
+- Licence: book CC BY 4.0 (`book/LICENSE`); the book's author is Andrés D'Ambrosio, code Apache 2.0 (`LICENSE`).
 
 ## Pull requests
 

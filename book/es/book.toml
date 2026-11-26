@@ -1,0 +1,18 @@
+[book]
+title = "Mecánica Estocástica Indivisible"
+authors = ["Andrés D'Ambrosio"]
+language = "es"
+src = "."
+
+[build]
+build-dir = "../html/es"
+
+[preprocessor.katex]
+after = ["links"]
+
+[output.html]
+theme = "../theme"
+default-theme = "light"
+preferred-dark-theme = "coal"
+git-repository-url = "https://github.com/andresdambrosio/IndivisibleStochasticMechanics"
+edit-url-template = "https://github.com/andresdambrosio/IndivisibleStochasticMechanics/edit/main/book/es/{path}"

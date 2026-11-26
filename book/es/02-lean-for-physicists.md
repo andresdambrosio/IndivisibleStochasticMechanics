@@ -2,7 +2,8 @@
 
 Este capítulo no es un curso de Lean. Su objetivo es que puedas **leer** el código del
 proyecto y modificarlo un poco. Para profundizar, el mejor recurso es
-*Mathematics in Lean* (https://leanprover-community.github.io/mathematics_in_lean/).
+[*Mathematics in Lean*](https://leanprover-community.github.io/mathematics_in_lean/), de
+Jeremy Avigad y Patrick Massot.
 
 ## Tres ideas
 
@@ -48,7 +49,9 @@ $\sum_i p_i = 1$". Una `structure` de tipo `Prop` agrupa varias condiciones en u
 
 ## Mathlib
 
-Mathlib es la gran biblioteca de matemática de Lean. No reinventamos nada que ya esté en
+[Mathlib](https://github.com/leanprover-community/mathlib4) es la gran biblioteca de
+matemática de Lean, escrita por cientos de colaboradores
+([The mathlib Community, 2020](https://arxiv.org/abs/1910.09336)). No reinventamos nada que ya esté en
 ella: matrices, números complejos, grupos unitarios, trigonometría, teoría de la medida.
 Por ejemplo, usamos su definición de matriz estocástica por columnas
 (`Matrix.colStochastic`), y así heredamos todos sus teoremas.
@@ -77,7 +80,7 @@ la rama `main` no debe contener ningún `sorry`.
 
 ## Ejercicios
 
-1. Instalá Lean (https://lean-lang.org/install), cloná el repositorio y ejecutá
+1. Instalá Lean ([lean-lang.org/install](https://lean-lang.org/install)), cloná el repositorio y ejecutá
    `lake build`.
 2. Abrí `IndivisibleStochasticMechanics/Stochastic/Basic.lean` en VS Code con la
    extensión de Lean. Poné el cursor dentro de una demostración y mirá el panel *Lean
