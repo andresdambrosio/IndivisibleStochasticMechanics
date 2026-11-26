@@ -16,4 +16,5 @@ public import IndivisibleStochasticMechanics.Quantum.Decoherence
 public import IndivisibleStochasticMechanics.Examples.DecoheredQubit
 public import IndivisibleStochasticMechanics.ForMathlib.Matrix.Stochastic
 public import IndivisibleStochasticMechanics.Quantum.Composite
+public import IndivisibleStochasticMechanics.Quantum.Bell
 public import IndivisibleStochasticMechanics.Examples.BellPair

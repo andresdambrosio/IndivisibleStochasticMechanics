@@ -59,6 +59,17 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.BellPair.hadamard` | the Hadamard gate `(1/√2)[[1, 1], [1, -1]]` | standard | | ⏳ |
 | `ISM.BellPair.cnot` | the CNOT gate `\|a, b⟩ ↦ \|a, b + a⟩` | standard | | ⏳ |
 | `ISM.BellPair.prep` | Bell-pair preparation `CNOT · (H ⊗ 1)` | Nielsen–Chuang §1.3.6 | | ⏳ |
+| `ISM.chsh` | the CHSH combination `E₀₀ + E₀₁ + E₁₀ - E₁₁` | CHSH (1969) | | ⏳ |
+| `ISM.LHVModel` | a local hidden-variable model: a finite hidden variable with distribution `μ`, outcomes `α x l`, `β y l` in `[-1, 1]` | Bell (1964); CHSH (1969) | finite `Λ`; locality = Alice's outcome independent of Bob's setting and vice versa; `[-1, 1]` covers local randomness | ⏳ |
+| `ISM.LHVModel.corr` | the correlation `∑ μ(l) α(x, l) β(y, l)` | standard | | ⏳ |
+| `ISM.expect` | expectation value `Re ⟨ψ, X ψ⟩` (unnormalized `ψ`) | standard | | ⏳ |
+| `ISM.BellPair.rotR` | the real rotation by `θ` | standard | | ⏳ |
+| `ISM.BellPair.rot` | the rotation by `θ` as a complex matrix: a local change of basis on one qubit | standard | | ⏳ |
+| `ISM.BellPair.sgn` | outcome `+1` for configuration `0`, `-1` for `1` | standard | | ⏳ |
+| `ISM.BellPair.corr` | correlation when Alice rotates by `a`, Bob by `b`, then both configurations are read | ours (stochastic reading); standard quantum content | "measuring" = local unitary then reading the configuration, as in ch. 9 | ⏳ |
+| `ISM.BellPair.alice` | Alice's CHSH settings `0, π/4` | standard | | ⏳ |
+| `ISM.BellPair.bob` | Bob's CHSH settings `π/8, -π/8` | standard | | ⏳ |
+| `ISM.BellPair.bellCorr` | the four Bell-pair correlations at those settings | standard | | ⏳ |
 | `ISM.dilationVec` | auxiliary: columns `∑ i, √Γᵢⱼ ∣i⟩⊗∣some j⟩` of the dilation | — | auxiliary construction, no physical claim | ⏳ |
 
 ## Main theorems
@@ -91,6 +102,11 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.BellPair.not_product` | after the Bell preparation the two qubits' joint distribution is not a product | standard | | ⏳ |
 | `ISM.BellPair.coherent` | without a division event, the qubits still agree after local Hadamards on both | Nielsen–Chuang | | ⏳ |
 | `ISM.BellPair.decohered_of_isRecording` | a perfect record right after the preparation makes the same local Hadamards give the uniform distribution | arXiv:2302.10778 §3.9 | | ⏳ |
+| `ISM.LHVModel.abs_chsh_corr_le_two` | **CHSH inequality:** every local hidden-variable model has `\|S\| ≤ 2` | CHSH (1969) | | ⏳ |
+| `ISM.expect_chsh_le` | **Tsirelson's bound:** `⟨C⟩ ≤ 2√2 ‖ψ‖²` for `±1` observables with Alice's commuting with Bob's | Cirel'son (1980) | quantum side; not yet stated for stochastic correlations directly | ⏳ |
+| `ISM.BellPair.corr_eq` | the Bell-pair correlation is `cos 2(a - b)` | standard | | ⏳ |
+| `ISM.BellPair.chsh_bellCorr` | the Bell pair reaches `S = 2√2` | standard | | ⏳ |
+| `ISM.BellPair.lhv_corr_ne_bellCorr` | no local hidden-variable model reproduces the Bell-pair correlations | Bell (1964); CHSH (1969) | | ⏳ |
 | `ISM.Qubit.measuredProcess_isDivisionEvent` | measuring the qubit at `π/4` makes `π/4` a division event (compare `not_isDivisionEvent_pi_div_four`) | — | | ⏳ |
 
 ## References
@@ -105,6 +121,7 @@ exists, and that it says what we cite it for).
 | Barandes, *Quantum Systems as Indivisible Stochastic Processes*, arXiv:2507.21192 (journal: Stud. Hist. Phil. Sci., 2026?) | README, book | ⏳ |
 | Zurek, *Decoherence, einselection, and the quantum origins of the classical*, Rev. Mod. Phys. 75, 715 (2003) | code, book | ⏳ |
 | Barandes, *New Prospects for a Causally Local Formulation of Quantum Theory*, arXiv:2402.16935 | code, book | ⏳ |
+| Bell, Physics Physique Fizika 1, 195 (1964); Clauser, Horne, Shimony, Holt, PRL 23, 880 (1969); Cirel'son, Lett. Math. Phys. 4, 93 (1980) | code, book | ⏳ |
 | Ghirardi, Rimini, Weber, Lett. Nuovo Cimento 27, 293 (1980) (no signalling) | code, book | ⏳ |
 | Nielsen and Chuang, *Quantum Computation and Quantum Information* (Cambridge, 2000) | code, book | ⏳ |
 | arXiv:2602.01043, 2603.27369, 2608.04354, 2601.18720 (Calvo); Horsocrates (Rocq) | ROADMAP | ⏳ |

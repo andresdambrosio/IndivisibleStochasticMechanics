@@ -116,6 +116,7 @@ contributions, by Andrés D'Ambrosio, are these:
   record, with the theorem "$\pi/4$ is a division event if and only if the record is
   perfect" (chapter 10). As far as we know, that statement does not appear in the
   literature. Also the stochastic reading of the Bell pair (chapter 11): the same statistics
-  at the intermediate time, with or without a division event, and different futures.
+  at the intermediate time, with or without a division event, and different futures; and
+  CHSH stated for the transition probabilities of the composite process.
 - **The exposition:** the course itself, its organization, its exercises and its
   discussions.

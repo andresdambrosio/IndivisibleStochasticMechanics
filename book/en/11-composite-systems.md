@@ -1,6 +1,7 @@
 # 11. Composite systems and entanglement
 
 > Code: `IndivisibleStochasticMechanics/Quantum/Composite.lean`,
+> `IndivisibleStochasticMechanics/Quantum/Bell.lean`,
 > `IndivisibleStochasticMechanics/Examples/BellPair.lean` and
 > `IndivisibleStochasticMechanics/ForMathlib/Matrix/Stochastic.lean`
 
@@ -18,7 +19,8 @@ composite systems. Einstein, Podolsky and Rosen pointed it out
 (*Verschränkung*) the same year ([Schrödinger, 1935](https://doi.org/10.1007/BF01491891)).
 In this chapter we see three things in stochastic language: what happens when the systems
 do not interact, why what one of them does cannot be seen in the other's statistics, and
-how entanglement shows up in a concrete example.
+how entanglement shows up in a concrete example. At the end we verify Bell's theorem in
+its CHSH form and Tsirelson's bound.
 
 ## Independent systems
 
@@ -104,14 +106,60 @@ that time is a division event.
 > *with* a division event. This is our way of summarizing the example; for Barandes'
 > general discussion see [Barandes, 2023a, §3.9](https://arxiv.org/abs/2302.10778).
 
+## Bell nonlocality: CHSH and Tsirelson
+
+The Bell pair also lets us check, in Lean, the most famous theorem about entanglement.
+Alice chooses one of two settings $x\in\{0,1\}$ and Bob one of two settings $y\in\{0,1\}$.
+Each one gets an outcome $\pm1$, and $E(x,y)$ is the average of the product of the
+outcomes. The **CHSH combination** is
+$$S = E(0,0) + E(0,1) + E(1,0) - E(1,1).$$
+
+**Theorem (CHSH inequality).** In every local hidden-variable model, $|S|\le 2$.
+
+A *local hidden-variable model* is the kind of theory Bell considered
+([Bell, 1964](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195)): a hidden variable
+$\lambda$ is drawn with some distribution, and Alice's outcome depends only on $\lambda$ and
+on her setting, not on Bob's (and vice versa). The inequality is the one of
+[Clauser, Horne, Shimony and Holt, 1969](https://doi.org/10.1103/PhysRevLett.23.880).
+*Proof:* for each $\lambda$, with $a_x, b_y\in[-1,1]$,
+$a_0(b_0+b_1) + a_1(b_0-b_1)$ has absolute value at most $|b_0+b_1| + |b_0-b_1| \le 2$;
+averaging over $\lambda$ keeps the bound. $\blacksquare$ In Lean we take $\lambda$ in a finite
+set and outcomes in $[-1,1]$, which also covers local randomness.
+
+**Theorem (the Bell pair, stochastically).** Alice rotates her qubit by an angle $a$ and Bob
+rotates his by $b$ (local unitaries), and then both configurations are read. With outcome
+$+1$ for configuration $0$ and $-1$ for $1$, the transition probabilities of the composite
+process give
+$$E(a,b) = \cos 2(a-b).$$
+With the standard settings $a\in\{0,\pi/4\}$ and $b\in\{\pi/8,-\pi/8\}$,
+$$S = 2\sqrt2 \approx 2.83 > 2.$$
+So **no local hidden-variable model reproduces these transition probabilities.** The
+calculation is textbook quantum mechanics; stating it for the transition probabilities of
+the composite process is ours.
+
+**Theorem (Tsirelson's bound).** For any state $\psi$ and any observables
+$A_0, A_1, B_0, B_1$ with eigenvalues $\pm1$, where Alice's commute with Bob's,
+$$\langle\psi, (A_0B_0 + A_0B_1 + A_1B_0 - A_1B_1)\,\psi\rangle \le 2\sqrt2\,\|\psi\|^2 .$$
+This is the result of [Cirel'son, 1980](https://doi.org/10.1007/BF00417500). *Proof* (the
+standard sum-of-squares argument): with $s = \sqrt2$,
+$$(sA_0 - B_0 - B_1)^2 + (sA_1 - B_0 + B_1)^2 = 8 - 2s\,(A_0B_0 + A_0B_1 + A_1B_0 - A_1B_1),$$
+and the left-hand side has a non-negative expectation. $\blacksquare$ So the Bell pair is
+optimal: quantum mechanics goes beyond 2, but never beyond $2\sqrt2$.
+
+What does this mean for indivisible stochastic mechanics? The configurations are real at
+every time, but they are **not** a local hidden variable in Bell's sense: the theorem shows
+that no such variable reproduces the statistics. In the language of this book, the reason
+is the one we already saw: the time right after the preparation is not a division event,
+so the configuration at that time does not "screen off" the future. This reading is ours;
+for how locality fits into Barandes' formulation, see
+[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+
 ## What is still missing
 
-- **Bell and CHSH.** The next step is to show that no local hidden-variable theory
-  reproduces these correlations ([Bell, 1964](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195);
-  [Clauser, Horne, Shimony and Holt, 1969](https://doi.org/10.1103/PhysRevLett.23.880)),
-  and that the quantum CHSH value is bounded by $2\sqrt 2$
-  ([Cirel'son, 1980](https://doi.org/10.1007/BF00417500)). In our language, this requires
-  measuring non-commuting observables on each qubit with apparatuses (chapter 9).
+- **Bell with apparatuses.** Here "measuring" means rotating and then reading the
+  configuration. Modelling each measurement with an apparatus (chapter 9) is pending.
+- **Tsirelson, stochastically.** We proved the bound on the quantum side; stating it
+  directly for the transition probabilities of every process is pending.
 - **No signalling for local measurements**, not only for unitaries.
 - **The locality question.** Barandes argues that his formulation is causally local
   ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizing that claim is a
@@ -152,6 +200,17 @@ theorem BellPair.decohered_of_isRecording (hE : IsRecording φ E e₀)
     envMarginal (recordedEvolution (hadamard ⊗ₖ hadamard) E prep) e₀ i (0, 0) = 1 / 4
 ```
 
+```lean
+theorem LHVModel.abs_chsh_corr_le_two (L : LHVModel Λ) : |chsh L.corr| ≤ 2
+
+theorem BellPair.corr_eq (a b : ℝ) : corr a b = Real.cos (2 * (a - b))
+theorem BellPair.chsh_bellCorr : chsh bellCorr = 2 * Real.sqrt 2
+theorem BellPair.lhv_corr_ne_bellCorr (L : LHVModel Λ) : L.corr ≠ bellCorr
+
+theorem expect_chsh_le ... (ψ : ι → ℂ) :
+    expect (A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁) ψ ≤ 2 * Real.sqrt 2 * ∑ i, ‖ψ i‖ ^ 2
+```
+
 ## Exercises
 
 1. (Paper) Check by hand that $(H\otimes H)\,\tfrac{1}{\sqrt2}(|00\rangle+|11\rangle) =
@@ -163,5 +222,6 @@ theorem BellPair.decohered_of_isRecording (hE : IsRecording φ E e₀)
    Which local gates leave the correlations intact?
 4. (To think about) The "glued coins" and the Bell pair have the same distribution at the
    intermediate time. Is there any way to tell them apart by looking at that time alone?
-5. (Lean, open) Extend the no-signalling theorem to an ideal measurement made by Bob on
+5. (Paper) Check that $S = 2\sqrt2$ from $E(a,b) = \cos 2(a-b)$ and the four angles.
+6. (Lean, open) Extend the no-signalling theorem to an ideal measurement made by Bob on
    his qubit.

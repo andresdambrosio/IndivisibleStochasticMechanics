@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import IndivisibleStochasticMechanics.Quantum.Composite
+public import IndivisibleStochasticMechanics.Quantum.Bell
 
 /-!
 # A Bell pair, seen from the stochastic side
@@ -26,6 +26,11 @@ What tells them apart is whether that time is a division event. That is how enta
 shows up in the indivisible stochastic picture: correlations together with the absence of
 a division event. The quantum facts used here (the Bell state and its invariance under
 `H ⊗ H`) are textbook material; the stochastic reading follows Barandes.
+
+* `corr_eq`, `chsh_bellCorr`, `lhv_corr_ne_bellCorr`: if Alice and Bob rotate their qubits
+  locally and then read the configurations, the correlation is `cos 2(a - b)`; with the
+  standard settings the CHSH value is `2√2`, so no local hidden-variable model reproduces
+  these transition probabilities (Bell 1964; CHSH 1969).
 
 ## References
 
@@ -129,5 +134,77 @@ theorem decohered_of_isRecording {m : Type*} [Fintype m] [DecidableEq m]
     envMarginal (recordedEvolution (hadamard ⊗ₖ hadamard) E prep) e₀ i (0, 0) = 1 / 4 := by
   rw [hE.envMarginal_of_orthonormal hφ]
   exact decohered i
+
+
+/-- The real rotation by `θ`. -/
+noncomputable def rotR (θ : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
+  !![Real.cos θ, -Real.sin θ; Real.sin θ, Real.cos θ]
+
+/-- The rotation by `θ`, as a complex matrix: a local change of basis on one qubit. -/
+noncomputable def rot (θ : ℝ) : Matrix (Fin 2) (Fin 2) ℂ := (rotR θ).map (↑)
+
+/-- Amplitudes after local rotations of the Bell pair. -/
+theorem rot_kron_prep_apply (a b : ℝ) (i : Fin 2 × Fin 2) :
+    ((rot a ⊗ₖ rot b) * prep) i (0, 0) =
+      (((rotR a i.1 0 * rotR b i.2 0 + rotR a i.1 1 * rotR b i.2 1) / Real.sqrt 2 : ℝ) : ℂ) := by
+  rw [Matrix.mul_apply, Fintype.sum_prod_type]
+  simp only [prep_col, Fin.sum_univ_two, kroneckerMap_apply, rot, map_apply]
+  simp
+  ring
+
+/-- The outcome `+1` for configuration `0` and `-1` for `1`. -/
+def sgn (i : Fin 2) : ℝ := if i = 0 then 1 else -1
+
+/-- The Bell-pair correlation when Alice rotates by `a` and Bob by `b` and then both
+configurations are read: `E = ∑ sgn(i₁) sgn(i₂) P(i₁, i₂)`, with `P` the transition
+probabilities of the composite process. -/
+noncomputable def corr (a b : ℝ) : ℝ :=
+  ∑ i : Fin 2 × Fin 2, sgn i.1 * sgn i.2 * normSqMatrix ((rot a ⊗ₖ rot b) * prep) i (0, 0)
+
+/-- **The Bell-pair correlation:** `E(a, b) = cos 2(a - b)`. -/
+theorem corr_eq (a b : ℝ) : corr a b = Real.cos (2 * (a - b)) := by
+  have h2 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have h2' : Real.sqrt 2 ≠ 0 := by positivity
+  simp only [corr, normSqMatrix, of_apply, rot_kron_prep_apply, Complex.norm_real,
+    Real.norm_eq_abs, sq_abs, Fintype.sum_prod_type, Fin.sum_univ_two, sgn, rotR]
+  simp [Real.cos_two_mul, Real.cos_sub, div_pow, h2]
+  field_simp
+  linear_combination (-2 * (Real.sin b ^ 2 + Real.cos b ^ 2)) * Real.sin_sq_add_cos_sq a -
+    2 * Real.sin_sq_add_cos_sq b
+
+/-- Alice's settings `0, π/4` and Bob's `π/8, -π/8`. -/
+noncomputable def alice : Fin 2 → ℝ := ![0, Real.pi / 4]
+
+/-- Bob's settings. -/
+noncomputable def bob : Fin 2 → ℝ := ![Real.pi / 8, -(Real.pi / 8)]
+
+/-- The four correlations of the CHSH experiment on the Bell pair. -/
+noncomputable def bellCorr (x y : Fin 2) : ℝ := corr (alice x) (bob y)
+
+/-- **The Bell pair reaches Tsirelson's bound:** `S = 2√2`. -/
+theorem chsh_bellCorr : chsh bellCorr = 2 * Real.sqrt 2 := by
+  have h3 : Real.cos (3 * Real.pi / 4) = -(Real.sqrt 2 / 2) := by
+    rw [show 3 * Real.pi / 4 = Real.pi - Real.pi / 4 by ring, Real.cos_pi_sub,
+      Real.cos_pi_div_four]
+  simp only [chsh, bellCorr, corr_eq, alice, bob]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one]
+  rw [show 2 * (0 - Real.pi / 8) = -(Real.pi / 4) by ring,
+    show 2 * (0 - -(Real.pi / 8)) = Real.pi / 4 by ring,
+    show 2 * (Real.pi / 4 - Real.pi / 8) = Real.pi / 4 by ring,
+    show 2 * (Real.pi / 4 - -(Real.pi / 8)) = 3 * Real.pi / 4 by ring,
+    Real.cos_neg, Real.cos_pi_div_four, h3]
+  ring
+
+/-- **No local hidden-variable model reproduces the Bell-pair correlations** (Bell 1964;
+CHSH 1969): they violate the CHSH inequality. -/
+theorem lhv_corr_ne_bellCorr {Λ : Type*} [Fintype Λ] (L : LHVModel Λ) :
+    L.corr ≠ bellCorr := by
+  intro h
+  have h1 := L.abs_chsh_corr_le_two
+  rw [h, chsh_bellCorr, abs_of_pos (by positivity)] at h1
+  have : (1 : ℝ) < Real.sqrt 2 := by
+    rw [show (1 : ℝ) = Real.sqrt 1 by simp]
+    exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+  linarith
 
 end ISM.BellPair

@@ -95,7 +95,10 @@ each item is in parentheses.
       events (a quantitative notion of "almost divisible")
 - [x] Composite systems and a Bell pair (book ch. 11)
 - [ ] No signalling for local *measurements* (not only local unitaries)
-- [ ] Bell/CHSH with measurement apparatuses, and the Tsirelson bound `2√2`
+- [x] CHSH inequality for local hidden-variable models, Tsirelson's bound `2√2`, and the
+      Bell pair reaching it (book ch. 11)
+- [ ] Tsirelson's bound stated directly for stochastic correlations (via the dilation)
+- [ ] Bell/CHSH with explicit measurement apparatuses (ch. 9) instead of rotate-then-read
 
 ### II.2 Infrastructure for infinite dimensions (in `ForMathlib/`, to be upstreamed)
 - [ ] Spectral measures; the spectral theorem for unbounded self-adjoint operators
@@ -111,7 +114,7 @@ each item is in parentheses.
       Hamiltonian, i.e. what principle selects `Γ(t)`
 - [ ] Worked systems: harmonic oscillator, hydrogen atom, spin-½
 - [ ] Identical particles: bosons and fermions as configuration-space structure
-- [ ] Bell, CHSH and the Tsirelson bound, formally verified
+- [x] Bell, CHSH and the Tsirelson bound, formally verified
 
 ## Stage III: Extend the theory (open research)
 

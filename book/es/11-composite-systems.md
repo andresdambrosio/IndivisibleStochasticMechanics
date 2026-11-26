@@ -1,6 +1,7 @@
 # 11. Sistemas compuestos y entrelazamiento
 
 > Código: `IndivisibleStochasticMechanics/Quantum/Composite.lean`,
+> `IndivisibleStochasticMechanics/Quantum/Bell.lean`,
 > `IndivisibleStochasticMechanics/Examples/BellPair.lean` y
 > `IndivisibleStochasticMechanics/ForMathlib/Matrix/Stochastic.lean`
 
@@ -19,7 +20,8 @@ sistemas compuestos. Lo señalaron Einstein, Podolsky y Rosen
 (*Verschränkung*) ese mismo año ([Schrödinger, 1935](https://doi.org/10.1007/BF01491891)).
 En este capítulo vemos tres cosas en lenguaje estocástico: qué pasa cuando los sistemas
 no interactúan, por qué lo que hace uno no se ve en las estadísticas del otro, y cómo
-aparece el entrelazamiento en un ejemplo concreto.
+aparece el entrelazamiento en un ejemplo concreto. Al final verificamos el teorema de Bell
+en su forma CHSH y la cota de Tsirelson.
 
 ## Sistemas independientes
 
@@ -107,14 +109,60 @@ distingue es si ese instante es o no un evento de división.
 > para la discusión general de Barandes ver
 > [Barandes, 2023a, §3.9](https://arxiv.org/abs/2302.10778).
 
+## No localidad de Bell: CHSH y Tsirelson
+
+El par de Bell también nos deja verificar en Lean el teorema más famoso sobre el
+entrelazamiento. Alicia elige una de dos configuraciones del aparato, $x\in\{0,1\}$, y Bob
+una de dos, $y\in\{0,1\}$. Cada uno obtiene un resultado $\pm1$, y $E(x,y)$ es el promedio
+del producto de los resultados. La **combinación CHSH** es
+$$S = E(0,0) + E(0,1) + E(1,0) - E(1,1).$$
+
+**Teorema (desigualdad CHSH).** En todo modelo de variables ocultas locales, $|S|\le 2$.
+
+Un *modelo de variables ocultas locales* es el tipo de teoría que consideró Bell
+([Bell, 1964](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195)): una variable oculta
+$\lambda$ se sortea con alguna distribución, y el resultado de Alicia depende solo de
+$\lambda$ y de su elección, no de la de Bob (y al revés). La desigualdad es la de
+[Clauser, Horne, Shimony y Holt, 1969](https://doi.org/10.1103/PhysRevLett.23.880).
+*Demostración:* para cada $\lambda$, con $a_x, b_y\in[-1,1]$, el número
+$a_0(b_0+b_1) + a_1(b_0-b_1)$ tiene valor absoluto a lo sumo $|b_0+b_1| + |b_0-b_1| \le 2$;
+promediar sobre $\lambda$ conserva la cota. $\blacksquare$ En Lean tomamos $\lambda$ en un
+conjunto finito y resultados en $[-1,1]$, lo que cubre también el azar local.
+
+**Teorema (el par de Bell, en lenguaje estocástico).** Alicia rota su qubit un ángulo $a$ y
+Bob rota el suyo un ángulo $b$ (unitarias locales), y después se leen las dos
+configuraciones. Con resultado $+1$ para la configuración $0$ y $-1$ para la $1$, las
+probabilidades de transición del proceso compuesto dan
+$$E(a,b) = \cos 2(a-b).$$
+Con los ángulos estándar $a\in\{0,\pi/4\}$ y $b\in\{\pi/8,-\pi/8\}$,
+$$S = 2\sqrt2 \approx 2{,}83 > 2.$$
+Entonces **ningún modelo de variables ocultas locales reproduce estas probabilidades de
+transición.** La cuenta es mecánica cuántica de libro; enunciarla para las probabilidades
+de transición del proceso compuesto es nuestro.
+
+**Teorema (cota de Tsirelson).** Para cualquier estado $\psi$ y observables
+$A_0, A_1, B_0, B_1$ con autovalores $\pm1$, donde los de Alicia conmutan con los de Bob,
+$$\langle\psi, (A_0B_0 + A_0B_1 + A_1B_0 - A_1B_1)\,\psi\rangle \le 2\sqrt2\,\|\psi\|^2 .$$
+Es el resultado de [Cirel'son, 1980](https://doi.org/10.1007/BF00417500). *Demostración*
+(el argumento estándar de suma de cuadrados): con $s = \sqrt2$,
+$$(sA_0 - B_0 - B_1)^2 + (sA_1 - B_0 + B_1)^2 = 8 - 2s\,(A_0B_0 + A_0B_1 + A_1B_0 - A_1B_1),$$
+y el lado izquierdo tiene valor esperado no negativo. $\blacksquare$ Así que el par de Bell
+es óptimo: la mecánica cuántica supera 2, pero nunca $2\sqrt2$.
+
+¿Qué significa esto para la mecánica estocástica indivisible? Las configuraciones son
+reales en todo instante, pero **no** son una variable oculta local en el sentido de Bell:
+el teorema muestra que ninguna variable así reproduce las estadísticas. En el lenguaje de
+este libro, la razón es la que ya vimos: el instante justo después de la preparación no es
+un evento de división, así que la configuración en ese instante no "aísla" el futuro. Esta
+lectura es nuestra; para cómo encaja la localidad en la formulación de Barandes, ver
+[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+
 ## Lo que todavía falta
 
-- **Bell y CHSH.** El paso siguiente es mostrar que ninguna teoría de variables ocultas
-  locales reproduce estas correlaciones ([Bell, 1964](https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195);
-  [Clauser, Horne, Shimony y Holt, 1969](https://doi.org/10.1103/PhysRevLett.23.880)), y
-  que el valor cuántico de CHSH está acotado por $2\sqrt 2$
-  ([Cirel'son, 1980](https://doi.org/10.1007/BF00417500)). En nuestro lenguaje, eso
-  requiere medir con aparatos (capítulo 9) observables que no conmutan sobre cada qubit.
+- **Bell con aparatos.** Acá "medir" quiere decir rotar y después leer la configuración.
+  Modelar cada medición con un aparato (capítulo 9) queda pendiente.
+- **Tsirelson, en lenguaje estocástico.** Probamos la cota del lado cuántico; enunciarla
+  directamente para las probabilidades de transición de cualquier proceso queda pendiente.
 - **No señalización para mediciones locales**, no solo para unitarias.
 - **La pregunta de la localidad.** Barandes sostiene que su formulación es causalmente
   local ([Barandes, 2024](https://arxiv.org/abs/2402.16935)). Formalizar ese enunciado es
@@ -155,6 +203,17 @@ theorem BellPair.decohered_of_isRecording (hE : IsRecording φ E e₀)
     envMarginal (recordedEvolution (hadamard ⊗ₖ hadamard) E prep) e₀ i (0, 0) = 1 / 4
 ```
 
+```lean
+theorem LHVModel.abs_chsh_corr_le_two (L : LHVModel Λ) : |chsh L.corr| ≤ 2
+
+theorem BellPair.corr_eq (a b : ℝ) : corr a b = Real.cos (2 * (a - b))
+theorem BellPair.chsh_bellCorr : chsh bellCorr = 2 * Real.sqrt 2
+theorem BellPair.lhv_corr_ne_bellCorr (L : LHVModel Λ) : L.corr ≠ bellCorr
+
+theorem expect_chsh_le ... (ψ : ι → ℂ) :
+    expect (A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁) ψ ≤ 2 * Real.sqrt 2 * ∑ i, ‖ψ i‖ ^ 2
+```
+
 ## Ejercicios
 
 1. (Papel) Verificá a mano que $(H\otimes H)\,\tfrac{1}{\sqrt2}(|00\rangle+|11\rangle) =
@@ -166,5 +225,6 @@ theorem BellPair.decohered_of_isRecording (hE : IsRecording φ E e₀)
    compuertas locales dejan las correlaciones intactas?
 4. (Para pensar) Las "monedas pegadas" y el par de Bell tienen la misma distribución en el
    instante intermedio. ¿Hay alguna forma de distinguirlos mirando solo ese instante?
-5. (Lean, abierto) Extendé el teorema de no señalización a una medición ideal hecha por Bob
+5. (Papel) Verificá que $S = 2\sqrt2$ a partir de $E(a,b) = \cos 2(a-b)$ y los cuatro ángulos.
+6. (Lean, abierto) Extendé el teorema de no señalización a una medición ideal hecha por Bob
    sobre su qubit.
