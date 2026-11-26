@@ -73,7 +73,9 @@ each item is in parentheses.
 
 - [x] CI: `lake build` on every push and pull request
 - [x] Book in Markdown (`book/`) explaining every step, written for a course
-- [ ] CI check that `main` contains no `sorry`
+- [x] Book published on GitHub Pages (mdBook + KaTeX)
+- [x] `CONTRIBUTING.md`, with rules for Lean, the book, and AI use
+- [x] CI check that `main` has no warnings and no `sorry` (`lake build --wfail`)
 - [ ] Blueprint (leanblueprint) linking each paper statement to its Lean declaration
 - [ ] API docs with doc-gen4, published on GitHub Pages
 - [ ] Coordinate with [physlib](https://github.com/leanprover-community/physlib) and the

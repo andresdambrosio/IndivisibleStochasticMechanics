@@ -10,4 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      # `--wfail` turns every warning into an error, including `declaration uses 'sorry'`.
       - uses: leanprover/lean-action@v1
+        with:
+          build-args: "--wfail"

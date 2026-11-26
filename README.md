@@ -32,8 +32,9 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ## The book
 
-[`book/`](book/README.md) is a step-by-step course, in Spanish, that explains the physics,
-the mathematics and the Lean code as the project grows.
+**[Read it online](https://andresdambrosio.github.io/IndivisibleStochasticMechanics/)**.
+It is a step-by-step course, in Spanish, that explains the physics, the mathematics and
+the Lean code as the project grows. Sources are in [`book/`](book/README.md).
 
 ## Building
 
@@ -45,8 +46,8 @@ lake build
 
 ## Contributing
 
-Pick an unchecked item from the roadmap, open an issue, and send a PR. Every definition
-should cite the paper and section it comes from. `main` must build with no `sorry`.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Good places to start are the issues labelled
+[`good first issue`](https://github.com/andresdambrosio/IndivisibleStochasticMechanics/labels/good%20first%20issue).
 
 ## References
 
@@ -59,4 +60,4 @@ should cite the paper and section it comes from. `main` must build with no `sorr
 
 ## License
 
-Apache 2.0
+Code: Apache 2.0 ([LICENSE](LICENSE)). Book: CC BY 4.0 ([book/LICENSE](book/LICENSE)).
