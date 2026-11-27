@@ -15,10 +15,10 @@ La mecánica cuántica como procesos estocásticos indivisibles es una propuesta
 son suyas, y también de los autores clásicos que citamos en cada capítulo (Born, von
 Neumann, Stinespring, Kraus, Zurek y otros).
 
-Este libro y la formalización en Lean son de **Andrés D'Ambrosio**, escritos con ayuda
-intensiva de IA (ver el [prefacio](00-preface.md)). En cada capítulo citamos la fuente de
-cada resultado, y marcamos de forma explícita lo que es un aporte propio del proyecto. La
-lista completa está en la [bibliografía](99-references.md).
+Este libro y la formalización en Lean son de **Andrés D'Ambrosio** (o sea, yo), escritos con ayuda
+intensiva de IA (ver el [prefacio](00-preface.md)). En cada capítulo cito la fuente de
+cada resultado, y marco de forma explícita lo que es un aporte propio del proyecto. La
+lista completa está en la [bibliografía](99-references.md). Puedo equivocarme, puede fallar. Espero no haber comito algun error y haber dado el crédito justo a quien corresponda. Si ven algo raro, me avisan a andresdambrosio@gmail.com (o me lo dejan en el repo) y procederé a corregir inmediatamente. Errarem humanum est (Errarem IA est?).
 
 Este libro acompaña al repositorio. Cada capítulo explica la física, la matemática y el
 código Lean de un tramo del proyecto. El libro crece a medida que avanza el código. Los
