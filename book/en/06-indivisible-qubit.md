@@ -70,7 +70,12 @@ noncomputable def U (t : ℝ) : Matrix (Fin 2) (Fin 2) ℂ :=
 ```
 
 `!![a, b; c, d]` is Mathlib's notation for explicitly written matrices. We prove that it
-is unitary (`U_mem_unitaryGroup`) and that `U 0 = 1` (`U_zero`). With that, the previous
+is unitary (`U_mem_unitaryGroup`) and that `U 0 = 1` (`U_zero`). We also prove that this
+explicit matrix really is the exponential of the previous chapter,
+`U t = hamiltonianEvolution σx t` (`U_eq_hamiltonianEvolution`). The proof diagonalizes
+$\sigma_x = P\,\mathrm{diag}(1,-1)\,P^{-1}$ with $P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$,
+so that $e^{-it\sigma_x} = P\,\mathrm{diag}(e^{-it}, e^{it})\,P^{-1}$, and then uses
+$e^{\pm it} = \cos t \pm i \sin t$. With that, the previous
 chapter gives us the process for free:
 
 ```lean

@@ -4,6 +4,7 @@ public import IndivisibleStochasticMechanics.Stochastic.Basic
 public import IndivisibleStochasticMechanics.Stochastic.Indivisible
 public import IndivisibleStochasticMechanics.Stochastic.Unistochastic
 public import IndivisibleStochasticMechanics.Quantum.UnitaryProcess
+public import IndivisibleStochasticMechanics.Quantum.Hamiltonian
 public import IndivisibleStochasticMechanics.Examples.Qubit
 public import IndivisibleStochasticMechanics.ForMathlib.Matrix.Unitary
 public import IndivisibleStochasticMechanics.Quantum.Dilation

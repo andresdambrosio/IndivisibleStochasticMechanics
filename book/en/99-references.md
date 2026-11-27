@@ -90,7 +90,7 @@
 - M. Schlosshauer, *Decoherence and the Quantum-to-Classical Transition* (Springer, 2007),
   [doi:10.1007/978-3-540-35775-9](https://doi.org/10.1007/978-3-540-35775-9).
 
-## Lean y Mathlib
+## Lean and Mathlib
 
 - L. de Moura and S. Ullrich, *The Lean 4 Theorem Prover and Programming Language*, CADE-28,
   LNCS 12699 (2021),

@@ -69,7 +69,12 @@ noncomputable def U (t : ℝ) : Matrix (Fin 2) (Fin 2) ℂ :=
 ```
 
 `!![a, b; c, d]` es la notación de Mathlib para matrices escritas explícitamente.
-Probamos que es unitaria (`U_mem_unitaryGroup`) y que `U 0 = 1` (`U_zero`). Con eso,
+Probamos que es unitaria (`U_mem_unitaryGroup`) y que `U 0 = 1` (`U_zero`). También
+probamos que esta matriz explícita es de verdad la exponencial del capítulo anterior,
+`U t = hamiltonianEvolution σx t` (`U_eq_hamiltonianEvolution`). La prueba diagonaliza
+$\sigma_x = P\,\mathrm{diag}(1,-1)\,P^{-1}$ con $P = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$,
+así que $e^{-it\sigma_x} = P\,\mathrm{diag}(e^{-it}, e^{it})\,P^{-1}$, y después usa
+$e^{\pm it} = \cos t \pm i \sin t$. Con eso,
 el capítulo anterior nos da el proceso gratis:
 
 ```lean

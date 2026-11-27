@@ -1,6 +1,6 @@
 # 5. La representación de Born y la evolución unitaria
 
-> Código: `Stochastic/Unistochastic.lean`, `Quantum/UnitaryProcess.lean`
+> Código: `Stochastic/Unistochastic.lean`, `Quantum/UnitaryProcess.lean`, `Quantum/Hamiltonian.lean`
 
 ## La idea física
 
@@ -96,6 +96,49 @@ Que Lean acepte `ofUnitary` *es* la demostración del teorema: para construir un
 el módulo de un complejo no se puede "calcular" con exactitud en una computadora, lo
 cual es irrelevante para las demostraciones.
 
+## De dónde sale $U(t)$: el hamiltoniano
+
+`ofUnitary` acepta *cualquier* familia unitaria con $U(0) = \mathbb{1}$. En la mecánica
+cuántica de libro de texto la familia sale de un hamiltoniano: una matriz hermítica $H$
+($H^\dagger = H$), con
+
+$$U(t) = e^{-itH} = \sum_{k \geq 0} \frac{(-itH)^k}{k!} \qquad (\hbar = 1),$$
+
+la solución de la ecuación de Schrödinger $i\,\dot U = H U$ con $U(0) = \mathbb{1}$ (ver,
+por ejemplo, [Nielsen y Chuang, 2000](https://doi.org/10.1017/CBO9780511976667),
+§2.2.2). Tres hechos la convierten en una entrada válida para `ofUnitary`:
+
+1. $U(0) = e^0 = \mathbb{1}$.
+2. **Ley de grupo:** $U(s+t) = U(s)\,U(t)$, porque $sH$ y $tH$ conmutan.
+3. **Unitariedad:** $U(t)^\dagger = e^{+itH^\dagger} = e^{itH} = U(-t)$, así que
+   $U(t)^\dagger U(t) = U(-t+t) = \mathbb{1}$.
+
+En Lean (`Quantum/Hamiltonian.lean`) la exponencial es `NormedSpace.exp` de Mathlib:
+
+```lean
+noncomputable def hamiltonianEvolution (H : Matrix n n ℂ) (t : ℝ) : Matrix n n ℂ :=
+  exp ((-(t : ℂ) * I) • H)
+
+theorem hamiltonianEvolution_add (H : Matrix n n ℂ) (s t : ℝ) :
+    hamiltonianEvolution H (s + t) = hamiltonianEvolution H s * hamiltonianEvolution H t
+
+theorem hamiltonianEvolution_mem_unitaryGroup {H : Matrix n n ℂ} (hH : H.IsHermitian)
+    (t : ℝ) : hamiltonianEvolution H t ∈ unitaryGroup n ℂ
+
+noncomputable def GenStochasticProcess.ofHamiltonian (H : Matrix n n ℂ)
+    (hH : H.IsHermitian) : GenStochasticProcess n
+```
+
+La prueba de unitariedad son exactamente los tres pasos de arriba:
+`Matrix.exp_conjTranspose` mete la $\dagger$ adentro de la exponencial, `hH.eq` reemplaza
+$H^\dagger$ por $H$, y `Matrix.exp_add_of_commute` da la ley de grupo. Así, todo
+hamiltoniano de dimensión finita da un proceso estocástico generalizado.
+
+Fijate qué es lo que **no** se traslada. $U$ cumple la ley de grupo, pero
+$\Gamma_{ij}(t) = |U_{ij}(t)|^2$ en general no: $\Gamma(s+t) \neq \Gamma(s)\,\Gamma(t)$.
+Tomar módulos al cuadrado destruye la ley de composición, y esa brecha es justamente la
+indivisibilidad. El capítulo siguiente lo muestra en el ejemplo más simple.
+
 ## Ejercicios
 
 1. (Papel) Demostrá que la matriz $3\times 3$ de la advertencia no es uniestocástica.
@@ -106,3 +149,7 @@ cual es irrelevante para las demostraciones.
    **libertad de gauge** de la representación.
 3. (Lean) Demostrá que toda matriz estocástica tiene *alguna* representación de Born.
    Pista: $\Theta_{ij} = \sqrt{\Gamma_{ij}}$. Está en el roadmap.
+4. (Lean) Mostrá que un hamiltoniano diagonal da un proceso trivial: si $H$ es diagonal y
+   hermítica, entonces `(GenStochasticProcess.ofHamiltonian H hH).Γ t = 1` para todo $t$.
+   Pista: `Matrix.exp_diagonal`. Físicamente, las configuraciones son autoestados de la
+   energía, que solo adquieren fases.

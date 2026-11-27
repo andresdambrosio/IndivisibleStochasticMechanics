@@ -26,7 +26,10 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.IsBornRep` | `Γᵢⱼ = ‖Θᵢⱼ‖²` | arXiv:2309.03085 | | ⏳ |
 | `ISM.IsUnistochastic` | `Γ` has a unitary Born representation | standard | | ⏳ |
 | `ISM.GenStochasticProcess.ofUnitary` | the process `Γᵢⱼ(t) = ‖Uᵢⱼ(t)‖²` induced by a unitary evolution | arXiv:2302.10778 | rows and columns of `U` are indexed by the configurations, i.e. the basis is fixed | ⏳ |
-| `ISM.Qubit.U` | `exp(-i t σₓ)` | standard | written out explicitly, not via a matrix exponential | ⏳ |
+| `ISM.hamiltonianEvolution` | `U(t) = exp(-itH)`, with `ℏ = 1` | standard | Mathlib's `NormedSpace.exp` on matrices; Hermiticity of `H` is a hypothesis of the theorems, not of the definition | ⏳ |
+| `ISM.GenStochasticProcess.ofHamiltonian` | the process `Γᵢⱼ(t) = ‖exp(-itH)ᵢⱼ‖²` of a Hermitian Hamiltonian | arXiv:2302.10778 | | ⏳ |
+| `ISM.Qubit.σx` | the Pauli matrix `σₓ` | standard | | ⏳ |
+| `ISM.Qubit.U` | `exp(-i t σₓ)` | standard | written out explicitly; `U_eq_hamiltonianEvolution` proves it equals the matrix exponential | ⏳ |
 | `ISM.Qubit.process` | the process of the qubit under `H = σₓ` | — | | ⏳ |
 | `ISM.IsUnitaryDilation` | `Γ` is the system marginal of a unitary `U` on system ⊗ environment, environment prepared in `e₀` | arXiv:2309.03085 | measurement of the environment is not modelled; we only marginalize over it | ⏳ |
 | `ISM.IsDensityMatrix` | a density matrix: positive semidefinite, trace one | standard | | ⏳ |
@@ -84,6 +87,9 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | Declaration | Statement in words | Source | Notes | Status |
 |---|---|---|---|---|
 | `ISM.IsUnistochastic.mem_colStochastic` | every unistochastic matrix is stochastic | standard | | ⏳ |
+| `ISM.hamiltonianEvolution_mem_unitaryGroup` | for Hermitian `H`, `exp(-itH)` is unitary | standard | | ⏳ |
+| `ISM.hamiltonianEvolution_add` | the group law `U(s + t) = U(s) U(t)` | standard | | ⏳ |
+| `ISM.Qubit.U_eq_hamiltonianEvolution` | the explicit qubit matrix `U t` equals `exp(-itσₓ)` | standard | | ⏳ |
 | `ISM.Qubit.process_Γ` | for the qubit, `Γ(t) = [[cos²t, sin²t], [sin²t, cos²t]]` | — | | ⏳ |
 | `ISM.Qubit.process_isIndivisible` | the qubit's process is indivisible | — | | ⏳ |
 | `ISM.Qubit.isDivisionEvent_iff_exists_nat` | the qubit's division events are exactly the multiples of `π/2` | — | in particular no `t' ∈ (0, π/2)` is one, and `π/2` is one | ⏳ |

@@ -30,10 +30,8 @@ namespace ISM.Qubit
 
 /-- The qubit evolution is a one-parameter group: `U s U(t)† = U (s - t)`. -/
 theorem U_mul_conjTranspose (s t : ℝ) : U s * (U t)ᴴ = U (s - t) := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [U, Matrix.mul_apply, Fin.sum_univ_two, -Complex.ofReal_cos, -Complex.ofReal_sin,
-      Real.cos_sub, Real.sin_sub] <;> push_cast <;> ring_nf <;> simp [Complex.I_sq]
+  simp only [U_eq_hamiltonianEvolution]
+  exact hamiltonianEvolution_mul_conjTranspose σx_isHermitian s t
 
 /-- The environment's record of the qubit: `(1, 0)` for configuration `0` and
 `(cos θ, sin θ)` for configuration `1`. -/
