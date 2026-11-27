@@ -28,7 +28,8 @@ each item is in parentheses.
 ### I.2 Quantum → stochastic (book ch. 5–6)
 - [x] A unitary evolution `U(t)` with `U(0) = 1` induces a generalized stochastic process
 - [x] Example: a qubit under `H = σₓ` whose process is indivisible (`π/4` is not a division event)
-- [ ] Qubit: no `t' ∈ (0, π/2)` is a division event, and `π/2` is one
+- [x] Qubit: no `t' ∈ (0, π/2)` is a division event, and `π/2` is one; the division events
+      are exactly the multiples of `π/2` (`isDivisionEvent_iff_exists_nat`, book ch. 6)
 - [ ] Hamiltonian evolution `U(t) = exp(-itH)` via Mathlib's `NormedSpace.exp`
 - [x] Density matrix `ρ(t) = Θ(t) diag(p₀) Θ(t)†` with `pᵢ(t) = ρᵢᵢ(t)`, and it is a genuine density matrix
 - [ ] Generic unitary dynamics are indivisible (interference ⇒ failure of divisibility)

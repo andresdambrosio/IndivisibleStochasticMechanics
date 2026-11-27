@@ -36,7 +36,7 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Stochastic/Indivisible` | generalized stochastic processes, division events, (in)divisibility |
 | `Stochastic/Unistochastic` | Born representations, unistochastic ⇒ stochastic |
 | `Quantum/UnitaryProcess` | unitary evolution ⇒ generalized stochastic process |
-| `Examples/Qubit` | a qubit under `H = σₓ` whose process is provably indivisible |
+| `Examples/Qubit` | a qubit under `H = σₓ` whose process is provably indivisible; its division events are exactly the multiples of `π/2` |
 | `Quantum/Dilation` | **stochastic-quantum correspondence (finite dimensions)**: every stochastic process is the marginal of a unitary evolution on a larger system |
 | `Quantum/DensityMatrix` | Barandes' density matrix `Θ diag(p) Θᴴ`: a genuine density matrix whose diagonal is the stochastic distribution |
 | `Quantum/Channel` | quantum channels ⇔ stochastic matrices |

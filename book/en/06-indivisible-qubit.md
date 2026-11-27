@@ -111,13 +111,68 @@ theorem process_isIndivisible : process.IsIndivisible := fun h =>
 "If it were divisible, $\pi/4$ would be a division event, and we just saw that it is
 not."
 
+## All the division events
+
+The argument for $\pi/4$ used that the columns of $\Gamma(\pi/4)$ are equal. Other times
+need a different argument, and it gives the complete answer.
+
+**Theorem.** $t' \geq 0$ is a division event of the qubit if and only if $t'$ is a
+multiple of $\pi/2$: $t' \in \{0, \pi/2, \pi, 3\pi/2, \dots\}$.
+
+*Proof.* If $t' = k\pi/2$, then $\Gamma(t')$ is the identity ($k$ even) or the swap
+($k$ odd). Either way $\Gamma(t')^2 = \mathbb{1}$, so $\Delta(t \leftarrow t') = \Gamma(t)\,\Gamma(t')$
+works: it is a product of stochastic matrices, hence stochastic, and
+$\Delta\,\Gamma(t') = \Gamma(t)\,\Gamma(t')^2 = \Gamma(t)$.
+
+If $t'$ is not a multiple of $\pi/2$, then $c = \cos^2 t'$ and $s = \sin^2 t'$ are both
+strictly positive. Take a later time $t \geq t'$ where the system has swapped,
+$\Gamma(t) = \begin{pmatrix}0&1\\1&0\end{pmatrix}$ (any $t = m\pi + \pi/2$ with $m$ large
+enough). The first row of $\Gamma(t) = \Delta\,\Gamma(t')$ reads
+
+$$0 = \Delta_{00}\,c + \Delta_{01}\,s, \qquad 1 = \Delta_{00}\,s + \Delta_{01}\,c.$$
+
+$\Delta$ is stochastic, so its entries are nonnegative. In the first equation a sum of
+nonnegative terms is $0$, and $c, s > 0$, so $\Delta_{00} = \Delta_{01} = 0$. The second
+equation then says $1 = 0$. $\blacksquare$
+
+Here, unlike at $\pi/4$, stochasticity of $\Delta$ is essential. Whenever
+$\cos 2t' \neq 0$, which is the determinant of $\Gamma(t')$, the inverse exists and
+$\Delta = \Gamma(t)\,\Gamma(t')^{-1}$ solves the equation. It just has negative entries: it
+is a valid *linear* law, but not a *stochastic* one.
+
+The picture is clear. The process "restarts" exactly at the times when $\Gamma$ is a
+permutation, that is, when the configuration at $t'$ determines the initial one. Between
+those times it is indivisible. The characterization is a direct computation done for this
+course; the general idea that division events are where the process can be restarted
+is Barandes' ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)).
+
+In Lean:
+
+```lean
+theorem isDivisionEvent_iff_exists_nat (t' : ℝ) :
+    process.IsDivisionEvent t' ↔ ∃ k : ℕ, t' = k * (Real.pi / 2)
+
+theorem isDivisionEvent_pi_div_two : process.IsDivisionEvent (Real.pi / 2)
+
+theorem not_isDivisionEvent_of_mem_Ioo {t' : ℝ} (ht : t' ∈ Set.Ioo 0 (Real.pi / 2)) :
+    ¬ process.IsDivisionEvent t'
+```
+
+The core is `isDivisionEvent_iff`, which states the condition as $\sin 2t' = 0$
+(recall $\sin 2t' = 2 \sin t' \cos t'$). The proof follows the paper argument: the later
+time is `m * π + π / 2` with `m = ⌈t' / π⌉₊` (the ceiling, a natural number), and
+`nonneg_of_mem_colStochastic` gives the nonnegative entries of $\Delta$.
+
 ## Exercises
 
-1. (Paper) Show that $t'=\pi/2$ **is** a division event. Hint: $\Gamma(\pi/2)$ is a
-   permutation, so it has a stochastic inverse.
-2. (Paper) Show that **no** $t' \in (0, \pi/2)$ is a division event. Hint: write
+1. (Paper) Give a second proof that no $t' \in (0, \pi/2)$ other than $\pi/4$ is a
+   division event. Write
    $\Gamma(t) = \tfrac12\begin{pmatrix}1+\lambda & 1-\lambda\\ 1-\lambda & 1+\lambda\end{pmatrix}$
-   with $\lambda = \cos 2t$, and use exercise 2 of chapter 4.
-3. (Lean) Formalize the two previous exercises. It is an open task on the roadmap.
+   with $\lambda = \cos 2t$, compute $\Gamma(t)\,\Gamma(t')^{-1}$, and use exercise 2 of
+   chapter 4.
+2. (Paper) Compute $\Delta = \Gamma(\pi/2)\,\Gamma(\pi/6)^{-1}$ explicitly and find its
+   negative entries.
+3. (Lean) Prove that $\Gamma$ has period $\pi$: `process.Γ (t + Real.pi) = process.Γ t`.
+   Hint: `process_Γ`, `Real.cos_add_pi`, `Real.sin_add_pi`.
 4. (To think about) At $\pi/2$ the system "restarts". Is it a coincidence that this
    happens exactly when $U(\pi/2)$ is, up to phases, a permutation?

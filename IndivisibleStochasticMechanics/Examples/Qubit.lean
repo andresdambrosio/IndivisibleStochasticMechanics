@@ -30,6 +30,8 @@ stochastic side.
 * `ISM.Qubit.process_Γ`: the explicit formula for `Γ t`.
 * `ISM.Qubit.not_isDivisionEvent_pi_div_four`: `π/4` is not a division event.
 * `ISM.Qubit.process_isIndivisible`: the process is indivisible.
+* `ISM.Qubit.isDivisionEvent_iff_exists_nat`: the division events are exactly the multiples
+  of `π/2`. In particular no `t' ∈ (0, π/2)` is one, and `π/2` is one.
 -/
 
 @[expose] public section
@@ -81,6 +83,94 @@ theorem not_isDivisionEvent_pi_div_four : ¬ process.IsDivisionEvent (Real.pi / 
 /-- The qubit process is indivisible. -/
 theorem process_isIndivisible : process.IsIndivisible := fun h =>
   not_isDivisionEvent_pi_div_four (h _ (by positivity))
+
+/-- When `sin 2t = 0`, `Γ(t)` is the identity or the swap, so it is its own inverse. -/
+theorem process_Γ_sq_of_sin_two_mul_eq_zero {t : ℝ} (h : Real.sin (2 * t) = 0) :
+    process.Γ t * process.Γ t = 1 := by
+  rw [Real.sin_two_mul] at h
+  have hsc : Real.sin t * Real.cos t = 0 := by linarith
+  have hp := Real.sin_sq_add_cos_sq t
+  rw [process_Γ]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_two] <;> nlinarith [hsc, hp]
+
+/-- **The division events of the qubit.** `t'` is a division event iff `t' ≥ 0` and
+`sin 2t' = 0`, i.e. iff `Γ(t')` is the identity or the swap. At any other time both
+configurations are reachable, and the swap at the next odd multiple of `π/2` cannot be
+produced by a stochastic law from time `t'`. -/
+theorem isDivisionEvent_iff (t' : ℝ) :
+    process.IsDivisionEvent t' ↔ 0 ≤ t' ∧ Real.sin (2 * t') = 0 := by
+  constructor
+  · rintro ⟨ht', Δ, hΔ⟩
+    refine ⟨ht', ?_⟩
+    by_contra hs
+    rw [Real.sin_two_mul] at hs
+    have hs0 : Real.sin t' ≠ 0 := fun h => hs (by simp [h])
+    have hc0 : Real.cos t' ≠ 0 := fun h => hs (by simp [h])
+    set m := ⌈t' / Real.pi⌉₊
+    set t := (m : ℝ) * Real.pi + Real.pi / 2
+    have htt : t' ≤ t := by
+      have h1 : t' / Real.pi ≤ m := Nat.le_ceil _
+      have h2 : t' ≤ m * Real.pi := by
+        rwa [div_le_iff₀ Real.pi_pos] at h1
+      show t' ≤ (m : ℝ) * Real.pi + Real.pi / 2
+      linarith [Real.pi_pos]
+    have hcos : Real.cos t = 0 := by
+      simp [t, Real.cos_add_pi_div_two, Real.sin_nat_mul_pi]
+    have hsin : Real.sin t ^ 2 = 1 := by
+      nlinarith [Real.sin_sq_add_cos_sq t]
+    obtain ⟨hΔs, hΓ⟩ := hΔ t htt
+    have h00 := congrFun (congrFun hΓ 0) 0
+    have h01 := congrFun (congrFun hΓ 0) 1
+    simp [process_Γ, Matrix.mul_apply, Fin.sum_univ_two, hcos, hsin] at h00 h01
+    have a := nonneg_of_mem_colStochastic hΔs (i := 0) (j := 0)
+    have b := nonneg_of_mem_colStochastic hΔs (i := 0) (j := 1)
+    have hc2 : 0 < Real.cos t' ^ 2 := by positivity
+    have hs2 : 0 < Real.sin t' ^ 2 := by positivity
+    have ha : Δ t 0 0 * Real.cos t' ^ 2 = 0 := by nlinarith [mul_nonneg b hs2.le]
+    have hb : Δ t 0 1 * Real.sin t' ^ 2 = 0 := by nlinarith [mul_nonneg a hc2.le]
+    rcases mul_eq_zero.1 ha with ha | ha
+    · rcases mul_eq_zero.1 hb with hb | hb
+      · rw [ha, hb] at h01; simp at h01
+      · exact absurd hb hs2.ne'
+    · exact absurd ha hc2.ne'
+  · rintro ⟨ht', hs⟩
+    refine ⟨ht', fun t => process.Γ t * process.Γ t', fun t ht => ⟨?_, ?_⟩⟩
+    · exact Submonoid.mul_mem _ (process.stochastic t (ht'.trans ht))
+        (process.stochastic t' ht')
+    · rw [mul_assoc, process_Γ_sq_of_sin_two_mul_eq_zero hs, mul_one]
+
+/-- The division events of the qubit are exactly the multiples of `π/2`. -/
+theorem isDivisionEvent_iff_exists_nat (t' : ℝ) :
+    process.IsDivisionEvent t' ↔ ∃ k : ℕ, t' = k * (Real.pi / 2) := by
+  rw [isDivisionEvent_iff, Real.sin_eq_zero_iff]
+  constructor
+  · rintro ⟨ht', k, hk⟩
+    have hk0 : (0 : ℝ) ≤ k := by
+      by_contra h
+      rw [not_le] at h
+      nlinarith [Real.pi_pos]
+    refine ⟨k.toNat, ?_⟩
+    have : ((k.toNat : ℤ) : ℝ) = k := by
+      exact_mod_cast Int.toNat_of_nonneg (by exact_mod_cast hk0)
+    rw [show ((k.toNat : ℕ) : ℝ) = ((k.toNat : ℤ) : ℝ) by norm_cast, this]
+    linarith
+  · rintro ⟨k, rfl⟩
+    exact ⟨by positivity, k, by push_cast; ring⟩
+
+/-- `π/2` is a division event: `Γ(π/2)` is the swap, which has a stochastic inverse. -/
+theorem isDivisionEvent_pi_div_two : process.IsDivisionEvent (Real.pi / 2) :=
+  (isDivisionEvent_iff_exists_nat _).2 ⟨1, by simp⟩
+
+/-- No time strictly between `0` and `π/2` is a division event. -/
+theorem not_isDivisionEvent_of_mem_Ioo {t' : ℝ} (ht : t' ∈ Set.Ioo 0 (Real.pi / 2)) :
+    ¬ process.IsDivisionEvent t' := by
+  rw [isDivisionEvent_iff]
+  rintro ⟨-, h⟩
+  have : 0 < Real.sin (2 * t') :=
+    Real.sin_pos_of_pos_of_lt_pi (by linarith [ht.1]) (by linarith [ht.2])
+  linarith
 
 end Qubit
 

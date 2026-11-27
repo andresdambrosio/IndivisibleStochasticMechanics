@@ -86,6 +86,7 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.IsUnistochastic.mem_colStochastic` | every unistochastic matrix is stochastic | standard | | ⏳ |
 | `ISM.Qubit.process_Γ` | for the qubit, `Γ(t) = [[cos²t, sin²t], [sin²t, cos²t]]` | — | | ⏳ |
 | `ISM.Qubit.process_isIndivisible` | the qubit's process is indivisible | — | | ⏳ |
+| `ISM.Qubit.isDivisionEvent_iff_exists_nat` | the qubit's division events are exactly the multiples of `π/2` | — | in particular no `t' ∈ (0, π/2)` is one, and `π/2` is one | ⏳ |
 | `ISM.forall_mem_colStochastic_iff_exists_isUnitaryDilation` | **stochastic-quantum correspondence (finite dimensions)**: transition matrices are stochastic at all times iff at all times they are unitary marginals | arXiv:2309.03085 | **Weaker than it may sound:** the unitary `U(t)` is chosen independently at each `t`. It need not be continuous, satisfy `U(0) = 1`, or come from a Hamiltonian | ⏳ |
 | `ISM.bornDensity_apply_self` | the diagonal of Barandes' density matrix is the stochastic distribution `Γ p` | arXiv:2302.10778 | | ⏳ |
 | `ISM.bornDensity_isDensityMatrix` | Barandes' density matrix is a genuine density matrix | arXiv:2302.10778 | | ⏳ |
