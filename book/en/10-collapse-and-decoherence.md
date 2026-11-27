@@ -203,7 +203,89 @@ multiply their overlaps, which go to zero exponentially
 ([Joos and Zeh, 1985](https://doi.org/10.1007/BF01725541)). Barandes, Hasan and Kagan
 say explicitly that division events "are often only approximate or effective", valid up
 to "some given level of precision" ([Barandes, Hasan and Kagan, 2025](https://arxiv.org/abs/2512.18105), §3.1), but they do not give a measure of that
-precision. Defining one, and formalizing it, is one of the next tasks.
+precision. This project proposes one, in the next section.
+
+## Approximate division events
+
+*The definitions and theorems of this section are original to this project.*
+
+We need a distance between transition matrices. We use the worst case, over the initial
+configuration $j$, of the total-variation distance between the columns:
+$$d(A, B) = \max_j \tfrac12 \sum_i |A_{ij} - B_{ij}| ,$$
+a number between $0$ and $1$ for stochastic matrices. It answers an operational question:
+how badly can the prediction $B$ fail, in probability, for the worst initial
+configuration?
+
+The **division defect** of a time $t'$ is how well the best stochastic laws from $t'$ can
+reproduce the true evolution, in the worst later time:
+$$\delta(t') = \sup_{t \geq t'}\ \inf_{\Delta \text{ stochastic}} d\big(\Gamma(t),\ \Delta\,\Gamma(t')\big).$$
+
+**Theorem.** For $t' \geq 0$, $\delta(t') = 0$ if and only if $t'$ is a division event.
+
+*Proof.* If $t'$ is a division event, the witnesses $\Delta(t)$ give distance $0$. Conversely,
+the stochastic matrices form a compact set (entries in $[0,1]$, closed conditions), and
+$\Delta \mapsto d(\Gamma(t), \Delta\Gamma(t'))$ is continuous, so the infimum is attained. If
+it is $0$, the minimizer is an exact witness. $\blacksquare$
+
+The compactness matters: without it, a sequence of better and better laws could fail to
+have a limit that is a law. We did not find this fact in Mathlib, so we proved it
+(`isCompact_colStochastic`).
+
+**Theorem (approximate decoherence).** Suppose the environment records the configuration at
+$t_1$, and the records of distinct configurations overlap by at most $\varepsilon$:
+$|\langle\phi_l, \phi_k\rangle| \leq \varepsilon$ for $k \neq l$. Then
+$$\delta(t_1) \leq \frac{(N-1)\,\varepsilon}{2},$$
+where $N$ is the number of configurations.
+
+*Proof idea.* Take as law the fully decohered one, $\Delta = |W|^2$. By the decoherence
+formula, the error in the entry $(i,j)$ is the sum of the interference terms $k \neq l$,
+each weighted by an overlap of size at most $\varepsilon$. So it is at most
+$\varepsilon \sum_{k\neq l} a_k a_l$, with $a_k = |W_{ik}|\,|U_{kj}|$. Summing over $i$,
+the Cauchy–Schwarz inequality bounds $\sum_i (\sum_k a_k)^2$ by $N$, and the diagonal terms
+$\sum_i \sum_k a_k^2$ add up to exactly $1$. What is left is $N - 1$. $\blacksquare$
+
+For the qubit the bound is **attained**. With the records above, $\varepsilon = |\cos\theta|$,
+and we compute exactly
+$$\delta(\pi/4) = \frac{|\cos\theta|}{2}.$$
+The upper bound uses $\Delta = \mathbb 1$. For the lower bound: $\Gamma(\pi/4)$ has equal
+columns, so $\Delta\,\Gamma(\pi/4)$ also does, whatever $\Delta$ is. At $\pi/2$ the two
+columns of $\Gamma$ are at total-variation distance $|\cos\theta|$, and a single column
+cannot be closer than half that to both.
+
+This makes the earlier "if and only if" quantitative. The defect is not $0$ for a partial
+record, but it is proportional to the overlap. With $M$ photons, each with overlap
+$\lambda$, the total overlap is $\lambda^M$ and the defect is at most
+$(N-1)|\lambda|^M/2$: it goes to zero exponentially, which is Joos and Zeh's argument
+turned into a theorem about division events.
+
+In Lean (`Stochastic/ApproxDivision.lean`, `Quantum/Decoherence.lean`,
+`Examples/DecoheredQubit.lean`):
+
+```lean
+noncomputable def colTV (A B : Matrix n n ℝ) : ℝ := ⨆ j, (∑ i, |A i j - B i j|) / 2
+
+noncomputable def divisionDefect (t' : ℝ) : ℝ :=
+  ⨆ t : Set.Ici t', P.factorDefect t' t
+
+theorem isDivisionEvent_iff_divisionDefect_eq_zero {t' : ℝ} (ht' : 0 ≤ t') :
+    P.IsDivisionEvent t' ↔ P.divisionDefect t' = 0
+
+theorem recordedAt_divisionDefect_le [Nonempty n] (hEφ : IsRecording φ E e₀)
+    (hunit : ∀ j, ∑ e, ‖φ j e‖ ^ 2 = 1) (hε0 : 0 ≤ ε)
+    (hε : ∀ k l, k ≠ l → ‖overlap φ k l‖ ≤ ε) :
+    (recordedAt U hU h0 E hE e₀ t₁ ht₁).divisionDefect t₁ ≤ (Fintype.card n - 1) * ε / 2
+
+theorem decoheredProcess_divisionDefect (θ : ℝ) :
+    (decoheredProcess θ).divisionDefect (Real.pi / 4) = |Real.cos θ| / 2
+```
+
+`⨆` and `⨅` are Mathlib's supremum and infimum. Over ℝ they need a bound to behave well,
+which is why the proofs carry facts like "the defect is at most $1$". The choice of
+distance is ours, and other choices are possible: it is listed as an interpretive choice in
+`TRUSTED.md`. How this measure relates to the discrepancy term `qCor` of Barandes, Hasan and
+Kagan, and to the divisibility measure of
+[Rivas, Huelga and Plenio, 2010](https://doi.org/10.1103/PhysRevLett.105.050403), is still
+open.
 
 ## What is still missing
 
@@ -212,8 +294,9 @@ precision. Defining one, and formalizing it, is one of the next tasks.
   $\Gamma_{\text{sys}}(t_1) = |V|^2|V^\dagger U|^2$ and the factorization is not
   immediate. The natural statement is about the composite system + pointer process.
 - **Repeated measurements** and the quantum Zeno effect.
-- **Continuous decoherence.** Records that build up over time, and a quantitative notion
-  of "almost divisible" for almost perfect records.
+- **Continuous decoherence.** Records that build up over time. The bound above handles a
+  record made at one instant; for $M$ photons it still has to be formalized that the
+  overlaps multiply.
 
 ## In Lean
 
@@ -266,3 +349,6 @@ enters when we want the probabilities to sum to one.
    $1/2$ by less than $10^{-6}$ if $\lambda = 0.99$?
 6. (Lean, open) Prove that measuring the qubit twice, at $t_1 < t_2$, creates two division
    events.
+7. (Paper) With $\lambda = 0.99$ per photon and $N = 2$, how many photons make the
+   division defect smaller than $10^{-6}$? Compare with exercise 5.
+8. (Paper) Show that $d$ is a metric on stochastic matrices and that $d(A, B) \leq 1$.

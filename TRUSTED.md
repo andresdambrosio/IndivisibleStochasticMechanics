@@ -23,6 +23,9 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.GenStochasticProcess.IsDivisible` | every `t' ≥ 0` is a division event (Markovian case) | arXiv:2302.10778 | | ⏳ |
 | `ISM.GenStochasticProcess.IsIndivisible` | not divisible | arXiv:2302.10778 | "indivisible" means *some* time fails, not *every* time | ⏳ |
 | `ISM.GenStochasticProcess.evolve` | `p(t) = Γ(t) p(0)` | arXiv:2302.10778 | | ⏳ |
+| `ISM.colTV` | worst-case total-variation distance between corresponding columns, `max_j ½ ∑ᵢ \|Aᵢⱼ − Bᵢⱼ\|` | — (this project) | **Interpretive choice:** total variation, worst case over the initial configuration; other norms are possible | ⏳ |
+| `ISM.GenStochasticProcess.factorDefect` | `inf` over stochastic `Δ` of `colTV(Γ(t), Δ Γ(t'))` | — (this project) | | ⏳ |
+| `ISM.GenStochasticProcess.divisionDefect` | the division defect of `t'`: `sup_{t ≥ t'}` of the factorization defect | — (this project); asked for by arXiv:2512.18105 §3.1 | **Original definition.** Zero iff `t'` is a division event; meaningful for `t' ≥ 0` | ⏳ |
 | `ISM.IsBornRep` | `Γᵢⱼ = ‖Θᵢⱼ‖²` | arXiv:2309.03085 | | ⏳ |
 | `ISM.IsUnistochastic` | `Γ` has a unitary Born representation | standard | | ⏳ |
 | `ISM.GenStochasticProcess.ofUnitary` | the process `Γᵢⱼ(t) = ‖Uᵢⱼ(t)‖²` induced by a unitary evolution | arXiv:2302.10778 | rows and columns of `U` are indexed by the configurations, i.e. the basis is fixed | ⏳ |
@@ -90,6 +93,9 @@ any interpretive choice in "Notes", and change the status to ✅ with your name 
 | `ISM.hamiltonianEvolution_mem_unitaryGroup` | for Hermitian `H`, `exp(-itH)` is unitary | standard | | ⏳ |
 | `ISM.hamiltonianEvolution_add` | the group law `U(s + t) = U(s) U(t)` | standard | | ⏳ |
 | `ISM.Qubit.U_eq_hamiltonianEvolution` | the explicit qubit matrix `U t` equals `exp(-itσₓ)` | standard | | ⏳ |
+| `ISM.GenStochasticProcess.isDivisionEvent_iff_divisionDefect_eq_zero` | for `t' ≥ 0`: division event iff division defect `0` | — (this project) | uses compactness of the stochastic matrices | ⏳ |
+| `ISM.GenStochasticProcess.recordedAt_divisionDefect_le` | a record with overlaps at most `ε` gives a division defect at most `(N − 1) ε / 2` | — (this project) | **Original result**; tight for the qubit | ⏳ |
+| `ISM.Qubit.decoheredProcess_divisionDefect` | the partially decohered qubit has division defect exactly `\|cos θ\| / 2` at `π/4` | — (this project) | | ⏳ |
 | `ISM.Qubit.process_Γ` | for the qubit, `Γ(t) = [[cos²t, sin²t], [sin²t, cos²t]]` | — | | ⏳ |
 | `ISM.Qubit.process_isIndivisible` | the qubit's process is indivisible | — | | ⏳ |
 | `ISM.Qubit.isDivisionEvent_iff_exists_nat` | the qubit's division events are exactly the multiples of `π/2` | — | in particular no `t' ∈ (0, π/2)` is one, and `π/2` is one | ⏳ |

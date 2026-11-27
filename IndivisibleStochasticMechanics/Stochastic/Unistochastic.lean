@@ -58,6 +58,14 @@ theorem unitary_col_normSq_sum {U : Matrix n n ℂ} (hU : U ∈ Matrix.unitaryGr
     Complex.conj_mul'] at h
   exact_mod_cast h
 
+/-- The rows of a unitary matrix are unit vectors. -/
+theorem unitary_row_normSq_sum {U : Matrix n n ℂ} (hU : U ∈ Matrix.unitaryGroup n ℂ) (i : n) :
+    ∑ k, ‖U i k‖ ^ 2 = 1 := by
+  have h := congrFun (congrFun (Matrix.mem_unitaryGroup_iff.mp hU) i) i
+  simp only [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply_eq, Complex.star_def,
+    Complex.mul_conj'] at h
+  exact_mod_cast h
+
 /-- Every unistochastic matrix is stochastic. -/
 theorem IsUnistochastic.mem_colStochastic {Γ : Matrix n n ℝ} (h : IsUnistochastic Γ) :
     Γ ∈ colStochastic ℝ n := by

@@ -35,6 +35,7 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Stochastic/Basic` | probability distributions; evolution under Mathlib's `colStochastic` matrices |
 | `Stochastic/Indivisible` | generalized stochastic processes, division events, (in)divisibility |
 | `Stochastic/Unistochastic` | Born representations, unistochastic ⇒ stochastic |
+| `Stochastic/ApproxDivision` | **approximate division events**: a division defect that is zero exactly at division events (original) |
 | `Quantum/UnitaryProcess` | unitary evolution ⇒ generalized stochastic process |
 | `Quantum/Hamiltonian` | Hamiltonian evolution `exp(-itH)`: unitary, group law, and the process it induces |
 | `Examples/Qubit` | a qubit under `H = σₓ` whose process is provably indivisible; its division events are exactly the multiples of `π/2` |
@@ -44,8 +45,8 @@ Early. See [ROADMAP.md](ROADMAP.md) for the full plan.
 | `Quantum/Measurement` | **the Born rule for arbitrary observables, derived** from pointer-configuration probabilities |
 | `Quantum/Collapse` | **collapse as a division event**: after a measurement, later evolution depends only on the outcome, and interference between outcomes disappears |
 | `Examples/MeasuredQubit` | measuring the qubit at `π/4` turns a non-division time into a division event |
-| `Quantum/Decoherence` | **decoherence creates division events**: an environment that records the configuration removes interference, with no one reading it |
-| `Examples/DecoheredQubit` | partial decoherence of the qubit: a division event appears iff the record is perfect |
+| `Quantum/Decoherence` | **decoherence creates division events**: an environment that records the configuration removes interference, with no one reading it; an imperfect record gives an approximate division event, with defect at most `(N − 1) ε / 2` |
+| `Examples/DecoheredQubit` | partial decoherence of the qubit: a division event appears iff the record is perfect, and the defect is exactly `\|cos θ\| / 2` |
 | `Quantum/Composite` | composite systems: independent systems give product processes; **no signalling** for any local operation, including measurements |
 | `Quantum/Bell` | the CHSH inequality for local hidden-variable models; Tsirelson's bound `2√2`, also for transition probabilities and for local apparatuses' pointers |
 | `Examples/BellPair` | a Bell pair: correlations that survive a local change of basis only without a division event |

@@ -105,18 +105,19 @@ each item is in parentheses.
       formula weights interference by the overlaps of the records
 - [x] Partial decoherence of the qubit: swap probability `(1 + cos θ)/2`, and `π/4` is a
       division event iff the record is perfect
-- [ ] **Approximate division events** (candidate original result). Barandes, Hasan and
+- [x] **Approximate division events** (original to this project): `divisionDefect`, zero iff
+      division event; a record with overlaps `≤ ε` gives defect `≤ (N − 1) ε / 2`, attained
+      by the qubit (`|cos θ| / 2`) (book ch. 10). Still to do: relate it to `qCor` and to
+      RHP. Background: Barandes, Hasan and
       Kagan say division events "are often only approximate or effective" and hold up to
       "some given level of precision", but give no measure (PRA 114, 022208 (2026),
       [arXiv:2512.18105](https://arxiv.org/abs/2512.18105) §3.1; their discrepancy `qCor`,
-      eqs. 19–20, is the natural starting point). Define a distance to a division event,
-      e.g. `inf_Δ sup_{t ≥ t'} ‖Γ(t) − Δ(t) Γ(t')‖` over stochastic `Δ`; compute it for the
-      partially decohered qubit as a function of `cos θ`; relate it to the RHP divisibility
-      measure (Rivas, Huelga, Plenio, PRL 105, 050403 (2010)) and to trace-distance
-      measures. No measure adapted to Barandes' definition was found in the literature
-      (search of November 2026)
+      eqs. 19–20). RHP divisibility measure: Rivas, Huelga, Plenio, PRL 105, 050403 (2010).
+      No measure adapted to Barandes' definition was found in the literature (search of
+      November 2026)
 - [ ] Continuous decoherence: records that build up over time, and division events that
-      become exact only in the limit
+      become exact only in the limit. With `M` independent records the overlap is a product,
+      so the defect bound decays like `εᴹ` (Joos–Zeh); formalize that
 - [x] Composite systems and a Bell pair (book ch. 11)
 - [x] No signalling for any local operation (unitary on system + own ancilla), in particular
       local measurements with an apparatus (book ch. 11)

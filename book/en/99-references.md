@@ -97,6 +97,11 @@
 - M. Schlosshauer, *Decoherence and the Quantum-to-Classical Transition* (Springer, 2007),
   [doi:10.1007/978-3-540-35775-9](https://doi.org/10.1007/978-3-540-35775-9).
 
+- **[Rivas, Huelga and Plenio, 2010]** Á. Rivas, S. F. Huelga and M. B. Plenio,
+  *Entanglement and Non-Markovianity of Quantum Evolutions*, Phys. Rev. Lett. 105, 050403
+  (2010), [doi:10.1103/PhysRevLett.105.050403](https://doi.org/10.1103/PhysRevLett.105.050403).
+  A measure of non-Markovianity based on divisibility.
+
 ## Lean and Mathlib
 
 - L. de Moura and S. Ullrich, *The Lean 4 Theorem Prover and Programming Language*, CADE-28,
@@ -128,5 +133,9 @@ contributions, by Andrés D'Ambrosio, are these:
   CHSH and Tsirelson's bound stated for the transition probabilities of a composite
   process and for the pointers of local apparatuses (a direct version; Barandes, Hasan and
   Kagan derive the bound in this framework from causal locality).
+- **Approximate division events** (chapter 10): the division defect, the theorem that it
+  vanishes exactly at division events, the bound $(N-1)\varepsilon/2$ for imperfect
+  records and its exact value $|\cos\theta|/2$ for the qubit. Barandes, Hasan and Kagan
+  ask for such a measure; as far as we know none had been given.
 - **The exposition:** the course itself, its organization, its exercises and its
   discussions.

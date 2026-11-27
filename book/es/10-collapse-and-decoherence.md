@@ -200,7 +200,92 @@ solapamiento cercano a uno, multiplican sus solapamientos, que se van a cero en 
 exponencial ([Joos y Zeh, 1985](https://doi.org/10.1007/BF01725541)). Barandes, Hasan y
 Kagan dicen explícitamente que los eventos de división "a menudo son solo aproximados o
 efectivos", válidos hasta "cierto nivel de precisión" ([Barandes, Hasan y Kagan, 2025](https://arxiv.org/abs/2512.18105), §3.1), pero no dan una
-medida de esa precisión. Definirla, y formalizarla, es una de las tareas siguientes.
+medida de esa precisión. Este proyecto propone una, en la sección siguiente.
+
+## Eventos de división aproximados
+
+*Las definiciones y los teoremas de esta sección son originales de este proyecto.*
+
+Necesitamos una distancia entre matrices de transición. Usamos el peor caso, sobre la
+configuración inicial $j$, de la distancia de variación total entre las columnas:
+$$d(A, B) = \max_j \tfrac12 \sum_i |A_{ij} - B_{ij}| ,$$
+un número entre $0$ y $1$ para matrices estocásticas. Responde una pregunta operativa:
+¿cuánto puede fallar, en probabilidad, la predicción $B$ para la peor configuración
+inicial?
+
+El **defecto de división** de un instante $t'$ mide qué tan bien las mejores leyes
+estocásticas desde $t'$ pueden reproducir la evolución verdadera, en el peor instante
+posterior:
+$$\delta(t') = \sup_{t \geq t'}\ \inf_{\Delta \text{ estocástica}} d\big(\Gamma(t),\ \Delta\,\Gamma(t')\big).$$
+
+**Teorema.** Para $t' \geq 0$, $\delta(t') = 0$ si y solo si $t'$ es un evento de división.
+
+*Demostración.* Si $t'$ es un evento de división, los testigos $\Delta(t)$ dan distancia
+$0$. Recíprocamente, las matrices estocásticas forman un conjunto compacto (entradas en
+$[0,1]$, condiciones cerradas), y $\Delta \mapsto d(\Gamma(t), \Delta\Gamma(t'))$ es
+continua, así que el ínfimo se alcanza. Si vale $0$, el minimizador es un testigo exacto.
+$\blacksquare$
+
+La compacidad importa: sin ella, una sucesión de leyes cada vez mejores podría no tener
+como límite una ley. No encontramos este hecho en Mathlib, así que lo probamos
+(`isCompact_colStochastic`).
+
+**Teorema (decoherencia aproximada).** Supongamos que el entorno registra la configuración
+en $t_1$, y que los registros de configuraciones distintas se solapan a lo sumo en
+$\varepsilon$: $|\langle\phi_l, \phi_k\rangle| \leq \varepsilon$ para $k \neq l$. Entonces
+$$\delta(t_1) \leq \frac{(N-1)\,\varepsilon}{2},$$
+donde $N$ es la cantidad de configuraciones.
+
+*Idea de la demostración.* Tomamos como ley la completamente decoherida, $\Delta = |W|^2$.
+Por la fórmula de la decoherencia, el error en la entrada $(i,j)$ es la suma de los
+términos de interferencia $k \neq l$, cada uno pesado por un solapamiento de tamaño a lo
+sumo $\varepsilon$. Así que es a lo sumo $\varepsilon \sum_{k\neq l} a_k a_l$, con
+$a_k = |W_{ik}|\,|U_{kj}|$. Al sumar sobre $i$, la desigualdad de Cauchy–Schwarz acota
+$\sum_i (\sum_k a_k)^2$ por $N$, y los términos diagonales $\sum_i \sum_k a_k^2$ suman
+exactamente $1$. Lo que queda es $N - 1$. $\blacksquare$
+
+Para el qubit la cota **se alcanza**. Con los registros de arriba,
+$\varepsilon = |\cos\theta|$, y calculamos exactamente
+$$\delta(\pi/4) = \frac{|\cos\theta|}{2}.$$
+La cota superior usa $\Delta = \mathbb 1$. Para la inferior: $\Gamma(\pi/4)$ tiene columnas
+iguales, así que $\Delta\,\Gamma(\pi/4)$ también, sea cual sea $\Delta$. En $\pi/2$ las dos
+columnas de $\Gamma$ están a distancia de variación total $|\cos\theta|$, y una sola
+columna no puede estar a menos de la mitad de eso de las dos.
+
+Esto vuelve cuantitativo el "si y solo si" anterior. El defecto no es $0$ para un registro
+parcial, pero es proporcional al solapamiento. Con $M$ fotones, cada uno con solapamiento
+$\lambda$, el solapamiento total es $\lambda^M$ y el defecto es a lo sumo
+$(N-1)|\lambda|^M/2$: se va a cero en forma exponencial, que es el argumento de Joos y Zeh
+convertido en un teorema sobre eventos de división.
+
+En Lean (`Stochastic/ApproxDivision.lean`, `Quantum/Decoherence.lean`,
+`Examples/DecoheredQubit.lean`):
+
+```lean
+noncomputable def colTV (A B : Matrix n n ℝ) : ℝ := ⨆ j, (∑ i, |A i j - B i j|) / 2
+
+noncomputable def divisionDefect (t' : ℝ) : ℝ :=
+  ⨆ t : Set.Ici t', P.factorDefect t' t
+
+theorem isDivisionEvent_iff_divisionDefect_eq_zero {t' : ℝ} (ht' : 0 ≤ t') :
+    P.IsDivisionEvent t' ↔ P.divisionDefect t' = 0
+
+theorem recordedAt_divisionDefect_le [Nonempty n] (hEφ : IsRecording φ E e₀)
+    (hunit : ∀ j, ∑ e, ‖φ j e‖ ^ 2 = 1) (hε0 : 0 ≤ ε)
+    (hε : ∀ k l, k ≠ l → ‖overlap φ k l‖ ≤ ε) :
+    (recordedAt U hU h0 E hE e₀ t₁ ht₁).divisionDefect t₁ ≤ (Fintype.card n - 1) * ε / 2
+
+theorem decoheredProcess_divisionDefect (θ : ℝ) :
+    (decoheredProcess θ).divisionDefect (Real.pi / 4) = |Real.cos θ| / 2
+```
+
+`⨆` y `⨅` son el supremo y el ínfimo de Mathlib. Sobre ℝ necesitan una cota para
+comportarse bien, y por eso las demostraciones cargan hechos como "el defecto es a lo sumo
+$1$". La elección de la distancia es nuestra, y hay otras posibles: figura como elección
+de interpretación en `TRUSTED.md`. Cómo se relaciona esta medida con el término de
+discrepancia `qCor` de Barandes, Hasan y Kagan, y con la medida de divisibilidad de
+[Rivas, Huelga y Plenio, 2010](https://doi.org/10.1103/PhysRevLett.105.050403), sigue
+abierto.
 
 ## Lo que todavía falta
 
@@ -209,8 +294,9 @@ medida de esa precisión. Definirla, y formalizarla, es una de las tareas siguie
   |V|^2|V^\dagger U|^2$ y la factorización no es inmediata. El enunciado natural es sobre el
   proceso compuesto sistema + puntero.
 - **Mediciones repetidas** y el efecto Zeno cuántico.
-- **Decoherencia continua.** Registros que se acumulan en el tiempo, y una noción
-  cuantitativa de "casi divisible" para registros casi perfectos.
+- **Decoherencia continua.** Registros que se acumulan en el tiempo. La cota de arriba
+  trata un registro hecho en un instante; para $M$ fotones falta formalizar que los
+  solapamientos se multiplican.
 
 ## En Lean
 
@@ -263,3 +349,7 @@ aparece recién cuando queremos que las probabilidades sumen uno.
    difiera de $1/2$ en menos de $10^{-6}$ si $\lambda = 0{,}99$?
 6. (Lean, abierto) Demostrá que medir el qubit dos veces, en $t_1 < t_2$, crea dos eventos
    de división.
+7. (Papel) Con $\lambda = 0{,}99$ por fotón y $N = 2$, ¿cuántos fotones hacen que el defecto
+   de división sea menor que $10^{-6}$? Compará con el ejercicio 5.
+8. (Papel) Mostrá que $d$ es una métrica sobre las matrices estocásticas y que
+   $d(A, B) \leq 1$.

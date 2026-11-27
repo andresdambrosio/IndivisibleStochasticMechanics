@@ -98,6 +98,11 @@
 - M. Schlosshauer, *Decoherence and the Quantum-to-Classical Transition* (Springer, 2007),
   [doi:10.1007/978-3-540-35775-9](https://doi.org/10.1007/978-3-540-35775-9).
 
+- **[Rivas, Huelga y Plenio, 2010]** Á. Rivas, S. F. Huelga y M. B. Plenio,
+  *Entanglement and Non-Markovianity of Quantum Evolutions*, Phys. Rev. Lett. 105, 050403
+  (2010), [doi:10.1103/PhysRevLett.105.050403](https://doi.org/10.1103/PhysRevLett.105.050403).
+  Una medida de no-markovianidad basada en la divisibilidad.
+
 ## Lean y Mathlib
 
 - L. de Moura y S. Ullrich, *The Lean 4 Theorem Prover and Programming Language*, CADE-28,
@@ -129,4 +134,8 @@ proyecto, de Andrés D'Ambrosio, son estos:
   enunciados para las probabilidades de transición de un proceso compuesto y para los
   punteros de aparatos locales (una versión directa; Barandes, Hasan y Kagan derivan la
   cota en este marco a partir de la localidad causal).
+- **Eventos de división aproximados** (capítulo 10): el defecto de división, el teorema de
+  que se anula exactamente en los eventos de división, la cota $(N-1)\varepsilon/2$ para
+  registros imperfectos y su valor exacto $|\cos\theta|/2$ para el qubit. Barandes, Hasan y
+  Kagan piden una medida así; hasta donde sabemos, nadie la había dado.
 - **La exposición:** el curso en sí, su organización, sus ejercicios y sus discusiones.

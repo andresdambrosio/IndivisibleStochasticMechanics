@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import IndivisibleStochasticMechanics.Quantum.Collapse
+public import IndivisibleStochasticMechanics.Stochastic.ApproxDivision
 
 /-!
 # Decoherence: an environment that records creates division events
@@ -47,6 +48,10 @@ from the physical correlation between system and environment.
 * `ISM.IsRecording.envMarginal_of_const`: no record ⇒ `Γ = |W U|²`.
 * `ISM.GenStochasticProcess.recordedAt_isDivisionEvent`: a perfect record at `t₁` makes `t₁`
   a division event.
+* `ISM.GenStochasticProcess.recordedAt_divisionDefect_le`: an imperfect record, with
+  overlaps at most `ε`, makes `t₁` an approximate division event: its division defect
+  (`ISM.GenStochasticProcess.divisionDefect`) is at most `(N - 1) ε / 2`. This quantitative
+  statement is original to this project.
 
 ## References
 
@@ -199,6 +204,57 @@ theorem envMarginal_kron_one (A : Matrix n n ℂ) (e₀ : m) :
   ext i j
   simp [envMarginal, normSqMatrix, Matrix.one_apply, apply_ite (fun z : ℂ => ‖z‖ ^ 2)]
 
+/-- **Approximate decoherence, entrywise.** Replacing the true transition probabilities by
+the fully decohered ones `|W|² |U|²` costs at most `ε ∑_{k ≠ l} aₖ aₗ`, with
+`aₖ = |Wᵢₖ| |Uₖⱼ|`, where `ε` bounds the overlaps of distinct records. -/
+theorem IsRecording.abs_envMarginal_sub_le {φ : n → m → ℂ} {E : Matrix (n × m) (n × m) ℂ}
+    {e₀ : m} (hE : IsRecording φ E e₀) (hunit : ∀ j, ∑ e, ‖φ j e‖ ^ 2 = 1) {ε : ℝ}
+    (hε : ∀ k l, k ≠ l → ‖overlap φ k l‖ ≤ ε) (W U : Matrix n n ℂ) (i j : n) :
+    |envMarginal (recordedEvolution W E U) e₀ i j - (normSqMatrix W * normSqMatrix U) i j| ≤
+      ε * ((∑ k, ‖W i k‖ * ‖U k j‖) ^ 2 - ∑ k, (‖W i k‖ * ‖U k j‖) ^ 2) := by
+  have hkk : ∀ k, overlap φ k k = 1 := fun k => by
+    simp only [overlap, Complex.star_def, Complex.mul_conj']
+    exact_mod_cast hunit k
+  have hdiff : ((envMarginal (recordedEvolution W E U) e₀ i j -
+      (normSqMatrix W * normSqMatrix U) i j : ℝ) : ℂ) =
+      ∑ k, ∑ l, if k = l then 0 else
+        W i k * U k j * star (W i l * U l j) * overlap φ k l := by
+    rw [Complex.ofReal_sub, hE.envMarginal_recordedEvolution]
+    have hd : (((normSqMatrix W * normSqMatrix U) i j : ℝ) : ℂ) =
+        ∑ k, ∑ l, if k = l then W i k * U k j * star (W i l * U l j) * overlap φ k l
+          else 0 := by
+      simp only [Finset.sum_ite_eq, Finset.mem_univ, ite_true, hkk, mul_one]
+      simp only [normSqMatrix, Matrix.mul_apply, of_apply]
+      push_cast
+      refine Finset.sum_congr rfl fun k _ => ?_
+      rw [Complex.star_def, Complex.mul_conj', norm_mul]
+      push_cast
+      ring
+    rw [hd, ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun l _ => ?_
+    split_ifs <;> ring
+  have hid : (∑ k, ‖W i k‖ * ‖U k j‖) ^ 2 - ∑ k, (‖W i k‖ * ‖U k j‖) ^ 2 =
+      ∑ k, ∑ l, if k = l then 0 else ‖W i k‖ * ‖U k j‖ * (‖W i l‖ * ‖U l j‖) := by
+    rw [sq, Finset.sum_mul_sum, ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    have : ∀ l, (if k = l then (0 : ℝ) else ‖W i k‖ * ‖U k j‖ * (‖W i l‖ * ‖U l j‖)) =
+        ‖W i k‖ * ‖U k j‖ * (‖W i l‖ * ‖U l j‖) -
+          if k = l then ‖W i k‖ * ‖U k j‖ * (‖W i l‖ * ‖U l j‖) else 0 := fun l => by
+      split_ifs <;> ring
+    simp_rw [this, Finset.sum_sub_distrib, Finset.sum_ite_eq, Finset.mem_univ, ite_true, sq]
+  rw [← Real.norm_eq_abs, ← Complex.norm_real, hdiff, hid, Finset.mul_sum]
+  refine (norm_sum_le _ _).trans (Finset.sum_le_sum fun k _ => ?_)
+  rw [Finset.mul_sum]
+  refine (norm_sum_le _ _).trans (Finset.sum_le_sum fun l _ => ?_)
+  split_ifs with hkl
+  · simp
+  · simp only [norm_mul, norm_star]
+    have := hε k l hkl
+    have h1 : 0 ≤ ‖W i k‖ * ‖U k j‖ * (‖W i l‖ * ‖U l j‖) := by positivity
+    nlinarith
+
 /-- Composite evolution when the system evolves by `U t` and an environment records its
 configuration at `t₁`. -/
 noncomputable def recordedComposite (U : ℝ → Matrix n n ℂ) (E : Matrix (n × m) (n × m) ℂ)
@@ -264,6 +320,44 @@ theorem recordedAt_isDivisionEvent {φ : n → m → ℂ} (hEφ : IsRecording φ
   refine ⟨ht₁.le, fun t => normSqMatrix (U t * (U t₁)ᴴ), fun t ht => ⟨?_, ?_⟩⟩
   · exact normSqMatrix_mem_colStochastic (mul_mem (hU t) (Unitary.star_mem (hU t₁)))
   · rw [recordedAt_Γ_of_le ht, hEφ.envMarginal_of_orthonormal hφ, recordedAt_Γ_at hEφ hunit]
+
+/-- **Approximate decoherence gives approximate division events.** If distinct records
+overlap by at most `ε`, the division defect of the recording time is at most
+`(N - 1) ε / 2`,
+where `N` is the number of configurations. For a perfect record (`ε = 0`) this recovers
+`recordedAt_isDivisionEvent`. -/
+theorem recordedAt_divisionDefect_le [Nonempty n] {φ : n → m → ℂ} (hEφ : IsRecording φ E e₀)
+    (hunit : ∀ j, ∑ e, ‖φ j e‖ ^ 2 = 1) {ε : ℝ} (hε0 : 0 ≤ ε)
+    (hε : ∀ k l, k ≠ l → ‖overlap φ k l‖ ≤ ε) :
+    (recordedAt U hU h0 E hE e₀ t₁ ht₁).divisionDefect t₁ ≤ (Fintype.card n - 1) * ε / 2 := by
+  have hN : (1 : ℝ) ≤ Fintype.card n := by exact_mod_cast Fintype.card_pos
+  refine divisionDefect_le _ (by nlinarith) fun t ht => ?_
+  have hW : U t * (U t₁)ᴴ ∈ unitaryGroup n ℂ := mul_mem (hU t) (Unitary.star_mem (hU t₁))
+  refine ((recordedAt U hU h0 E hE e₀ t₁ ht₁).factorDefect_le
+    (normSqMatrix_mem_colStochastic hW)).trans (colTV_le (by nlinarith) fun j => ?_)
+  rw [recordedAt_Γ_at hEφ hunit, recordedAt_Γ_of_le ht]
+  set W := U t * (U t₁)ᴴ
+  have hcs : ∀ i, (∑ k, ‖W i k‖ * ‖U t₁ k j‖) ^ 2 ≤ 1 := fun i => by
+    refine (Finset.sum_mul_sq_le_sq_mul_sq _ _ _).trans (le_of_eq ?_)
+    rw [unitary_row_normSq_sum hW, unitary_col_normSq_sum (hU t₁), one_mul]
+  have hdiag : ∑ i, ∑ k, (‖W i k‖ * ‖U t₁ k j‖) ^ 2 = 1 := by
+    simp_rw [mul_pow]
+    rw [Finset.sum_comm]
+    simp_rw [← Finset.sum_mul, unitary_col_normSq_sum hW, one_mul]
+    exact unitary_col_normSq_sum (hU t₁) j
+  have hsum : ∑ i, |envMarginal (recordedEvolution W E (U t₁)) e₀ i j -
+      (normSqMatrix W * normSqMatrix (U t₁)) i j| ≤ (Fintype.card n - 1) * ε := by
+    calc _ ≤ ∑ i, ε * ((∑ k, ‖W i k‖ * ‖U t₁ k j‖) ^ 2 - ∑ k, (‖W i k‖ * ‖U t₁ k j‖) ^ 2) :=
+          Finset.sum_le_sum fun i _ => hEφ.abs_envMarginal_sub_le hunit hε _ _ i j
+      _ = ε * (∑ i, (∑ k, ‖W i k‖ * ‖U t₁ k j‖) ^ 2 - 1) := by
+          rw [← Finset.mul_sum, Finset.sum_sub_distrib, hdiag]
+      _ ≤ ε * (Fintype.card n - 1) := by
+          refine mul_le_mul_of_nonneg_left ?_ hε0
+          have := Finset.sum_le_sum fun i (_ : i ∈ Finset.univ) => hcs i
+          simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one] at this
+          linarith
+      _ = (Fintype.card n - 1) * ε := by ring
+  linarith
 
 end GenStochasticProcess
 
