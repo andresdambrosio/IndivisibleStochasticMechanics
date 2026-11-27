@@ -200,8 +200,10 @@ That a partial record is not enough matters. A division event is not "a little b
 either the dynamics factors or it does not. In the real world records are never perfect,
 but they become perfect very quickly: many photons, each with an overlap close to one,
 multiply their overlaps, which go to zero exponentially
-([Joos and Zeh, 1985](https://doi.org/10.1007/BF01725541)). Formalizing this idea of
-*approximate* division events is one of the next tasks.
+([Joos and Zeh, 1985](https://doi.org/10.1007/BF01725541)). Barandes, Hasan and Kagan
+say explicitly that division events "are often only approximate or effective", valid up
+to "some given level of precision" ([Barandes, Hasan and Kagan, 2025](https://arxiv.org/abs/2512.18105), §3.1), but they do not give a measure of that
+precision. Defining one, and formalizing it, is one of the next tasks.
 
 ## What is still missing
 

@@ -147,7 +147,8 @@ With the standard settings $a\in\{0,\pi/4\}$ and $b\in\{\pi/8,-\pi/8\}$,
 $$S = 2\sqrt2 \approx 2.83 > 2.$$
 So **no local hidden-variable model reproduces these transition probabilities.** The
 calculation is textbook quantum mechanics; stating it for the transition probabilities of
-the composite process is ours.
+the composite process is ours (for the CHSH game in this framework, see also
+[Barandes, Hasan and Kagan, 2025](https://arxiv.org/abs/2512.18105)).
 
 **Theorem (Tsirelson's bound).** For any state $\psi$ and any observables
 $A_0, A_1, B_0, B_1$ with eigenvalues $\pm1$, where Alice's commute with Bob's,
@@ -167,7 +168,11 @@ computed from the transition matrices $\Gamma^{xy}$ satisfy $|S| \le 2\sqrt2$. *
 $E(x,y)$ is the quantum expectation value of $(U_x^\dagger D_{a_x} U_x)\otimes(V_y^\dagger
 D_{b_y} V_y)$ in the state $\Theta e_j$, where $D_a$ is the diagonal matrix of outcomes.
 These observables square to $1$, so the previous theorem applies. $\blacksquare$ The bound
-is Cirel'son's; stating it for transition probabilities is ours.
+is Cirel'son's. Barandes, Hasan and Kagan derive Tsirelson's bound within indivisible
+stochastic mechanics, for unistochastic processes and from the principle of causal
+locality ([Barandes, Hasan and Kagan, 2025](https://arxiv.org/abs/2512.18105)). Our statement is a different, more direct version: for the transition
+probabilities themselves, with local unitaries. That version and its formal proof are
+ours.
 
 **Theorem (with apparatuses).** So far, "measuring" meant rotating and then reading the
 configuration. Now each side measures with an ideal apparatus as in chapter 9: Alice with an
@@ -187,7 +192,7 @@ that no such variable reproduces the statistics. In the language of this book, t
 is the one we already saw: the time right after the preparation is not a division event,
 so the configuration at that time does not "screen off" the future. This reading is ours;
 for how locality fits into Barandes' formulation, see
-[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+[Barandes, 2024](https://arxiv.org/abs/2402.16935) and, for CHSH in particular, [Barandes, Hasan and Kagan, 2025](https://arxiv.org/abs/2512.18105).
 
 ## What is still missing
 

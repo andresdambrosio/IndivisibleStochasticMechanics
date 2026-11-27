@@ -197,8 +197,10 @@ Que un registro parcial no alcance es importante. Un evento de división no es "
 verdadero: o la dinámica se factoriza o no. En el mundo real los registros nunca son
 perfectos, pero se vuelven perfectos muy rápido: muchos fotones, cada uno con un
 solapamiento cercano a uno, multiplican sus solapamientos, que se van a cero en forma
-exponencial ([Joos y Zeh, 1985](https://doi.org/10.1007/BF01725541)).
-Formalizar esta idea de eventos de división *aproximados* es una de las tareas siguientes.
+exponencial ([Joos y Zeh, 1985](https://doi.org/10.1007/BF01725541)). Barandes, Hasan y
+Kagan dicen explícitamente que los eventos de división "a menudo son solo aproximados o
+efectivos", válidos hasta "cierto nivel de precisión" ([Barandes, Hasan y Kagan, 2025](https://arxiv.org/abs/2512.18105), §3.1), pero no dan una
+medida de esa precisión. Definirla, y formalizarla, es una de las tareas siguientes.
 
 ## Lo que todavía falta
 

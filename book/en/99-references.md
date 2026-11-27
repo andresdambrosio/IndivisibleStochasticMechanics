@@ -19,11 +19,18 @@
   Implications for the Complex Numbers*,
   [arXiv:2602.01043](https://arxiv.org/abs/2602.01043) (2026); Philosophy of Science (2026).
   On the role of the complex numbers.
+- **[Barandes, Hasan and Kagan, 2025]** J. A. Barandes, M. Hasan and D. Kagan, *The CHSH
+  Game, Tsirelson's Bound, and Causal Locality*,
+  [arXiv:2512.18105](https://arxiv.org/abs/2512.18105) (2025); Phys. Rev. A 114, 022208
+  (2026). Tsirelson's bound from causal locality; approximate division events.
 
 ## Work on the correspondence
 
 - S. Calvo, *On the Stochastic-Quantum Correspondence*,
   [arXiv:2601.18720](https://arxiv.org/abs/2601.18720) (2026).
+- **[Pimenta, 2025]** L. S. Pimenta, *Divisible and indivisible Stochastic-Quantum
+  dynamics*, [arXiv:2505.08785](https://arxiv.org/abs/2505.08785) (2025). Geometric
+  characterization of divisible two-configuration dynamics.
 
 ## Quantum mechanics: classic results
 
@@ -112,12 +119,14 @@ contributions, by Andrés D'Ambrosio, are these:
   lemmas for completing orthonormal columns to a unitary and on Kronecker products of
   stochastic matrices (`ForMathlib/`).
 - **New examples and statements:** the qubit with $H = \sigma_x$ as an example of
-  indivisibility (chapter 6), the qubit measured at $\pi/4$, and the qubit with a partial
+  indivisibility (chapter 6; the characterization of its division events is a special
+  case of [Pimenta, 2025]), the qubit measured at $\pi/4$, and the qubit with a partial
   record, with the theorem "$\pi/4$ is a division event if and only if the record is
   perfect" (chapter 10). As far as we know, that statement does not appear in the
   literature. Also the stochastic reading of the Bell pair (chapter 11): the same statistics
   at the intermediate time, with or without a division event, and different futures; and
   CHSH and Tsirelson's bound stated for the transition probabilities of a composite
-  process and for the pointers of local apparatuses.
+  process and for the pointers of local apparatuses (a direct version; Barandes, Hasan and
+  Kagan derive the bound in this framework from causal locality).
 - **The exposition:** the course itself, its organization, its exercises and its
   discussions.

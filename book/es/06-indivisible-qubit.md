@@ -146,9 +146,12 @@ es una ley *lineal* válida, pero no *estocástica*.
 
 El panorama es claro. El proceso "se reinicia" justo en los instantes en que $\Gamma$ es
 una permutación, es decir, cuando la configuración en $t'$ determina la inicial. Entre
-esos instantes es indivisible. La caracterización es un cálculo directo hecho para este
-curso; la idea general de que los eventos de división son los instantes en que el proceso
-se puede reiniciar es de Barandes ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)).
+esos instantes es indivisible. La idea general de que los eventos de división son los
+instantes en que el proceso se puede reiniciar es de Barandes
+([Barandes, 2023a](https://arxiv.org/abs/2302.10778)). La divisibilidad de las dinámicas
+de dos configuraciones ya fue caracterizada en general, con una imagen geométrica en el
+espacio de matrices estocásticas $2\times 2$, por [Pimenta, 2025](https://arxiv.org/abs/2505.08785); nuestro teorema es un caso
+particular, calculado directamente para este curso. La demostración en Lean es nuestra.
 
 En Lean:
 

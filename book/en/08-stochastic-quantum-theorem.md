@@ -48,7 +48,9 @@ because it is the squared norm of column $(j,e_0)$ of a unitary matrix. $\blacks
 dilation. An environment with $N+1$ configurations suffices.
 
 *Proof.* This concrete construction is ours. It is a direct dilation of Stinespring type,
-and it need not coincide with the one in Barandes' paper. Take as environment
+and it need not coincide with Barandes', who goes through Kraus operators and a
+Stinespring dilation of dimension at most $N^3$
+([Barandes, 2026](https://arxiv.org/abs/2602.01043), §5); ours has dimension $N(N+1)$. Take as environment
 $\mathcal{E} = \{\varnothing\} \cup \mathcal{C}$, with initial state
 $e_0 = \varnothing$. In Lean this is `Option n`, and $\varnothing$ is `none`. For each
 initial configuration $j$, define the vector

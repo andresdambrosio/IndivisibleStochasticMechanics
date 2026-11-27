@@ -147,9 +147,11 @@ is a valid *linear* law, but not a *stochastic* one.
 
 The picture is clear. The process "restarts" exactly at the times when $\Gamma$ is a
 permutation, that is, when the configuration at $t'$ determines the initial one. Between
-those times it is indivisible. The characterization is a direct computation done for this
-course; the general idea that division events are where the process can be restarted
-is Barandes' ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)).
+those times it is indivisible. The general idea that division events are where the
+process can be restarted is Barandes' ([Barandes, 2023a](https://arxiv.org/abs/2302.10778)).
+The divisibility of two-configuration dynamics has been characterized in general, with a
+geometric picture in the space of $2\times 2$ stochastic matrices, by [Pimenta, 2025](https://arxiv.org/abs/2505.08785); our theorem
+is a special case, worked out directly for this course. The Lean proof is ours.
 
 In Lean:
 

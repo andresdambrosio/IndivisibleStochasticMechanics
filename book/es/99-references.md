@@ -19,11 +19,19 @@
   Implications for the Complex Numbers*,
   [arXiv:2602.01043](https://arxiv.org/abs/2602.01043) (2026); Philosophy of Science (2026).
   Sobre el papel de los números complejos.
+- **[Barandes, Hasan y Kagan, 2025]** J. A. Barandes, M. Hasan y D. Kagan, *The CHSH Game,
+  Tsirelson's Bound, and Causal Locality*,
+  [arXiv:2512.18105](https://arxiv.org/abs/2512.18105) (2025); Phys. Rev. A 114, 022208
+  (2026). La cota de Tsirelson a partir de la localidad causal; eventos de división
+  aproximados.
 
 ## Trabajos sobre la correspondencia
 
 - S. Calvo, *On the Stochastic-Quantum Correspondence*,
   [arXiv:2601.18720](https://arxiv.org/abs/2601.18720) (2026).
+- **[Pimenta, 2025]** L. S. Pimenta, *Divisible and indivisible Stochastic-Quantum
+  dynamics*, [arXiv:2505.08785](https://arxiv.org/abs/2505.08785) (2025). Caracterización
+  geométrica de las dinámicas divisibles de dos configuraciones.
 
 ## Mecánica cuántica: resultados clásicos
 
@@ -112,11 +120,13 @@ proyecto, de Andrés D'Ambrosio, son estos:
   generales para completar columnas ortonormales a una unitaria y sobre productos de
   Kronecker de matrices estocásticas (`ForMathlib/`).
 - **Ejemplos y enunciados nuevos:** el qubit con $H = \sigma_x$ como ejemplo de
-  indivisibilidad (capítulo 6), el qubit medido en $\pi/4$ y el qubit con registro parcial,
+  indivisibilidad (capítulo 6; la caracterización de sus eventos de división es un caso
+  particular de [Pimenta, 2025]), el qubit medido en $\pi/4$ y el qubit con registro parcial,
   con el teorema "$\pi/4$ es un evento de división si y solo si el registro es perfecto"
   (capítulo 10). Hasta donde sabemos, ese enunciado no aparece en la literatura. Y la
   lectura estocástica del par de Bell (capítulo 11): las mismas estadísticas en el instante
   intermedio, con o sin evento de división, y futuros distintos; y CHSH y la cota de Tsirelson
   enunciados para las probabilidades de transición de un proceso compuesto y para los
-  punteros de aparatos locales.
+  punteros de aparatos locales (una versión directa; Barandes, Hasan y Kagan derivan la
+  cota en este marco a partir de la localidad causal).
 - **La exposición:** el curso en sí, su organización, sus ejercicios y sus discusiones.

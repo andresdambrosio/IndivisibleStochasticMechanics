@@ -151,7 +151,8 @@ Con los ángulos estándar $a\in\{0,\pi/4\}$ y $b\in\{\pi/8,-\pi/8\}$,
 $$S = 2\sqrt2 \approx 2{,}83 > 2.$$
 Entonces **ningún modelo de variables ocultas locales reproduce estas probabilidades de
 transición.** La cuenta es mecánica cuántica de libro; enunciarla para las probabilidades
-de transición del proceso compuesto es nuestro.
+de transición del proceso compuesto es nuestro (para el juego CHSH en este marco, ver
+también [Barandes, Hasan y Kagan, 2025](https://arxiv.org/abs/2512.18105)).
 
 **Teorema (cota de Tsirelson).** Para cualquier estado $\psi$ y observables
 $A_0, A_1, B_0, B_1$ con autovalores $\pm1$, donde los de Alicia conmutan con los de Bob,
@@ -172,8 +173,11 @@ calculadas con las matrices de transición $\Gamma^{xy}$ cumplen $|S| \le 2\sqrt
 *Demostración:* $E(x,y)$ es el valor esperado cuántico de
 $(U_x^\dagger D_{a_x} U_x)\otimes(V_y^\dagger D_{b_y} V_y)$ en el estado $\Theta e_j$, donde
 $D_a$ es la matriz diagonal de resultados. Esos observables tienen cuadrado $1$, así que
-vale el teorema anterior. $\blacksquare$ La cota es de Cirel'son; enunciarla para
-probabilidades de transición es nuestro.
+vale el teorema anterior. $\blacksquare$ La cota es de Cirel'son. Barandes, Hasan y Kagan
+derivan la cota de Tsirelson dentro de la mecánica estocástica indivisible, para procesos
+uniestocásticos y a partir del principio de localidad causal ([Barandes, Hasan y Kagan, 2025](https://arxiv.org/abs/2512.18105)). Nuestro enunciado
+es una versión distinta y más directa: para las probabilidades de transición mismas, con
+unitarias locales. Esa versión y su demostración formal son nuestras.
 
 **Teorema (con aparatos).** Hasta acá, "medir" quería decir rotar y después leer la
 configuración. Ahora cada lado mide con un aparato ideal como el del capítulo 9: Alicia con
@@ -193,7 +197,7 @@ el teorema muestra que ninguna variable así reproduce las estadísticas. En el 
 este libro, la razón es la que ya vimos: el instante justo después de la preparación no es
 un evento de división, así que la configuración en ese instante no "aísla" el futuro. Esta
 lectura es nuestra; para cómo encaja la localidad en la formulación de Barandes, ver
-[Barandes, 2024](https://arxiv.org/abs/2402.16935).
+[Barandes, 2024](https://arxiv.org/abs/2402.16935) y, para CHSH en particular, [Barandes, Hasan y Kagan, 2025](https://arxiv.org/abs/2512.18105).
 
 ## Lo que todavía falta
 

@@ -50,7 +50,10 @@ porque es la norma al cuadrado de la columna $(j,e_0)$ de una matriz unitaria. $
 dilatación unitaria. Basta un entorno con $N+1$ configuraciones.
 
 *Demostración.* Esta construcción concreta es nuestra. Es una dilatación directa del tipo
-de Stinespring, y no necesariamente coincide con la del paper de Barandes. Tomamos como
+de Stinespring, y no necesariamente coincide con la de Barandes, que pasa por operadores
+de Kraus y una dilatación de Stinespring de dimensión a lo sumo $N^3$
+([Barandes, 2026](https://arxiv.org/abs/2602.01043), §5); la nuestra tiene dimensión
+$N(N+1)$. Tomamos como
 entorno $\mathcal{E} = \{\varnothing\} \cup \mathcal{C}$, con
 estado inicial $e_0 = \varnothing$. En Lean esto es `Option n`, y $\varnothing$ es `none`.
 Para cada configuración inicial $j$ definimos el vector
