@@ -29,11 +29,19 @@ each item is in parentheses.
 - [x] A unitary evolution `U(t)` with `U(0) = 1` induces a generalized stochastic process
 - [x] Example: a qubit under `H = σₓ` whose process is indivisible (`π/4` is not a division event)
 - [x] Qubit: no `t' ∈ (0, π/2)` is a division event, and `π/2` is one; the division events
-      are exactly the multiples of `π/2` (`isDivisionEvent_iff_exists_nat`, book ch. 6)
+      are exactly the multiples of `π/2` (`isDivisionEvent_iff_exists_nat`, book ch. 6).
+      *Known:* a special case of Pimenta's characterization of divisible two-configuration
+      dynamics ([arXiv:2505.08785](https://arxiv.org/abs/2505.08785))
 - [x] Hamiltonian evolution `U(t) = exp(-itH)` via Mathlib's `NormedSpace.exp`: unitary,
       group law, induced process; the qubit's `U` is `exp(-itσₓ)` (book ch. 5–6)
 - [x] Density matrix `ρ(t) = Θ(t) diag(p₀) Θ(t)†` with `pᵢ(t) = ρᵢᵢ(t)`, and it is a genuine density matrix
-- [ ] Generic unitary dynamics are indivisible (interference ⇒ failure of divisibility)
+- [ ] Generic unitary dynamics are indivisible (interference ⇒ failure of divisibility).
+      *Known, to formalize:* the classical reduction of a unitary dynamics loses
+      P-divisibility (Benatti, Chruściński, Nichele, PRA 110, 052212 (2024),
+      [arXiv:2405.05794](https://arxiv.org/abs/2405.05794)); Barandes discusses why
+      intermediate times of a unistochastic evolution are generically not division events
+      ([arXiv:2507.21192](https://arxiv.org/abs/2507.21192)). Check the exact statements
+      before formalizing
 
 ### I.3 Stochastic → quantum: the Stochastic-Quantum Theorem (book ch. 8)
 - [x] The marginal of a unitary on system ⊗ environment is stochastic
@@ -44,6 +52,10 @@ each item is in parentheses.
 - [ ] Every stochastic matrix has a Born representation `Θᵢⱼ = √Γᵢⱼ` (issue #3)
 - [ ] Strengthen the dilation: `U(0) = 1`, and `U(t)` continuous in `t` when `Γ(t)` is
 - [ ] Smaller environments: when does an environment of size `n`, or none, suffice?
+      *Known bounds:* Barandes' Stinespring construction needs dimension at most `N³`
+      ([arXiv:2602.01043](https://arxiv.org/abs/2602.01043) §5); ours uses `N(N + 1)`.
+      With no environment the question is unistochasticity, which is characterized for
+      `N = 3` but open in general for `N ≥ 4`
 - [ ] Compare with Barandes' exact statement in arXiv:2309.03085 and formalize it verbatim
 - [ ] Gauge freedom: moved to Stage V
 
@@ -93,8 +105,18 @@ each item is in parentheses.
       formula weights interference by the overlaps of the records
 - [x] Partial decoherence of the qubit: swap probability `(1 + cos θ)/2`, and `π/4` is a
       division event iff the record is perfect
-- [ ] Continuous decoherence: records that build up over time, and approximate division
-      events (a quantitative notion of "almost divisible")
+- [ ] **Approximate division events** (candidate original result). Barandes, Hasan and
+      Kagan say division events "are often only approximate or effective" and hold up to
+      "some given level of precision", but give no measure (PRA 114, 022208 (2026),
+      [arXiv:2512.18105](https://arxiv.org/abs/2512.18105) §3.1; their discrepancy `qCor`,
+      eqs. 19–20, is the natural starting point). Define a distance to a division event,
+      e.g. `inf_Δ sup_{t ≥ t'} ‖Γ(t) − Δ(t) Γ(t')‖` over stochastic `Δ`; compute it for the
+      partially decohered qubit as a function of `cos θ`; relate it to the RHP divisibility
+      measure (Rivas, Huelga, Plenio, PRL 105, 050403 (2010)) and to trace-distance
+      measures. No measure adapted to Barandes' definition was found in the literature
+      (search of November 2026)
+- [ ] Continuous decoherence: records that build up over time, and division events that
+      become exact only in the limit
 - [x] Composite systems and a Bell pair (book ch. 11)
 - [x] No signalling for any local operation (unitary on system + own ancilla), in particular
       local measurements with an apparatus (book ch. 11)
@@ -183,15 +205,37 @@ Tasks:
       is necessary.
 - [ ] **Gauge freedom:** exactly which data of `Θ` are fixed by the whole family `Γ(t)`
       (phases, changes of basis).
-- [ ] **Trading ℂ for a hidden bit:** every complex unitary `U = A + iB` gives a real
-      orthogonal matrix `[[A, -B], [B, A]]` on `n × Bool`, and `Γ` is the marginal of its
-      Born matrix. One system's dynamics never needs complex numbers, only one more binary
-      configuration.
-- [ ] **Composite systems:** realifying `U ⊗ V` seems to need one *shared* bit, not one per
-      subsystem (to check). Make this precise and relate it to Renou et al.: is the shared bit the whole
-      price of removing ℂ?
-- [ ] **Minimal memory:** what is the smallest real structure that, together with `Γ(t₁)`,
-      determines the future? Is it less than a complex phase per entry?
+- [ ] **Trading ℂ for a hidden bit** (*known, to formalize*): every complex unitary
+      `U = A + iB` gives a real orthogonal matrix `[[A, -B], [B, A]]` on `n × Bool`, and `Γ`
+      is the marginal of its Born matrix. This is the real representation of quantum theory
+      (Stueckelberg, Helv. Phys. Acta 33, 727 (1960); Myrheim, arXiv:quant-ph/9905037), and
+      Barandes uses it in the stochastic setting
+      ([arXiv:2507.21192](https://arxiv.org/abs/2507.21192) §4.2). Barandes argues that the
+      bit's structure `I` (with `I² = −1`) *is* ℂ in disguise
+      ([arXiv:2602.01043](https://arxiv.org/abs/2602.01043) §2).
+- [ ] **Composite systems** (*known, to formalize*): one *shared* rebit suffices to simulate
+      any multipartite quantum system, while one bit per subsystem does not (McKague, Mosca,
+      Gisin, PRL 102, 020505 (2009), [arXiv:0810.1923](https://arxiv.org/abs/0810.1923)).
+      Renou et al. show that the local version is experimentally distinguishable. Formalize
+      the shared-bit construction for composite processes.
+- [ ] **Real dilations of families** (candidate original result). Instant by instant, every
+      stochastic matrix is the marginal of a *real* orthogonal matrix (our `Option n`
+      dilation has real columns `√Γᵢⱼ`), so complex numbers are never needed at a single
+      time. The question is for whole families: when is `Γ(t)` the marginal of a real
+      orthogonal *one-parameter group* `exp(tA)`, of what minimal dimension, and must `A`
+      always commute with a complex structure `J` (`J² = −1`)? A theorem of that form would
+      make precise Barandes' claim that any real structure doing the job is isomorphic to ℂ
+      ([arXiv:2602.01043](https://arxiv.org/abs/2602.01043) §5, which argues from
+      orthostochasticity at size `N` only). Related: in real Hilbert space, Stueckelberg
+      obtains an operator playing the role of `i` from an uncertainty principle (1960), and
+      Moretti and Oppio obtain the complex structure from Poincaré symmetry
+      ([arXiv:1611.09029](https://arxiv.org/abs/1611.09029)).
+- [ ] **Minimal memory** (open): what is the smallest real structure that, together with
+      `Γ(t₁)`, determines the future? Is it less than a complex phase per entry? Closest
+      work: Doukas argues that phases act as a compressed record of earlier context, and
+      that a revival of distinguishability rules out Markovian realizers, but proves no
+      bound ([arXiv:2611.32578](https://arxiv.org/abs/2611.32578),
+      [arXiv:2602.22095](https://arxiv.org/abs/2602.22095)).
 - [ ] **Without the Hilbert space:** state and prove the main results of the book
       (interference, collapse, decoherence, Bell) using only real stochastic data plus that
       memory.
@@ -200,10 +244,21 @@ Tasks:
 
 ## Related work
 
-- **Barandes' papers:** arXiv:2302.10778, 2309.03085, 2507.21192, 2602.01043
+- **Barandes' papers:** arXiv:2302.10778, 2309.03085, 2402.16935, 2507.21192, 2602.01043;
+  with Hasan and Kagan, *The CHSH Game, Tsirelson's Bound, and Causal Locality*
+  (arXiv:2512.18105)
 - **Follow-ups:** S. Calvo, *On the stochastic-quantum correspondence* (arXiv:2601.18720);
   *Quantum Conditional Stochastic Processes* (arXiv:2603.27369);
-  *The Born Representation Theorem and the Unistochastic Theorem* (arXiv:2608.04354)
+  *The Born Representation Theorem and the Unistochastic Theorem* (arXiv:2608.04354);
+  L. S. Pimenta, *Divisible and indivisible Stochastic-Quantum dynamics* (arXiv:2505.08785);
+  J. Doukas, arXiv:2602.22095 and arXiv:2611.32578
+- **Non-Markovianity and divisibility:** Rivas, Huelga, Plenio, PRL 105, 050403 (2010)
+  (arXiv:0911.4270, the RHP measure); Vacchini et al., NJP 13, 093004 (2011); Benatti,
+  Chruściński, Nichele (arXiv:2405.05794); Milz et al., PRX 10, 041049 (2020)
+- **Real quantum theory:** Stueckelberg, Helv. Phys. Acta 33, 727 (1960); Myrheim
+  (arXiv:quant-ph/9905037); McKague, Mosca, Gisin (arXiv:0810.1923); Aleksandrova, Borish,
+  Wootters, *Real-vector-space quantum theory with a universal quantum bit*
+  (arXiv:1210.4535); Moretti, Oppio (arXiv:1611.09029); Renou et al., Nature 600, 625 (2021)
 - **Other formalization:** A. Horsocrates, *From Distinction to Unistochasticity*, says it
   has theorems checked in Rocq/Coq (not yet verified by us)
 - **Numerical:** [isp-lab](https://github.com/mrklaney/isp-lab), a Python lab for divisibility checks
